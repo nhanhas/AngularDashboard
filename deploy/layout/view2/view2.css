@@ -1,0 +1,5 @@
+.view2 {
+  margin-top: 100px;
+  background-color: yellow; }
+  .view2 > div {
+    border: 10px solid green; }
