@@ -1,0 +1,11 @@
+.menu {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 50px;
+  text-align: center;
+  background-color: #d0d0ff; }
+  .menu ul {
+    list-style: none;
+    padding: 0; }

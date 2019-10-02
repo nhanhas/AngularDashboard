@@ -1,0 +1,27 @@
+<div class="tabset">
+
+<!-- Tabset container -->
+<uib-tabset active="activeTab">
+
+    <!-- Tab (with snapshots) -->
+    <uib-tab index="$index + 1" ng-repeat="tab in tabCollection" heading="{{tab.title}}" disable="tab.disabled">
+        
+        <!-- Tab header -->
+        <uib-tab-heading>
+            <span>{{tab.title}} &nbsp;<i class="fa fa-cog" ng-click="editTabHandler(tab.id)"></i></span>            
+        </uib-tab-heading>          
+
+    </uib-tab>        
+
+    <!-- Tab to add more (+) -->
+    <li class="uib-tab nav-item" ng-click="addNewTabHandler($event)">
+        <a href="" class="nav-link">
+            <span><i class="fa fa-plus"></i></span>       
+        </a>
+    </li>
+
+
+    </uib-tabset>
+
+</div>
+
