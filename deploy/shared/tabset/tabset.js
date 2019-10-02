@@ -9,7 +9,7 @@ app
             scope: {
                 tabCollection : '=',  //Tab collection
                 onAddNew: '&?',       //Handler for add new Tab
-                onEditTab: '&?'       //Triggers the edition tab
+                onTriggerToolbox: '&?'       //Triggers the edition tab
                            
             },
             templateUrl: 'shared/tabset/tabset.html',
@@ -23,8 +23,8 @@ app
                     scope.onAddNew = undefined;
                 }
 
-                if (!attrs.onEditTab) {
-                    scope.onEditTab = undefined;
+                if (!attrs.onTriggerToolbox) {
+                    scope.onTriggerToolbox = undefined;
                 }
 
                 /**
@@ -44,12 +44,13 @@ app
                     }                    
                 }
 
-                //#B - Edit Tab
-                scope.editTabHandler = function(tabId){
-                    if(scope.onEditTab){
-                        scope.onEditTab({tabId : tabId});
+                //#B - Trigger Toolbox Opening to edit Tab
+                scope.triggerToolbox = function(tabId){
+                    if(scope.onTriggerToolbox){
+                        scope.onTriggerToolbox({tabId : tabId});
                     }  
                 }
+
 
             }
         }

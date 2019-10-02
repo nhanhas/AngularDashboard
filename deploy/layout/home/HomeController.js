@@ -26,7 +26,7 @@ app
         
 
         /**
-         * Handler functions
+         * Handler functions - <tabset>
          */
         //#A - Tabset - Add new tab
         $scope.addNewTab = function(){
@@ -35,13 +35,34 @@ app
             $scope.tabs.push(newTab);
         };
 
-        //#B - Tabset - Edit Tab
-        $scope.editTab = function(tabId){
-            alert(tabId);
+        //#B - Tabset - Get tab by id
+        $scope.getTabById = function(tabId){
+            let tab = $scope.tabs.find(tabItem => {
+                return tabItem.id === tabId
+            })
+            return tab;
         };
 
+        //#B - Tabset - Edit Tab
+        $scope.triggerToolboxTabEdit = function(tabId){
+            let newEditingElement = new EditingElement('TAB', $scope.getTabById(tabId));
+            $scope.toggleToolbox(true, newEditingElement);
+        };
 
+        /**
+         * Handler functions - <toolbox>
+         */
+        $scope.toggleTools = false;
+        //Closes mobile menu when opening new views
+        $scope.closeToolbox = function(){   
+            $scope.toggleTools = false;        
+        }             
 
+        $scope.toggleToolbox = function(forceOpen = false, editingElement = undefined){
+            if(editingElement)
+                $scope.editingElement = editingElement //update editing element from directives
+            $scope.toggleTools = !$scope.toggleTools || forceOpen;        
+        } 
 
         
         
@@ -50,17 +71,7 @@ app
             $scope.initialize();
         },500);
 
-//Mobile menu default = hidden
-$scope.toggleNav = false;
-  
-//Hamburger icon default
-$scope.animate = false;
 
-//Closes mobile menu when opening new views
-$scope.close = function(){
-  $scope.toggleNav = false;
-  $scope.animate = false;
-} 
 
 
     }]);

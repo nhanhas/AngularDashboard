@@ -1,0 +1,46 @@
+.toolbox #mobile-nav-menu {
+  float: right;
+  width: 270px;
+  background: white;
+  font-size: 19px;
+  /* margin-top: 60px; */
+  padding: 0;
+  position: absolute;
+  right: 50px;
+  overflow: hidden;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid rgba(34, 34, 34, 0.3);
+  top: 0;
+  bottom: 0; }
+
+.toolbox .ng-hide-remove {
+  -webkit-animation: 0.5s slideIn ease;
+  -moz-animation: 0.5s slideIn ease;
+  animation: 0.5s slideIn ease; }
+
+.toolbox .ng-hide-add {
+  -webkit-animation: 0.5s slideOut ease;
+  -moz-animation: 0.5s slideOut ease;
+  animation: 0.5s slideOut ease;
+  display: block !important; }
+
+@keyframes slideIn {
+  0% {
+    right: -270px; }
+  100% {
+    right: 50px; } }
+
+@keyframes slideOut {
+  0% {
+    right: 50px; }
+  100% {
+    right: -270px; } }
+
+.toolbox .toolbox-close-btn {
+  position: absolute;
+  right: 20px;
+  top: 10px;
+  cursor: pointer; }
+
+.toolbox .toolbox-main-container {
+  margin: 30px 15px 0 15px; }

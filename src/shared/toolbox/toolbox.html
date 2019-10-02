@@ -1,0 +1,27 @@
+<div class="toolbox" ng-if="isToolReady">
+    <!-- Main toolbox container -->
+    <div id="mobile-nav-menu" ng-show="toggleTools">
+        
+        <!-- Close toolbox -->
+        <div class="toolbox-close-btn" ng-click="closeToolbox()">
+            <span><i class="fa fa-times"></i></span>
+        </div>
+
+        <!-- Toolbox main content -->        
+        <div class="toolbox-main-container" ng-switch="editingElement.type">
+
+            <!-- tab toolbox -->
+            <div  ng-switch-when="TAB">
+                <div ng-include="'shared/toolbox/_toolboxes/_tab-toolbox.html'"></div>
+            </div>
+
+            <!-- menu toolbox -->
+            <div  ng-switch-when="MENU">
+                <div ng-include="'shared/toolbox/_toolboxes/_menu-toolbox.html'"></div>
+            </div>
+
+            <pre>{{ editingElement |json }}</pre>
+        </div>
+    </div>
+
+</div>

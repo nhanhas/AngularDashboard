@@ -1,15 +1,9 @@
-
-
-
-
-
 <div class="home"> 
    
-  Welcome home
-  
+    
   <hr>
 
-  <tabset tab-collection="tabs" on-add-new="addNewTab()" on-edit-tab="editTab(tabId)"></tabset>
+  <tabset tab-collection="tabs" on-add-new="addNewTab()" on-trigger-toolbox="triggerToolboxTabEdit(tabId)"></tabset>
 
 </div>
 
@@ -17,19 +11,7 @@
 
 
 
-<div class="navbar">  
-    <div id="nav-toggle" ng-click="toggleNav = !toggleNav; animate = !animate" ng-class="{'active': animate}">
-      AA
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>   
-  </div>
-  
-  <div id="mobile-nav-menu" ng-show="toggleNav">
-    Something
-  </div>
 
+  <toolbox></toolbox> 
 
   <menu></menu>
