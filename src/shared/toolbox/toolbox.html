@@ -20,6 +20,11 @@
                 <div ng-include="'shared/toolbox/_toolboxes/_menu-toolbox.html'"></div>
             </div>
 
+            <!-- snapshot toolbox -->
+            <div  ng-switch-when="SNAPSHOT">
+                <div ng-include="'shared/toolbox/_toolboxes/_snapshot-toolbox.html'"></div>
+            </div>
+
             <pre>{{ editingElement |json }}</pre>
         </div>
     </div>

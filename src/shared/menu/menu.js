@@ -10,10 +10,11 @@ app
 
             link: function (scope, element, attrs) {
                 
+                //#1 - Init menu items
                 scope.menus = [
-                    { id: 1, actionName: 'Create DB' },
-                    { id: 2, actionName: 'Delete DB' }, 
-                    { id: 3, actionName: 'Update DB' }                    
+                    (function(){ let option = new MenuItem(); option.actionName = 'Create DB'; return option })(),
+                    (function(){ let option = new MenuItem(); option.actionName = 'Delete DB'; return option })(),
+                    (function(){ let option = new MenuItem(); option.actionName = 'Update DB'; return option })()                  
                 ]
 
                 scope.getMenuById = function(menuId){

@@ -1,5 +1,5 @@
 /**
- * Frontend representation of an tab panel
+ * Frontend representation of a tab panel
  * Each tab has the following params to draw
  */
 class TabItem{

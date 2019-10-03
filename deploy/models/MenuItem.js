@@ -1,13 +1,12 @@
 /**
- * Frontend representation of a tab panel
+ * Frontend representation of a Maneu
  * Each tab has the following params to draw
  */
-class TabItem{
+class MenuItem{
 
     id = -1;
-    title = '';
-    snapshots = [];
-    disabled = false;
+    actionName = '';
+    icon = '';
 
     constructor(){
         this.id = Math.floor((Math.random() * 100) + 1);

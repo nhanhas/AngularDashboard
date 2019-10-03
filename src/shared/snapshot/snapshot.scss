@@ -1,0 +1,12 @@
+.snapshot{
+    position: relative;
+    width: 280px;
+    height: 140px;
+    border: 1px dashed black;
+
+    .snapshot-close-btn{
+        position: absolute;
+        right: 10px;
+        top: 5px;
+    }
+}

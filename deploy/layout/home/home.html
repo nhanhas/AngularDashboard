@@ -1,9 +1,11 @@
 <div class="home"> 
    
     
-  <hr>
+  <br>
 
-  <tabset tab-collection="tabs" on-add-new="addNewTab()" on-trigger-toolbox="triggerToolboxTabEdit(tabId)"></tabset>
+  <div class="home-tabset">
+    <tabset tab-collection="tabs" on-add-new="addNewTab()" on-trigger-toolbox="triggerToolboxTabEdit(type, item)"></tabset>
+  </div>
 
 </div>
 
@@ -12,6 +14,8 @@
 
 
 
-  <toolbox></toolbox> 
+<footer></footer>
 
-  <menu></menu>
+<toolbox></toolbox> 
+
+<menu></menu>

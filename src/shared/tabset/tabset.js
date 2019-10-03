@@ -6,11 +6,12 @@ app
     .directive('tabset', ['$timeout', function($timeout) {
         return {
             restrict: 'EA',
+            transclude: true,                            
             scope: {
                 tabCollection : '=',  //Tab collection
                 onAddNew: '&?',       //Handler for add new Tab
                 onTriggerToolbox: '&?'       //Triggers the edition tab
-                           
+                
             },
             templateUrl: 'shared/tabset/tabset.html',
 
@@ -45,9 +46,9 @@ app
                 }
 
                 //#B - Trigger Toolbox Opening to edit Tab
-                scope.triggerToolbox = function(tabId){
+                scope.triggerToolbox = function(type, item){
                     if(scope.onTriggerToolbox){
-                        scope.onTriggerToolbox({tabId : tabId});
+                        scope.onTriggerToolbox({type : type, item : item});
                     }  
                 }
 

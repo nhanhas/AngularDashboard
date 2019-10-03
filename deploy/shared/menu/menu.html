@@ -1,16 +1,18 @@
 <div class="menu">
 
     <ul>
-        <li ng-click="triggerToolbox(1)">
-            <span><i class="fa fa-database"></i></span>
+        <!-- Pic -->
+        <li class="user-picture">
+            <span><i class="fa fa-circle fa-2x"></i></span>
         </li>
-        <li ng-click="triggerToolbox(2)">
+
+        <li ng-click="triggerToolbox(menu.id)" ng-repeat="menu in menus">
             <span><i class="fa fa-database"></i></span>
-        </li>
-        <li ng-click="triggerToolbox(3)">
-            <span><i class="fa fa-database"></i></span>
-        </li>
+        </li>      
     </ul>
 
+</div>
+
+<div class="menu-left">
 
 </div>
