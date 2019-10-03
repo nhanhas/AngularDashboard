@@ -42,26 +42,8 @@ app
             $scope.tabs.push(newTab);
         };
 
-        //#B - Tabset - Get tab by id
-        $scope.getTabById = function(tabId){
-            let tab = $scope.tabs.find(tabItem => {
-                return tabItem.id === tabId
-            })
-            return tab;
-        };
-
-        $scope.getSnapshotById = function(snapId){
-            let tab = $scope.tabs.find(tabItem => {
-                
-                //Get snap
-                return snap.id === tabId
-            })
-            return tab;
-        };
-
-        //#C - Tabset - Edit Tab
+        //#B - Tabset - Edit Tab and Snapshot
         $scope.triggerToolboxTabEdit = function(type, item){
-            //TODO - get snap
             let newEditingElement = new EditingElement(type, item);
             
             $scope.toggleToolbox(true, newEditingElement);

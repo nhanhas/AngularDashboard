@@ -19,9 +19,9 @@ app
 
 
                 //#A - Trigger Toolbox Opening to edit Snapshot
-                scope.triggerToolbox = function(snapId){
+                scope.triggerToolbox = function(){
                     if(scope.onTriggerToolbox){
-                        scope.onTriggerToolbox({snapId : snapId});
+                        scope.onTriggerToolbox({item : scope.item});
                     }  
                 }
             }
