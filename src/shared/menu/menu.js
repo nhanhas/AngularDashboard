@@ -10,6 +10,8 @@ app
 
             link: function (scope, element, attrs) {
                 
+                scope.selectedMenu = undefined;
+
                 //#1 - Init menu items
                 scope.menus = [
                     (function(){ let option = new MenuItem(); option.actionName = 'Create DB'; return option })(),
@@ -26,7 +28,8 @@ app
 
 
                 scope.triggerToolbox = function(menuId){
-                    let newEditingElement = new EditingElement('MENU', scope.getMenuById(menuId));
+                    scope.selectedMenu = scope.getMenuById(menuId)
+                    let newEditingElement = new EditingElement('MENU', scope.selectedMenu);
                     scope.toggleToolbox(true, newEditingElement);
                 }
 

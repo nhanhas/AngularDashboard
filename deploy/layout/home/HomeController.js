@@ -6,14 +6,18 @@ app
          * Controller Variables
          */
         
-        $scope.tabs = [
-            
-          ];
+        $scope.tabs = [];
+        $scope.dataSource = {};
+     
 
         /**
          * Initialize main function
          */
         $scope.initialize = function(){
+
+            /*DashboardService.getDataSourcesSets().then(result => {
+                console.log(result);
+            })*/ 
 
             //#DEVELOPMENT - generate 5 tabs
             for(var i = 0; i < 5; i++){
@@ -28,6 +32,16 @@ app
 
                 $scope.tabs.push(newTab);
             }
+
+
+            $scope.dataSource =  {
+                name: "windows",
+                childs: [
+                    { name: 'Available_Physical_Memory', checked:false },
+                    { name: 'Backup Failure(Full Diff) 24 hrs', checked:false },
+                    { name: 'BAvailable Physical Memory(pct)', checked:false }
+                ]
+            };
         }
 
         

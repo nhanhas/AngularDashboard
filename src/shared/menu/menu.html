@@ -7,7 +7,7 @@
         </li>
 
         <li ng-click="triggerToolbox(menu.id)" ng-repeat="menu in menus">
-            <span><i class="fa fa-database"></i></span>
+            <span><i class="fa fa-database" ng-class="{'color-black' : selectedMenu.id === menu.id}"></i></span>
         </li>      
     </ul>
 
