@@ -4,12 +4,14 @@
  */
 class EditingElement{
 
-    type = ''; //[TAB, SNAPSHOT]
-    item = undefined; //Can be any known type    
+    type = ''; //[TAB, SNAPSHOT, MENU]
+    item = undefined; // Can be any known type  
+    data = undefined; // All Required data to edit/use  
 
-    constructor(type, item){
+    constructor(type, item, data = undefined ){
         this.type = type;       
         this.item = item;
+        this.data = data;
     }
 
 }

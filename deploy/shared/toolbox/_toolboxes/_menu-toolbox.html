@@ -1,4 +1,37 @@
-<div>
-    <h2>Menu edit:</h2>
-    <multi-dropdown datasource="dataSource"></multi-dropdown>
+<div class="menu-toolbox">
+    <div>
+        <h3> <span><i class="fa {{ editingElement.item.icon }}"></i></span>&nbsp;{{ editingElement.item.actionName }}:</h3>
+        
+        
+        <!-- TYPE: DATASOURCE -->
+        <div class="datasources-container" ng-if="editingElement.item.type === 'DATASOURCES'">
+            
+            <div ng-repeat="datasource in editingElement.data">
+                <multi-dropdown datasource="datasource"></multi-dropdown>
+            </div>
+
+            <!-- Save Button -->
+            <div class="save-button-container">
+                <div>
+                    <span>Save Settings</span>
+                </div>
+            </div>
+            
+        </div>
+
+        <!-- TYPE: CHARTS -->
+        <div ng-if="editingElement.item.type === 'CHARTS'">
+
+            Charts 
+        </div>
+
+        <!-- TYPE: CHART_BUILDER -->
+        <div ng-if="editingElement.item.type === 'CHART_BUILDER'">
+
+            Builder 
+        </div>
+    </div>
+
+    
+    
 </div>

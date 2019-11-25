@@ -13,6 +13,7 @@ app
 
             link: function (scope, element, attrs) {
 
+                //Should be of class DatasourceItem 
                 scope.datasource = scope.datasource || undefined;
                 
 

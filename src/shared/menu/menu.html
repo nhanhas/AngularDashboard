@@ -6,8 +6,8 @@
             <span><i class="fa fa-circle fa-2x"></i></span>
         </li>
 
-        <li ng-click="triggerToolbox(menu.id)" ng-repeat="menu in menus">
-            <span><i class="fa fa-database" ng-class="{'color-black' : selectedMenu.id === menu.id}"></i></span>
+        <li ng-click="menu.handler(menu.id)" ng-repeat="menu in menus">
+            <span><i class="fa {{ menu.icon }}" ng-class="{'color-black' : selectedMenu.id === menu.id}"></i></span>
         </li>      
     </ul>
 

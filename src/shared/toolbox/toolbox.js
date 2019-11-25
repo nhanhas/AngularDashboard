@@ -14,6 +14,10 @@ app
             link: function (scope, element, attrs) {
                 scope.isToolReady = false;
                 
+                // save changes from toolbox
+                
+
+
                 $timeout(function(){
                     scope.isToolReady = true;
                 })

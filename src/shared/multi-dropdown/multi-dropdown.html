@@ -7,7 +7,7 @@
             <span>{{ datasource.name }}</span> 
         </div>
 
-        <span><i class="fa fa-cog"></i></span>        
+        <span><i class="fa" ng-class="datasource.expanded ? 'fa-minus-circle' : 'fa-plus-circle'"></i></span>        
     </div>
 
     <!-- Expand datasource (datasets) -->
@@ -16,9 +16,9 @@
         <!-- datasets -->
         <div class="datasets-container">
             
-            <div ng-repeat="dataset in datasource.childs">
+            <div ng-repeat="dataset in datasource.datasets">
                 <div>
-                    <custom-checkbox label="{{dataset.name}}" model="dataset.checked"></custom-checkbox>
+                    <custom-checkbox label="{{dataset.name}}" model="dataset.selected"></custom-checkbox>
                 </div>
             </div>
 
