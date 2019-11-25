@@ -57,10 +57,10 @@
   }
 
   .toolbox-main-container{
-    margin: 40px 15px 0px 15px;
+    margin: 100px 15px 0px 15px;
     height: 100%;
     overflow: auto;
-    padding-bottom: 150px;
+    padding-bottom: 220px;
 
     > div{
       height: 100%;
@@ -68,36 +68,38 @@
     }
   }
       
+  h3{
+    position: absolute;
+    top: 20px;
+  }
 
   /* DATASOURCES */
-  .menu-toolbox{
-    
-    .datasources-container{
-      > div:not(:last-child){ 
-        margin-bottom: 20px;
-      }
+  .datasources-container{
+    > div:not(:last-child){ 
+      margin-bottom: 20px;
     }
+  }
 
-    .save-button-container{
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      text-align: center;
-      padding: 30px 40px;
-      background-color: #3e64a0;
-      box-shadow: 0px -12px 18px 0 rgba(0, 0, 0, 0.4);
+  .save-btn-ds-container{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    padding: 30px 40px;
+    background-color: #3e64a0;
+    box-shadow: 0px -12px 18px 0 rgba(0, 0, 0, 0.4);
 
-      > div{
-        background-color: white;
-        border-radius: 4px;
-        padding: 10px;
-        cursor: pointer;
-      }
-  
+    > div{
+      background-color: white;
+      border-radius: 4px;
+      padding: 10px;
+      cursor: pointer;
     }
 
   }
+
+
 
 
 

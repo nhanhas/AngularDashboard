@@ -42,16 +42,19 @@
     top: 10px;
     cursor: pointer; }
   .toolbox .toolbox-main-container {
-    margin: 40px 15px 0px 15px;
+    margin: 100px 15px 0px 15px;
     height: 100%;
     overflow: auto;
-    padding-bottom: 150px; }
+    padding-bottom: 220px; }
     .toolbox .toolbox-main-container > div {
       height: 100%;
       overflow: auto; }
-  .toolbox .menu-toolbox .datasources-container > div:not(:last-child) {
+  .toolbox h3 {
+    position: absolute;
+    top: 20px; }
+  .toolbox .datasources-container > div:not(:last-child) {
     margin-bottom: 20px; }
-  .toolbox .menu-toolbox .save-button-container {
+  .toolbox .save-btn-ds-container {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -60,7 +63,7 @@
     padding: 30px 40px;
     background-color: #3e64a0;
     box-shadow: 0px -12px 18px 0 rgba(0, 0, 0, 0.4); }
-    .toolbox .menu-toolbox .save-button-container > div {
+    .toolbox .save-btn-ds-container > div {
       background-color: white;
       border-radius: 4px;
       padding: 10px;
