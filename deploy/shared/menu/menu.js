@@ -26,10 +26,10 @@ app
                     });
                 }
 
-                // TYPE: CHART_BUILDER menu handler
-                scope.chartBuilderHandler = function(menuId){
+                // TYPE: GRAPHIC_PIE menu handler
+                scope.graphicPieHandler = function(menuId){
                     //#1 - Get datasources for toolbox
-                    DashboardService.getChartsToBuild().then((result) => {
+                    DashboardService.getGraphicPiesToBuild().then((result) => {
 
                         //#2 - Show datasources in toolbox
                         scope.$apply(function(){
@@ -46,8 +46,8 @@ app
                 //#1 - Init menu items
                 scope.menus = [
                     new MenuItem('DATASOURCES', 'Data Sources and Data Sets', 'fa-database', scope.dataSourceHandler.bind(this)),
-                    new MenuItem('CHARTS', 'Charts', 'fa-bar-chart'),               
-                    new MenuItem('CHART_BUILDER', 'Graph Builder', 'fa-pie-chart', scope.chartBuilderHandler.bind(this))
+                    new MenuItem('GRAPHIC_CHART', 'Graphic Charts', 'fa-bar-chart'),               
+                    new MenuItem('GRAPHIC_PIE', 'Graphic Pie', 'fa-pie-chart', scope.graphicPieHandler.bind(this))
                     
                 ]
 

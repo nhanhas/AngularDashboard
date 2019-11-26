@@ -19,16 +19,24 @@
             
         </div>
 
-        <!-- TYPE: CHARTS -->
-        <div ng-if="editingElement.item.type === 'CHARTS'">
+        <!-- TYPE: GRAPHIC_CHART -->
+        <div ng-if="editingElement.item.type === 'GRAPHIC_CHART'">
 
             Charts 
         </div>
 
-        <!-- TYPE: CHART_BUILDER -->
-        <div ng-if="editingElement.item.type === 'CHART_BUILDER'">
+        <!-- TYPE: GRAPHIC_PIE -->
+        <div class="graphic-pie-container" ng-if="editingElement.item.type === 'GRAPHIC_PIE'">
 
-            Builder 
+            <div class="column" ng-repeat="pieItem in editingElement.data">
+                
+                <!-- Pie element -->
+                <div class="pie-element">
+                    <span id="{{ pieItem.id }}"><i class="fa {{ pieItem.icon }}"></i></span>
+                </div>
+
+            </div>
+
         </div>
     </div>
 

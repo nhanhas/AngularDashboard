@@ -80,8 +80,16 @@ app.service('DashboardService', ['$http', 'FrameworkUtils', function($http, Fram
             })
     }
 
-    this.getChartsToBuild = function () {
-        return Promise.resolve({ data: [1,2,3,4,5] });
+    this.getGraphicPiesToBuild = function () {
+        return Promise.resolve({ data: [
+            { type: 'pie_01', icon: 'fa-pie-chart' },
+            { type: 'pie_02', icon: 'fa-pie-chart' },
+            { type: 'pie_03', icon: 'fa-pie-chart' },
+            { type: 'pie_04', icon: 'fa-pie-chart' },
+            { type: 'pie_05', icon: 'fa-pie-chart' },
+            { type: 'pie_06', icon: 'fa-pie-chart' }
+
+        ] });
        
     }
 
