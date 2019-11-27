@@ -24,6 +24,11 @@ app
                         scope.onTriggerToolbox({item : scope.item});
                     }  
                 }
+
+                scope.onDropComplete=function(data, event){
+                    console.log("drop success, data:", data);
+                }
+                
             }
         }
     }

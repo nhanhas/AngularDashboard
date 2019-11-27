@@ -16,11 +16,13 @@ app
                 
                 // save changes from toolbox
                 
-
-
                 $timeout(function(){
                     scope.isToolReady = true;
                 })
+
+
+                
+
             }
         }
     }

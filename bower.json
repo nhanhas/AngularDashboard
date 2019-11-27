@@ -8,9 +8,10 @@
     "angular-animate": "*",
     "font-awesome": "4.2",
     "bootstrap": "3.3.7",
-    "angular-ui" : "*",
-    "angular-bootstrap" : "*",
-    "requirejs" : "*",
-    "angular-translate" : "*"
+    "angular-ui": "*",
+    "angular-bootstrap": "*",
+    "requirejs": "*",
+    "angular-translate": "*",
+    "ngDraggable": "^0.1.11"
   }
 }

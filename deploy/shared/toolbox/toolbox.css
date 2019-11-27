@@ -70,15 +70,16 @@
       border-radius: 4px;
       padding: 10px;
       cursor: pointer; }
-  .toolbox .pie-element {
+  .toolbox .pie-element, .toolbox .pie-element > div {
     background-color: #e2e0e0;
     width: 50px;
     height: 45px;
     font-size: 27px;
     text-align: center;
-    padding-top: 5px;
     border-radius: 5px;
     cursor: pointer; }
+  .toolbox .pie-element > div {
+    padding-top: 4px; }
   .toolbox .graphic-pie-container {
     max-width: 140px;
     margin: 0 auto; }
@@ -90,3 +91,6 @@
     content: "";
     display: table;
     clear: both; }
+  .toolbox [ng-drag].dragging {
+    position: fixed;
+    background-color: #90a9cd; }
