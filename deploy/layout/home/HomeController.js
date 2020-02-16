@@ -6,7 +6,7 @@ app
          * Controller Variables
          */
         
-        $scope.tabs = [];
+        $scope.dashboards = [];
         $scope.dataSource = {};
      
 
@@ -15,33 +15,19 @@ app
          */
         $scope.initialize = function(){
 
-            /*DashboardService.getDataSourcesSets().then(result => {
-                console.log(result);
-            })*/ 
+            // #1 - get available dashboards
+            DashboardService.getDashboards().then(result => {
+                $scope.dashboards = result;    
 
-            //#DEVELOPMENT - generate 5 tabs
-            for(var i = 0; i < 5; i++){
-                let newTab = new TabItem();
-                newTab.title = `Tab id: ${newTab.id}`;
+                // #2 - get charts by dashboard
+                $scope.dashboards.forEach(dashboard => {
+                    DashboardService.getDashboardItems(dashboard.id).then(chartsResult => {
+                        dashboard.charts = chartsResult;
+                    })
+                })
 
-                newTab.snapshots = [
-                    (function(){ let option = new SnapshotItem(); option.tabId = newTab.id; option.title = `Tab ${newTab.id} >> Snapshot #${option.id}`; return option })(),
-                    (function(){ let option = new SnapshotItem(); option.tabId = newTab.id; option.title = `Tab ${newTab.id} >> Snapshot #${option.id}`; return option })(),
-                    (function(){ let option = new SnapshotItem(); option.tabId = newTab.id; option.title = `Tab ${newTab.id} >> Snapshot #${option.id}`; return option })()
-                ];
+            })
 
-                $scope.tabs.push(newTab);
-            }
-
-
-            $scope.dataSource =  {
-                name: "windows",
-                childs: [
-                    { name: 'Available_Physical_Memory', checked:false },
-                    { name: 'Backup Failure(Full Diff) 24 hrs', checked:false },
-                    { name: 'BAvailable Physical Memory(pct)', checked:false }
-                ]
-            };
         }
 
         
@@ -51,7 +37,7 @@ app
          */
         //#A - Tabset - Add new tab
         $scope.addNewTab = function(){
-            let newTab = new TabItem();
+            let newTab = new DashboardItem();
             newTab.title = `Tab id: ${newTab.id}`;
             $scope.tabs.push(newTab);
         };

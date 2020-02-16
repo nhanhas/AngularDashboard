@@ -12,8 +12,8 @@
             </uib-tab-heading>          
 
             <div class="snapshots-container">
-                <div ng-repeat="snapshot in tab.snapshots">
-                    <snapshot item="snapshot" on-trigger-toolbox="triggerToolbox('SNAPSHOT', item)"></snapshot>
+                <div ng-repeat="chart in tab.charts">
+                    <snapshot item="chart" on-trigger-toolbox="triggerToolbox('SNAPSHOT', item)"></snapshot>
                 </div>
             </div>
 

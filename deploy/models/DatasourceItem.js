@@ -3,16 +3,16 @@
  */
 class DatasourceItem{
 
-    id = -1;
+    type = 2;
     name = '';
-    type = '';
-    datasets = []; //items of DatasetItem
+    description = '';
+    selected = false;    
+    metaDataEntryId;
 
-    constructor(name, type, datasets = []){
-        this.id = Math.floor((Math.random() * 100) + 1);
-        this.name = name;
-        this.type = type;
-        this.datasets = datasets;
-    }
+    itens = []; //items of DatasetItem
+    
+    expanded = false;
+
+    constructor(){ }
 
 }

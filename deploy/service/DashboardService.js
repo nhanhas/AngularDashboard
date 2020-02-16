@@ -11,8 +11,69 @@ app.service('DashboardService', ['$http', 'FrameworkUtils', function($http, Fram
         return new Promise((resolve) => setTimeout(resolve, time));
     };
 
+    /**
+     * Get DataSources 
+     */
     this.getDataSourcesSets = function () {
+     
+        /*return FrameworkUtils.Http_GET(baseUrl + "api/datasource/getsets").then((data) => {
+            console.log(data);
+            return data;
+        })*/
+
+     
         return Promise.resolve( (()=> {
+
+            //#1 - Data sets
+            const data = this.getSets;
+            
+            //#2 - pick first service
+            const serviceDataSource = data[0];
+            
+            let results = [];
+
+            serviceDataSource.itens.forEach(sourceItem => {
+                let newSource = Object.assign( new DatasourceItem, { 
+                    name : sourceItem.name,
+                    description : sourceItem.description,
+                    selected : sourceItem.selected,    
+                    metaDataEntryId: sourceItem.MetadataEntryId
+                })
+
+                // #2.1 - iterate data sources
+                sourceItem.itens.forEach(setItem => {
+                    let newSet = Object.assign( new DatasetItem(), {
+                        name : setItem.name,
+                        description : setItem.description,
+                        selected : setItem.selected,    
+                        metaDataEntryId: setItem.MetadataEntryId
+                    })
+
+                    newSource.itens.push(newSet);
+
+                    // #2.2 - iterate data fields
+                    setItem.itens.forEach(fieldItem => {
+                        let newField = Object.assign( new DatafieldItem(), {
+                            name : fieldItem.name,
+                            description : fieldItem.description,
+                            selected : fieldItem.selected,    
+                            metaDataEntryId: fieldItem.MetadataEntryId
+                        })
+                        newSet.itens.push(newField);
+                    })
+
+                })
+                results.push(newSource)
+            })
+
+            
+            return this.sleep(5).then((result)=>{
+                return {data :results};
+            });
+
+
+
+
             let datasources = [];
             
 
@@ -80,6 +141,40 @@ app.service('DashboardService', ['$http', 'FrameworkUtils', function($http, Fram
             })
     }
 
+    /**
+     * Get all availble Dashboards
+     * [{"Id":13,"Name":"chartSet1"},{"Id":14,"Name":"chartSet1"}]
+     */
+    this.getDashboards = function(){
+        return FrameworkUtils.Http_GET(baseUrl + "api/ChartSet/GetDashBoards").then((data) => {
+            return data.data.map(dashboard => Object.assign(new DashboardItem(), { id: dashboard.Id, title: dashboard.Name }) )
+        })            
+
+    }
+
+    /**
+     * Get Itens of Dashboard
+     */
+    this.getDashboardItems = function(id){
+        return FrameworkUtils.Http_GET(baseUrl + `api/chartConfig/GetDashBoardItens?DashBoardId=${id}`).then((data) => {
+            return data.data.map(chartConfig => Object.assign(new ChartConfigItem(), {                
+                name: chartConfig.Name,
+                description: chartConfig.Description,
+                chartSetId: chartConfig.ChartSetId,
+                chartType: chartConfig.ChartType,
+                backGroundColor: chartConfig.BackGroundColor,
+                color: chartConfig.Color,
+                posX: chartConfig.PosX,
+                posY: chartConfig.PosY,
+                width: chartConfig.Width,
+                heigth: chartConfig.Heigth,
+                fields: chartConfig.Fields,
+                chartConfigId: chartConfig.ChartConfigId
+            }))
+            
+        })
+    }
+
     this.getGraphicPiesToBuild = function () {
         return Promise.resolve({ data: [
             { type: 'pie_01', icon: 'fa-pie-chart' },
@@ -94,5 +189,464 @@ app.service('DashboardService', ['$http', 'FrameworkUtils', function($http, Fram
     }
 
   
+    /**
+     * Mockups
+     */
+    this.getSets = [
+        {
+          "type": 1,
+          "name": "SRC01EUA_APPLE",
+          "description": "SRC01EUA_APPLE",
+          "selected": false,
+          "itens": [
+            {
+              "type": 2,
+              "name": "SRV01EUA_APPLE",
+              "description": "SRV01EUA_APPLE",
+              "selected": false,
+              "itens": [
+                {
+                  "type": 3,
+                  "name": "DB Size",
+                  "description": "DB Size",
+                  "selected": false,
+                  "itens": [
+                    {
+                      "type": 4,
+                      "name": "Allocated (MB)",
+                      "description": "Allocated (MB)",
+                      "selected": false,
+                      "itens": [],
+                      "MetadataEntryId": 8
+                    },
+                    {
+                      "type": 4,
+                      "name": "Used (MB)",
+                      "description": "Used (MB)",
+                      "selected": true,
+                      "itens": [],
+                      "MetadataEntryId": 9
+                    },
+                    {
+                      "type": 4,
+                      "name": "Used Percent",
+                      "description": "Used Percent",
+                      "selected": true,
+                      "itens": [],
+                      "MetadataEntryId": 10
+                    }
+                  ],
+                  "MetadataEntryId": 7
+                },
+                {
+                  "type": 3,
+                  "name": "Job",
+                  "description": "Job",
+                  "selected": false,
+                  "itens": [
+                    {
+                      "type": 4,
+                      "name": "Count Error",
+                      "description": "Count Error",
+                      "selected": false,
+                      "itens": [],
+                      "MetadataEntryId": 19
+                    }
+                  ],
+                  "MetadataEntryId": 18
+                },
+                {
+                  "type": 3,
+                  "name": "CPU Utilization",
+                  "description": "CPU Utilization",
+                  "selected": false,
+                  "itens": [
+                    {
+                      "type": 4,
+                      "name": "Number Core",
+                      "description": "Number Core",
+                      "selected": false,
+                      "itens": [],
+                      "MetadataEntryId": 26
+                    },
+                    {
+                      "type": 4,
+                      "name": "Percent",
+                      "description": "Percent",
+                      "selected": false,
+                      "itens": [],
+                      "MetadataEntryId": 27
+                    }
+                  ],
+                  "MetadataEntryId": 25
+                },
+                {
+                  "type": 3,
+                  "name": "Memory Utilization",
+                  "description": "Memory Utilization",
+                  "selected": false,
+                  "itens": [
+                    {
+                      "type": 4,
+                      "name": "Installed (MB)",
+                      "description": "Installed (MB)",
+                      "selected": false,
+                      "itens": [],
+                      "MetadataEntryId": 34
+                    },
+                    {
+                      "type": 4,
+                      "name": "Used (MB)",
+                      "description": "Used (MB)",
+                      "selected": false,
+                      "itens": [],
+                      "MetadataEntryId": 35
+                    },
+                    {
+                      "type": 4,
+                      "name": "Used Percent",
+                      "description": "Used Percent",
+                      "selected": false,
+                      "itens": [],
+                      "MetadataEntryId": 36
+                    }
+                  ],
+                  "MetadataEntryId": 33
+                },
+                {
+                  "type": 3,
+                  "name": "Page File Checks",
+                  "description": "Page File Checks",
+                  "selected": false,
+                  "itens": [
+                    {
+                      "type": 4,
+                      "name": "Deviation",
+                      "description": "Deviation",
+                      "selected": false,
+                      "itens": [],
+                      "MetadataEntryId": 45
+                    },
+                    {
+                      "type": 4,
+                      "name": "Total File (MB)",
+                      "description": "Total File (MB)",
+                      "selected": false,
+                      "itens": [],
+                      "MetadataEntryId": 46
+                    }
+                  ],
+                  "MetadataEntryId": 44
+                }
+              ],
+              "MetadataEntryId": null
+            }
+          ],
+          "MetadataEntryId": null
+        },
+        {
+          "type": 1,
+          "name": "SRC02PRT_APPLE",
+          "description": "SRC02PRT_APPLE",
+          "selected": false,
+          "itens": [
+            {
+              "type": 2,
+              "name": "SRV01PRT_APPLE",
+              "description": "SRV01PRT_APPLE",
+              "selected": false,
+              "itens": [
+                {
+                  "type": 3,
+                  "name": "DB Size",
+                  "description": "DB Size",
+                  "selected": false,
+                  "itens": [
+                    {
+                      "type": 4,
+                      "name": "Allocated (MB)",
+                      "description": "Allocated (MB)",
+                      "selected": false,
+                      "itens": [],
+                      "MetadataEntryId": 54
+                    },
+                    {
+                      "type": 4,
+                      "name": "Used (MB)",
+                      "description": "Used (MB)",
+                      "selected": false,
+                      "itens": [],
+                      "MetadataEntryId": 55
+                    },
+                    {
+                      "type": 4,
+                      "name": "Used Percent",
+                      "description": "Used Percent",
+                      "selected": false,
+                      "itens": [],
+                      "MetadataEntryId": 56
+                    }
+                  ],
+                  "MetadataEntryId": 53
+                },
+                {
+                  "type": 3,
+                  "name": "Job",
+                  "description": "Job",
+                  "selected": false,
+                  "itens": [
+                    {
+                      "type": 4,
+                      "name": "Count Error",
+                      "description": "Count Error",
+                      "selected": false,
+                      "itens": [],
+                      "MetadataEntryId": 65
+                    }
+                  ],
+                  "MetadataEntryId": 64
+                },
+                {
+                  "type": 3,
+                  "name": "CPU Utilization",
+                  "description": "CPU Utilization",
+                  "selected": false,
+                  "itens": [
+                    {
+                      "type": 4,
+                      "name": "Number Core",
+                      "description": "Number Core",
+                      "selected": false,
+                      "itens": [],
+                      "MetadataEntryId": 72
+                    },
+                    {
+                      "type": 4,
+                      "name": "Percent",
+                      "description": "Percent",
+                      "selected": false,
+                      "itens": [],
+                      "MetadataEntryId": 73
+                    }
+                  ],
+                  "MetadataEntryId": 71
+                },
+                {
+                  "type": 3,
+                  "name": "Memory Utilization",
+                  "description": "Memory Utilization",
+                  "selected": false,
+                  "itens": [
+                    {
+                      "type": 4,
+                      "name": "Installed (MB)",
+                      "description": "Installed (MB)",
+                      "selected": false,
+                      "itens": [],
+                      "MetadataEntryId": 80
+                    },
+                    {
+                      "type": 4,
+                      "name": "Used (MB)",
+                      "description": "Used (MB)",
+                      "selected": false,
+                      "itens": [],
+                      "MetadataEntryId": 81
+                    },
+                    {
+                      "type": 4,
+                      "name": "Used Percent",
+                      "description": "Used Percent",
+                      "selected": false,
+                      "itens": [],
+                      "MetadataEntryId": 82
+                    }
+                  ],
+                  "MetadataEntryId": 79
+                },
+                {
+                  "type": 3,
+                  "name": "Page File Checks",
+                  "description": "Page File Checks",
+                  "selected": false,
+                  "itens": [
+                    {
+                      "type": 4,
+                      "name": "Deviation",
+                      "description": "Deviation",
+                      "selected": false,
+                      "itens": [],
+                      "MetadataEntryId": 91
+                    },
+                    {
+                      "type": 4,
+                      "name": "Total File (MB)",
+                      "description": "Total File (MB)",
+                      "selected": false,
+                      "itens": [],
+                      "MetadataEntryId": 92
+                    }
+                  ],
+                  "MetadataEntryId": 90
+                }
+              ],
+              "MetadataEntryId": null
+            }
+          ],
+          "MetadataEntryId": null
+        },
+        {
+          "type": 1,
+          "name": "SRC03BRA_APPLE",
+          "description": "SRC03BRA_APPLE",
+          "selected": false,
+          "itens": [
+            {
+              "type": 2,
+              "name": "SRV05BRA_APPLE",
+              "description": "SRV05BRA_APPLE",
+              "selected": false,
+              "itens": [
+                {
+                  "type": 3,
+                  "name": "DB Size",
+                  "description": "DB Size",
+                  "selected": false,
+                  "itens": [
+                    {
+                      "type": 4,
+                      "name": "Allocated (MB)",
+                      "description": "Allocated (MB)",
+                      "selected": false,
+                      "itens": [],
+                      "MetadataEntryId": 100
+                    },
+                    {
+                      "type": 4,
+                      "name": "Used (MB)",
+                      "description": "Used (MB)",
+                      "selected": false,
+                      "itens": [],
+                      "MetadataEntryId": 101
+                    },
+                    {
+                      "type": 4,
+                      "name": "Used Percent",
+                      "description": "Used Percent",
+                      "selected": false,
+                      "itens": [],
+                      "MetadataEntryId": 102
+                    }
+                  ],
+                  "MetadataEntryId": 99
+                },
+                {
+                  "type": 3,
+                  "name": "Job",
+                  "description": "Job",
+                  "selected": false,
+                  "itens": [
+                    {
+                      "type": 4,
+                      "name": "Count Error",
+                      "description": "Count Error",
+                      "selected": false,
+                      "itens": [],
+                      "MetadataEntryId": 111
+                    }
+                  ],
+                  "MetadataEntryId": 110
+                },
+                {
+                  "type": 3,
+                  "name": "CPU Utilization",
+                  "description": "CPU Utilization",
+                  "selected": false,
+                  "itens": [
+                    {
+                      "type": 4,
+                      "name": "Number Core",
+                      "description": "Number Core",
+                      "selected": false,
+                      "itens": [],
+                      "MetadataEntryId": 118
+                    },
+                    {
+                      "type": 4,
+                      "name": "Percent",
+                      "description": "Percent",
+                      "selected": false,
+                      "itens": [],
+                      "MetadataEntryId": 119
+                    }
+                  ],
+                  "MetadataEntryId": 117
+                },
+                {
+                  "type": 3,
+                  "name": "Memory Utilization",
+                  "description": "Memory Utilization",
+                  "selected": false,
+                  "itens": [
+                    {
+                      "type": 4,
+                      "name": "Installed (MB)",
+                      "description": "Installed (MB)",
+                      "selected": false,
+                      "itens": [],
+                      "MetadataEntryId": 126
+                    },
+                    {
+                      "type": 4,
+                      "name": "Used (MB)",
+                      "description": "Used (MB)",
+                      "selected": false,
+                      "itens": [],
+                      "MetadataEntryId": 127
+                    },
+                    {
+                      "type": 4,
+                      "name": "Used Percent",
+                      "description": "Used Percent",
+                      "selected": false,
+                      "itens": [],
+                      "MetadataEntryId": 128
+                    }
+                  ],
+                  "MetadataEntryId": 125
+                },
+                {
+                  "type": 3,
+                  "name": "Page File Checks",
+                  "description": "Page File Checks",
+                  "selected": false,
+                  "itens": [
+                    {
+                      "type": 4,
+                      "name": "Deviation",
+                      "description": "Deviation",
+                      "selected": false,
+                      "itens": [],
+                      "MetadataEntryId": 137
+                    },
+                    {
+                      "type": 4,
+                      "name": "Total File (MB)",
+                      "description": "Total File (MB)",
+                      "selected": false,
+                      "itens": [],
+                      "MetadataEntryId": 138
+                    }
+                  ],
+                  "MetadataEntryId": 136
+                }
+              ],
+              "MetadataEntryId": null
+            }
+          ],
+          "MetadataEntryId": null
+        }
+      ]
     
 }]);
+

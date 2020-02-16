@@ -3,12 +3,12 @@
  */
 class DatafieldItem{
 
-    id = -1;
+    type = 4;
     name = '';
-    type = '';
+    description = '';
+    selected = false;  
+    metaDataEntryId;
 
-    constructor(){
-        this.id = Math.floor((Math.random() * 100) + 1);
-    }
+    constructor(){ }
 
 }
