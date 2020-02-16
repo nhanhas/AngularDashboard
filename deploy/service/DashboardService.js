@@ -175,6 +175,30 @@ app.service('DashboardService', ['$http', 'FrameworkUtils', function($http, Fram
         })
     }
 
+
+    /**
+     * Create dashboard
+     */
+    this.createDashboard = function(name){
+        return FrameworkUtils.Http_POST(baseUrl + `api/ChartSet/Create?name=${name}`).then((data) => {
+            if(data.data)
+                return Object.assign(new DashboardItem(), { id: data.data, title: name });
+        })     
+    }
+
+    /**
+     * Delete dashboard
+     */
+    this.deleteDashboard = function(id){
+        return FrameworkUtils.Http_POST(baseUrl + `api/ChartSet/Delete?chartSetId=${id}`).then((data) => {
+            console.log(data)
+        })     
+    }
+
+
+    /**
+     * Development
+     */
     this.getGraphicPiesToBuild = function () {
         return Promise.resolve({ data: [
             { type: 'pie_01', icon: 'fa-pie-chart' },

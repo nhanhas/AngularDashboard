@@ -37,9 +37,14 @@ app
          */
         //#A - Tabset - Add new tab
         $scope.addNewTab = function(){
-            let newTab = new DashboardItem();
+            DashboardService.createDashboard('New').then(result =>{
+                // #1 - Add a new successfull dashboard
+                $scope.dashboards.push(result);
+            })
+
+            /*let newTab = new DashboardItem();
             newTab.title = `Tab id: ${newTab.id}`;
-            $scope.tabs.push(newTab);
+            $scope.tabs.push(newTab);*/
         };
 
         //#B - Tabset - Edit Tab and Snapshot
