@@ -19,6 +19,20 @@
         -webkit-box-shadow: 0px 1px 6px rgba(50, 50, 50, 0.75);
         -moz-box-shadow: 0px 1px 6px rgba(50, 50, 50, 0.75);
         box-shadow: 0px 1px 6px rgba(50, 50, 50, 0.75);
+        
+        display: flex;
+        flex-direction: row;
+        justify-items: center;
+        align-items: center;
+
+        > span:first-child {
+            background-color: white;
+            padding: 4px 8px;
+            width: 25px;
+            border-radius: 25px;
+            margin-right: 10px;
+            height: 25px;
+        }
     }
 
 }
