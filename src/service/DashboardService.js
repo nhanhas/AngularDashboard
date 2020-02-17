@@ -16,10 +16,49 @@ app.service('DashboardService', ['$http', 'FrameworkUtils', function($http, Fram
      */
     this.getDataSourcesSets = function () {
      
-        /*return FrameworkUtils.Http_GET(baseUrl + "api/datasource/getsets").then((data) => {
-            console.log(data);
-            return data;
-        })*/
+        return FrameworkUtils.Http_GET(baseUrl + "api/datasource/getsets").then((data) => {
+                       
+            //#2 - pick first service
+            const serviceDataSource = data.data;
+            
+            let results = [];
+
+            serviceDataSource.forEach(sourceItem => {
+                let newSource = Object.assign( new DatasourceItem, { 
+                    name : sourceItem.name,
+                    description : sourceItem.description,
+                    selected : sourceItem.selected,    
+                    metaDataEntryId: sourceItem.MetadataEntryId
+                })
+
+                // #2.1 - iterate data sources
+                sourceItem.itens.forEach(setItem => {
+                    let newSet = Object.assign( new DatasetItem(), {
+                        name : setItem.name,
+                        description : setItem.description,
+                        selected : setItem.selected,    
+                        metaDataEntryId: setItem.MetadataEntryId
+                    })
+
+                    newSource.itens.push(newSet);
+
+                    // #2.2 - iterate data fields
+                    setItem.itens.forEach(fieldItem => {
+                        let newField = Object.assign( new DatafieldItem(), {
+                            name : fieldItem.name,
+                            description : fieldItem.description,
+                            selected : fieldItem.selected,    
+                            metaDataEntryId: fieldItem.MetadataEntryId
+                        })
+                        newSet.itens.push(newField);
+                    })
+
+                })
+                results.push(newSource)
+            })
+
+            return {data: results };
+        })
 
      
         return Promise.resolve( (()=> {

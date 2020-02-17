@@ -3,7 +3,7 @@
  */
 class DatasourceItem{
 
-    type = 2;
+    type = 1;
     name = '';
     description = '';
     selected = false;    

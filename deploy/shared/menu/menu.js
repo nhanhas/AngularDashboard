@@ -18,9 +18,9 @@ app
                     DashboardService.getDataSourcesSets().then((result) => {
 
                         //#2 - Show datasources in toolbox
-                        scope.$apply(function(){
+                        //scope.$apply(function(){
                             scope.triggerToolbox(menuId, result.data);
-                        });
+                        //});
                         
 
                     });
