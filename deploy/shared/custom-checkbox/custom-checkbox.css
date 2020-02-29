@@ -27,17 +27,17 @@
 /* Create a custom checkbox */
 .custom-checkmark {
   position: absolute;
-  top: 6px;
+  top: 7px;
   right: 10px;
-  height: 20px;
-  width: 20px;
-  background-color: #000b48;
-  border-radius: 15px; }
+  height: 15px;
+  width: 15px;
+  background-color: #313e52;
+  border-radius: 20px; }
 
 /* On mouse-over, add a grey background color */
-.custom-check-container:hover input ~ .custom-checkmark {
-  background-color: #000b48; }
-
+/*.custom-check-container:hover input ~ .custom-checkmark {
+    
+  }*/
 /* Create the custom-checkmark/indicator (hidden when not checked) */
 .custom-checkmark:after {
   content: "";
@@ -50,10 +50,10 @@
 
 /* Style the custom-checkmark/indicator */
 .custom-check-container .custom-checkmark:after {
-  left: 6px;
-  top: 3px;
-  width: 8px;
-  height: 13px;
+  left: 4px;
+  top: 0px;
+  width: 7px;
+  height: 12px;
   border: solid #ffffff;
   border-width: 0 3px 3px 0;
   -webkit-transform: rotate(45deg);
@@ -61,8 +61,8 @@
   transform: rotate(45deg); }
 
 .custom-check-container-selected {
-  background-color: #0ea50e;
+  background-color: #42b75b;
   color: white; }
 
 .custom-checkmark-selected {
-  background-color: #0ea50e; }
+  background-color: #42b75b; }

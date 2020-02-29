@@ -8,7 +8,7 @@ app
         
         $scope.dashboards = [];
         $scope.dataSource = {};
-     
+        $scope.toolboxOpened = false;
 
         /**
          * Initialize main function
@@ -60,16 +60,22 @@ app
         $scope.toggleTools = false;
         //#A - Closes mobile menu when opening new views
         $scope.closeToolbox = function(){   
+            $scope.toolboxOpened = false;
             $scope.toggleTools = false;        
         }             
         //#B - Toogle toolbox with a specific element 
         $scope.toggleToolbox = function(forceOpen = false, editingElement = undefined){
+            $scope.toolboxOpened = true;
+
             if(editingElement)
                 $scope.editingElement = editingElement //update editing element from directives
             $scope.toggleTools = !$scope.toggleTools || forceOpen;        
         } 
 
-        
+        //#C - Is toolbox opened
+        $scope.isToolboxOpened = function(){
+            return $scope.toolboxOpened;
+        }
         
         //Initialize!
         $timeout( function(){

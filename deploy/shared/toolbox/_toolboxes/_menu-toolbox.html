@@ -7,6 +7,12 @@
         <!-- TYPE: DATASOURCE -->
         <div class="datasources-container" ng-if="editingElement.item.type === 'DATASOURCES'">
             
+            <!-- Hint -->
+            <div class="toolbox-hint">
+                <span><i class="color-blue fa fa-exclamation-circle fa-lg"></i> </span> 
+                <span>Choose your Data Source and select your data set to work on the dashboards</span>
+            </div>
+            
             <div ng-repeat="datasource in editingElement.data">
                 <multi-dropdown datasource="datasource"></multi-dropdown>
             </div>

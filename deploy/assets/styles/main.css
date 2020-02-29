@@ -7,3 +7,19 @@ body {
 /* Colors */
 .color-black {
   color: black; }
+
+.color-blue {
+  color: #3e64a0; }
+
+.color-dark-blue {
+  color: #313e52; }
+
+/* Backgrounds */
+.background-white {
+  background-color: white; }
+
+.background-blue {
+  background-color: #3e64a0; }
+
+.background-l-blue {
+  background-color: #4f74af; }

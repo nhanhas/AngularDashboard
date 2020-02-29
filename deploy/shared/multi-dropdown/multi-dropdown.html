@@ -3,8 +3,12 @@
     <!-- Dataset header -->
     <div class="datasource-label" ng-click="datasource.expanded = !datasource.expanded">
         <div>
-            <span><i class="fa fa-database"></i></span>        
-            <span>{{ datasource.name }}</span> 
+            <span>
+                <i class="fa fa-database fa-lg"></i>
+                <div class="label-indicator" ng-if="getTotalSelected() > 0">{{ getTotalSelected() }}</div>
+            </span> 
+
+            <span><strong>{{ datasource.name }}</strong></span> 
         </div>
 
         <span><i class="fa" ng-class="datasource.expanded ? 'fa-minus-circle' : 'fa-plus-circle'"></i></span>        

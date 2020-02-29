@@ -16,7 +16,13 @@ app
                 //Should be of class DatasourceItem 
                 scope.datasource = scope.datasource || undefined;
                 
+                scope.getSelected = function(){
+                    return scope.datasource.itens.filter(dataset => dataset.selected );
+                }
 
+                scope.getTotalSelected = function(){
+                    return scope.getSelected().length;
+                }
 
             }
         }

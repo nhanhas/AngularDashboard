@@ -4,13 +4,13 @@
   /* Clear floats after the columns */ }
   .toolbox #mobile-nav-menu {
     float: right;
-    width: 270px;
+    width: 310px;
     background: white;
     font-size: 12px;
     /* margin-top: 60px; */
     padding: 0;
     position: absolute;
-    right: 35px;
+    right: 45px;
     overflow: hidden;
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.4);
     border-bottom-left-radius: 24px;
@@ -29,7 +29,7 @@
 
 @keyframes slideIn {
   0% {
-    right: -270px; }
+    right: -310px; }
   100% {
     right: 35px; } }
 
@@ -37,7 +37,7 @@
   0% {
     right: 35px; }
   100% {
-    right: -270px; } }
+    right: -310px; } }
   .toolbox .toolbox-close-btn {
     position: absolute;
     right: 10px;
@@ -73,6 +73,21 @@
       margin-right: 10px; }
   .toolbox .datasources-container > div:not(:last-child) {
     margin-bottom: 20px; }
+  .toolbox .datasources-container .toolbox-hint {
+    padding: 4px 10px;
+    display: flex;
+    flex-direction: row;
+    justify-items: center;
+    align-items: center;
+    background-color: #dedede;
+    border-radius: 40px;
+    font-size: 11px; }
+    .toolbox .datasources-container .toolbox-hint > span:first-child {
+      padding: 4px 8px;
+      width: 25px;
+      border-radius: 25px;
+      margin-right: 10px;
+      height: 24px; }
   .toolbox .save-btn-ds-container {
     position: absolute;
     bottom: 0;
