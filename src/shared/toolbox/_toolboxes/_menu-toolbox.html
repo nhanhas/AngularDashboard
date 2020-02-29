@@ -2,7 +2,11 @@
     <div>
         <h4> <span><i class="fa fa-lg {{ editingElement.item.icon }}"></i></span>{{ editingElement.item.actionName }}:</h4>
         
-        <!-- TODO: hint here -->
+        <!-- TYPE: USER -->
+        <div ng-if="editingElement.item.type === 'USER'">
+
+            User Settings 
+        </div>
         
         <!-- TYPE: DATASOURCE -->
         <div class="datasources-container" ng-if="editingElement.item.type === 'DATASOURCES'">

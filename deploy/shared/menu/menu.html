@@ -2,13 +2,18 @@
 
     <ul>
         <!-- Pic -->
-        <li class="user-picture">
-            <span><i class="fa fa-circle fa-2x"></i></span>
+        <li class="user-picture" ng-click="userMenu.handler(userMenu.id)">
+            <div>
+                <span ng-class="selectedMenu.id === userMenu.id && isToolboxOpened() ? 'color-white' : 'color-black'">
+                    <i class="fa fa-circle fa-2x"></i>
+                </span>
+            </div>
+            <div class="menu-notch" ng-show="selectedMenu.id === userMenu.id && isToolboxOpened()"></div>
         </li>
 
         <hr class="menu-spacer" width="60%">
 
-        <li ng-click="menu.handler(menu.id)" ng-repeat="menu in menus">
+        <li ng-click="menu.handler(menu.id)" ng-repeat="menu in menus" ng-if="menu.id !== userMenu.id">
             <div class="menu-btn" ng-class="selectedMenu.id === menu.id && isToolboxOpened() ? 'background-white' : 'background-l-blue'">
                 <span><i class="fa {{ menu.icon }}" ng-class="{'color-blue' : selectedMenu.id === menu.id && isToolboxOpened() }"></i></span>
             </div>

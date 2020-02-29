@@ -10,6 +10,12 @@ app
 
             link: function (scope, element, attrs) {
                 
+                // TYPE: USER menu handler
+                scope.userSettingsHandler = function(menuId){
+                    //#1 - Get datasources for toolbox
+                    scope.triggerToolbox(menuId, undefined);
+                    
+                }
                 
                 // TYPE: DATASOURCES menu handler
                 scope.dataSourceHandler = function(menuId){
@@ -44,12 +50,16 @@ app
                 scope.selectedMenu = undefined;
 
                 //#1 - Init menu items
+                
                 scope.menus = [
+                    new MenuItem('USER', 'User settings', '', scope.userSettingsHandler.bind(this)),
                     new MenuItem('DATASOURCES', 'Data Sources and Data Sets', 'fa-database', scope.dataSourceHandler.bind(this)),
                     new MenuItem('GRAPHIC_CHART', 'Graphic Charts', 'fa-bar-chart'),               
-                    new MenuItem('GRAPHIC_PIE', 'Graphic Pie', 'fa-pie-chart', scope.graphicPieHandler.bind(this))
-                    
+                    new MenuItem('GRAPHIC_PIE', 'Graphic Pie', 'fa-pie-chart', scope.graphicPieHandler.bind(this))                    
                 ]
+                // isolate menu user setting
+                scope.userMenu = scope.menus[0];
+                
 
                 scope.getMenuById = function(menuId){
                     let menu = scope.menus.find(menuItem => {

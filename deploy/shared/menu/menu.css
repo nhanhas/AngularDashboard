@@ -20,6 +20,9 @@
     padding-bottom: 5px;
     color: black;
     margin-bottom: -10px; }
+    .menu .user-picture > div {
+      padding-top: 5px;
+      font-size: 18px; }
   .menu .menu-btn {
     cursor: pointer;
     color: white;

@@ -5,6 +5,9 @@ body {
   padding: 0 35px; }
 
 /* Colors */
+.color-white {
+  color: white; }
+
 .color-black {
   color: black; }
 

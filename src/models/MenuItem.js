@@ -5,7 +5,7 @@
 class MenuItem{
 
     id = -1;
-    type = ''; // This can be: ['DATASOURCE', 'GRAPHIC_PIE', 'GRAPHIC_CHART']
+    type = ''; // This can be: ['USER', 'DATASOURCE', 'GRAPHIC_PIE', 'GRAPHIC_CHART']
     actionName = '';
     icon = '';
     handler = undefined; //handler function on click
