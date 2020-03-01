@@ -3,12 +3,13 @@
     <ul>
         <!-- Pic -->
         <li class="user-picture" ng-click="userMenu.handler(userMenu.id)">
-            <div>
-                <span ng-class="selectedMenu.id === userMenu.id && isToolboxOpened() ? 'color-white' : 'color-black'">
-                    <i class="fa fa-circle fa-2x"></i>
-                </span>
+           
+            <!-- Photo -->
+            <div class="photo-container" ng-class="{ 'user-selected' : selectedMenu.id === userMenu.id && isToolboxOpened() }">  
+                <img src="assets/img/user-photo.png">
+                <div class="menu-notch" ng-show="selectedMenu.id === userMenu.id && isToolboxOpened()"></div>
             </div>
-            <div class="menu-notch" ng-show="selectedMenu.id === userMenu.id && isToolboxOpened()"></div>
+            
         </li>
 
         <hr class="menu-spacer" width="60%">

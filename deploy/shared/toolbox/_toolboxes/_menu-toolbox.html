@@ -3,9 +3,53 @@
         <h4> <span><i class="fa fa-lg {{ editingElement.item.icon }}"></i></span>{{ editingElement.item.actionName }}:</h4>
         
         <!-- TYPE: USER -->
-        <div ng-if="editingElement.item.type === 'USER'">
+        <div class="user-container" ng-if="editingElement.item.type === 'USER'">
+            <!-- Hint -->
+            <div class="toolbox-hint">
+                <span><i class="color-blue fa fa-exclamation-circle fa-lg"></i> </span> 
+                <span>You can change your personal settings, take the lead...</span>
+            </div>
 
-            User Settings 
+            <!-- User header -->
+            <div class="header">
+                <!-- Photo -->
+                <div class="photo-container"> 
+                    <img src="assets/img/user-photo.png">
+                </div>
+
+                <!-- Detail -->
+                <div class="resume-container color-blue">
+                    <p class="text-lg text-bold">Mr. Manual Vaz Silva</p>
+                    <p class="text-bold">Singular Data Co-Worker</p>
+                    <span class="text-bold ">Status:&nbsp;</span><span>Online</span>
+                    <!-- Logout -->
+                    <div class="logout color-blue">
+                        <span class="background-blue color-white"><i class="fa fa-sign-out fa-lg color-white"></i></span>
+                        <span>Log off</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Greetings -->
+            <p class="greetings text-xl color-blue">Hi, you can edit your profile here!</p>
+
+            <!-- Form -->
+            <div class="form-container">
+                <custom-input label="Name" model="userInfo.username"></custom-input>
+                <custom-input label="Surname" model="userInfo.surname"></custom-input>
+                <custom-input label="Address" model="userInfo.address"></custom-input>
+                <custom-input label="Company" model="userInfo.company"></custom-input>
+                <custom-input label="Old Password" model="userInfo.password" type="password"></custom-input>
+                <custom-input label="New Password" model="userInfo.newpw" type="password"></custom-input>
+            </div>
+
+            <!-- Save Button -->
+            <div class="save-btn-container">
+                <div>
+                    <span>Save Settings</span>
+                </div>
+            </div>
+
         </div>
         
         <!-- TYPE: DATASOURCE -->
@@ -22,7 +66,7 @@
             </div>
 
             <!-- Save Button -->
-            <div class="save-btn-ds-container">
+            <div class="save-btn-container">
                 <div>
                     <span>Save Settings</span>
                 </div>

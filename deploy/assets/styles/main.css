@@ -4,6 +4,17 @@ body {
 .container-dashboard {
   padding: 0 35px; }
 
+/* Text weight */
+.text-bold {
+  font-weight: bold; }
+
+/* Text size */
+.text-lg {
+  font-size: 15px; }
+
+.text-xl {
+  font-size: 20px; }
+
 /* Colors */
 .color-white {
   color: white; }

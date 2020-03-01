@@ -8,6 +8,7 @@ app
         
         $scope.dashboards = [];
         $scope.dataSource = {};
+        $scope.userInfo = {};
         $scope.toolboxOpened = false;
 
         /**
@@ -27,6 +28,16 @@ app
                 })
 
             })
+
+            // #2 - user info
+            $scope.userInfo = {
+                username: 'Manuel Vaz',
+                surname: 'Silva',
+                address: 'Av. da Liberdade, 2655-300 Lisboa',
+                company: 'Singular Data',
+                password: '',
+                newpw: ''
+            }
 
         }
 

@@ -17,12 +17,18 @@
       cursor: pointer;
       color: white; }
   .menu .user-picture {
-    padding-bottom: 5px;
     color: black;
     margin-bottom: -10px; }
-    .menu .user-picture > div {
-      padding-top: 5px;
-      font-size: 18px; }
+    .menu .user-picture .photo-container {
+      width: 35px;
+      border-radius: 40px;
+      margin-right: 20px;
+      margin: 0px 5px; }
+      .menu .user-picture .photo-container > img {
+        width: 100%; }
+    .menu .user-picture .user-selected {
+      background-color: white;
+      border: 2px solid white; }
   .menu .menu-btn {
     cursor: pointer;
     color: white;
