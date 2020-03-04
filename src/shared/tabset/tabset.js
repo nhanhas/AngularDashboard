@@ -68,7 +68,7 @@ app
  * {
  *      id: <Integer>,
  *      disabled: <Boolean>,
- *      snapshots: <Object Array>
+ *      chart: <Object Array>
  * }
  * 
  * 

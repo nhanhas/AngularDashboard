@@ -3,7 +3,7 @@
     <!-- Tabset container -->
     <uib-tabset active="activeTab">
 
-        <!-- Tab (with snapshots) -->
+        <!-- Tab (with charts) -->
         <uib-tab index="$index + 1" ng-repeat="tab in tabCollection" heading="{{tab.title}}" disable="tab.disabled">
             
             <!-- Tab header -->
@@ -11,9 +11,9 @@
                 <span>{{tab.title}} &nbsp;<i class="fa fa-cog" ng-click="triggerToolbox('TAB', tab)"></i></span>            
             </uib-tab-heading>          
 
-            <div class="snapshots-container">
+            <div class="charts-container">
                 <div ng-repeat="chart in tab.charts">
-                    <snapshot item="chart" on-trigger-toolbox="triggerToolbox('SNAPSHOT', item)"></snapshot>
+                    <chart config="chart" on-trigger-toolbox="triggerToolbox('CHART', item)"></chart>
                 </div>
             </div>
 

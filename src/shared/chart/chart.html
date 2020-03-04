@@ -1,0 +1,49 @@
+<div class="chart" ng-drop="true" ng-drop-success="onDropComplete($data,$event)">
+
+    <!-- Charts -->
+    <div ng-if="!isLoading" ng-switch="config.ChartType">
+        <!-- line -->
+        <canvas ng-switch-when="line"
+            class="chart chart-line" 
+            chart-data="data"
+            chart-labels="labels" 
+            chart-series="series">
+        </canvas>
+
+        <!-- bar -->
+        <canvas ng-switch-when="bar"
+            class="chart chart-bar"
+            chart-data="data" 
+            chart-series="series"
+            chart-labels="labels"> 
+        </canvas>
+
+        <!-- pie -->
+        <canvas ng-switch-when="pie"
+            class="chart chart-pie"
+            chart-data="data" 
+            chart-labels="labels" 
+            chart-options="options">
+        </canvas>
+
+    </div>
+
+
+    <!-- loading -->
+    <div class="loading color-blue" ng-if="isLoading">
+        <span><i class="fa fa-spinner fa-spin"></i></span>
+    </div>
+
+</div>
+
+
+
+
+
+
+<!--<div class="chart-tile">
+    <div class="chart" ng-drop="true" ng-drop-success="onDropComplete($data,$event)">
+        <span class="chart-close-btn"><i class="fa fa-cog" ng-click="triggerToolbox()"></i></span>  
+        ID : {{item.name}}
+    </div> 
+</div> -->

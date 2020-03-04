@@ -12,6 +12,7 @@
     "angular-bootstrap": "*",
     "requirejs": "*",
     "angular-translate": "*",
-    "ngDraggable": "^0.1.11"
+    "ngDraggable": "^0.1.11",
+    "angular-chart.js": "^1.1.1"
   }
 }

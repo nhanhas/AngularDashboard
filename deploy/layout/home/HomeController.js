@@ -58,7 +58,7 @@ app
             $scope.tabs.push(newTab);*/
         };
 
-        //#B - Tabset - Edit Tab and Snapshot
+        //#B - Tabset - Edit Tab and Chart
         $scope.triggerToolboxTabEdit = function(type, item){
             let newEditingElement = new EditingElement(type, item);
             

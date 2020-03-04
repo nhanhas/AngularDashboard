@@ -1,4 +1,4 @@
-var app = angular.module("App", ['ngRoute', 'ui.bootstrap', 'pascalprecht.translate', 'ngAnimate', 'ngDraggable']);
+var app = angular.module("App", ['ngRoute', 'ui.bootstrap', 'pascalprecht.translate', 'ngAnimate', 'ngDraggable', 'chart.js']);
 
 //Routes Configuration 
 app.config(['$routeProvider', function($routeProvider) {

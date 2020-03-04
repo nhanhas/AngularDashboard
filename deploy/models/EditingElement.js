@@ -4,7 +4,7 @@
  */
 class EditingElement{
 
-    type = ''; //[TAB, SNAPSHOT, MENU]
+    type = ''; //[TAB, CHART, MENU]
     item = undefined; // Can be any known type  
     data = undefined; // All Required data to edit/use  
 
