@@ -27,12 +27,19 @@ app
                 if (!attrs.onTriggerToolbox) {
                     scope.onTriggerToolbox = undefined;
                 }
+                
 
                 /**
                  * #2 - Controller variables                 
                  */
                 //Wich tab is active
                 scope.activeTab = 1;
+
+                // Gridstack configuration
+                scope.gridStackOptions = {
+                    cellHeight: 200,
+                    verticalMargin: 10
+                };
 
 
                 /**
@@ -51,6 +58,32 @@ app
                         scope.onTriggerToolbox({type : type, item : item});
                     }  
                 }
+
+                
+
+                
+
+                //TEST
+                scope.widgets = [{ x:0, y:0, width:1, height:1 }, { x:0, y:0, width:3, height:1 }];
+                scope.addWidget = function() {
+                    var newWidget = { x:0, y:0, width:1, height:1 };
+                    scope.widgets.push(newWidget);
+                };
+
+                scope.onChange = function(event, items) {};
+
+                scope.onDragStart = function(event, ui) {};
+
+                scope.onDragStop = function(event, ui) {};
+
+                scope.onResizeStart = function(event, ui) {};
+
+                scope.onResizeStop = function(event, ui) {};
+
+                scope.onItemAdded = function(item) {};
+
+                scope.onItemRemoved = function(item) {};
+                //TEST
 
 
             }

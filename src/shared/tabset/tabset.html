@@ -11,9 +11,33 @@
                 <span>{{tab.title}} &nbsp;<i class="fa fa-cog" ng-click="triggerToolbox('TAB', tab)"></i></span>            
             </uib-tab-heading>          
 
-            <div class="charts-container">
-                <div ng-repeat="chart in tab.charts">
-                    <chart config="chart" on-trigger-toolbox="triggerToolbox('CHART', item)"></chart>
+            <div class="container-fluid charts-container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- Grid Stack panel -->
+                        <div 
+                            gridstack class="grid-stack grid1" 
+                            options="gridStackOptions" 
+                            on-change="onChange(event,items)" 
+                            on-drag-start="onDragStart(event,ui)" 
+                            on-drag-stop="onDragStop(event,ui)" 
+                            on-resize-start="onResizeStart(event,ui)" 
+                            on-resize-stop="onResizeStop(event,ui)">
+                            <!-- Grid Stack item -->
+                            <div 
+                                gridstack-item 
+                                ng-repeat="chart in tab.charts" 
+                                class="grid-stack-item" 
+                                gs-item-x="chart.posX" 
+                                gs-item-y="chart.posY"
+                                gs-item-width="chart.width" 
+                                gs-item-height="chart.height" 
+                                gs-item-autopos="1">
+                                <!-- Chart item -->
+                                <chart config="chart" on-trigger-toolbox="triggerToolbox('CHART', item)"></chart>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -33,3 +57,8 @@
 
 </div>
 
+<!--
+    https://github.com/kdietrich/gridstack-angular
+    https://github.com/gridstack/gridstack.js/tree/develop/doc#options
+    http://kdietrich.github.io/gridstack-angular/demo/#
+-->

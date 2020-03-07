@@ -34,7 +34,13 @@ app
                 // setup chart config
                 scope.setupChart = function(){
                     scope.isLoading = true;
-					
+                    
+                    // generic chart options
+                    scope.options = {
+                        responsive: true, 
+                        maintainAspectRatio: false
+                    }
+
 					// run setup according chart type
 					switch (scope.config.ChartType) {
 						case 'line':
@@ -91,9 +97,3 @@ app
 
 ]);
 
-class ChartOptions{
-	labels = []
-	series = []
-	data = []
-	options = {}
-}

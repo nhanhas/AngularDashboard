@@ -1,13 +1,20 @@
-<div class="chart" ng-drop="true" ng-drop-success="onDropComplete($data,$event)">
+<div class="chart grid-stack-item-content" ng-drop="true" ng-drop-success="onDropComplete($data,$event)"style="height: 100%;">
+    <!-- Title and config -->
+    <div class="chart-header color-blue text-bold" style="height: 15%;">
+        <div>{{ config.name }}</div>
+        <div><span ><i class="fa fa-cog" ng-click="triggerToolbox()"></i></span></div>
+    </div>
 
     <!-- Charts -->
-    <div ng-if="!isLoading" ng-switch="config.ChartType">
+    <div ng-if="!isLoading" ng-switch="config.ChartType" style="height: 85%;">
+
         <!-- line -->
         <canvas ng-switch-when="line"
             class="chart chart-line" 
             chart-data="data"
             chart-labels="labels" 
-            chart-series="series">
+            chart-series="series"
+            chart-options="options">
         </canvas>
 
         <!-- bar -->

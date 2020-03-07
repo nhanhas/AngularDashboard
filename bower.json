@@ -13,6 +13,8 @@
     "requirejs": "*",
     "angular-translate": "*",
     "ngDraggable": "^0.1.11",
-    "angular-chart.js": "^1.1.1"
+    "angular-chart.js": "^1.1.1",
+    "gridstack-angular": "^0.5.0",
+    "lodash": "^4.17.15"
   }
 }
