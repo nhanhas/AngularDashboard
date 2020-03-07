@@ -9,7 +9,7 @@ class ChartConfigItem{
     description = "";
     chartSetId = 0;
     chartType = "";
-    backGroundColor = "";
+    backgroundColor = "";
     color = "";
     posX = 0;
     posY = 0;

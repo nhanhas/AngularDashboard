@@ -201,7 +201,7 @@ app.service('DashboardService', ['$http', 'FrameworkUtils', function($http, Fram
                 description: chartConfig.Description,
                 chartSetId: chartConfig.ChartSetId,
                 chartType: chartConfig.ChartType,
-                backGroundColor: chartConfig.BackGroundColor,
+                backgroundColor: chartConfig.BackGroundColor,
                 color: chartConfig.Color,
                 posX: chartConfig.PosX,
                 posY: chartConfig.PosY,
@@ -234,6 +234,10 @@ app.service('DashboardService', ['$http', 'FrameworkUtils', function($http, Fram
         })     
     }
 
+    /**
+     * Fetch Chart Result
+     */
+    this.fecthChartResult = function() {}
 
     /**
      * Development
