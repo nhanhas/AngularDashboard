@@ -240,6 +240,30 @@ app.service('DashboardService', ['$http', 'FrameworkUtils', function($http, Fram
     this.fecthChartResult = function() {}
 
     /**
+     * Fetch Chart Result By Dates
+     */
+    this.fecthChartResultByDates = function(startDate, endDate, fieldsID = []) {
+      // setup param to send
+      const param = {        
+        MetadataEntriesIds: fieldsID,
+        StartingDate: startDate,
+        EndingDate: endDate        
+      }
+       
+      return FrameworkUtils.Http_POST(baseUrl + 'api/DataEntries/GetChartDataEntriesByDates', param).then((data) => {
+        if(data.data){
+          return data.data
+          let result = [];
+          // join fieldIds results into 1 array
+          data.data.forEach(setResult => result = result.concat(setResult));
+          return result;
+        }         
+
+        return [];
+      })   
+    }
+
+    /**
      * Development
      */
     this.getGraphicPiesToBuild = function () {
