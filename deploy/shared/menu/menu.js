@@ -33,13 +33,13 @@ app
                 }
 
                 // TYPE: GRAPHIC_PIE menu handler
-                scope.graphicPieHandler = function(menuId){
+                scope.graphicPieHandler = function(menuType){
                     //#1 - Get datasources for toolbox
                     DashboardService.getGraphicPiesToBuild().then((result) => {
 
                         //#2 - Show datasources in toolbox
                         scope.$apply(function(){
-                            scope.triggerToolbox(menuId, result.data);
+                            scope.triggerToolbox(menuType, result.data);
                         });
                         
 
@@ -61,18 +61,43 @@ app
                 scope.userMenu = scope.menus[0];
                 
 
-                scope.getMenuById = function(menuId){
+                scope.getMenuByType = function(menuType){
                     let menu = scope.menus.find(menuItem => {
-                        return menuItem.id === menuId
+                        return menuItem.type === menuType
                     })
                     return menu;
                 }
 
                 // Home controller toolbox trigger
-                scope.triggerToolbox = function(menuId, data = undefined){
-                    scope.selectedMenu = scope.getMenuById(menuId)
+                scope.triggerToolbox = function(menuType, data = undefined){
+                    scope.selectedMenu = scope.getMenuByType(menuType)
                     let newEditingElement = new EditingElement('MENU', scope.selectedMenu, data);
                     scope.toggleToolbox(true, newEditingElement);
+                }
+
+
+                // check if a specific menu entry is selected (menu toolbox or another)
+                scope.isMenuIconSelected = function(menu){
+                    if(!scope.editingElement) return false;
+                    
+                    // if a menu is beeing edited
+                    if(scope.editingElement && scope.editingElement.type === 'MENU')
+                        return scope.selectedMenu.id === menu.id;
+                    
+                    //otherwise is another external component component
+                    switch (scope.editingElement.type) {
+                        case 'CHART':
+                            scope.selectedMenu = scope.getMenuByType('GRAPHIC_PIE')
+                            break;
+                        case 'TAB':                            
+                            scope.selectedMenu = {} //TODO
+                            break;
+                        default:
+                            scope.selectedMenu = {}
+                            break;
+                    }
+
+                    return scope.selectedMenu.id === menu.id;
                 }
 
             }

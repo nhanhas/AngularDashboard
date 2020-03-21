@@ -28,11 +28,12 @@
                                 gridstack-item 
                                 ng-repeat="chart in tab.charts" 
                                 class="grid-stack-item" 
+                                gs-item="{{chart}}"
                                 gs-item-x="chart.posX" 
                                 gs-item-y="chart.posY"
                                 gs-item-width="chart.width" 
                                 gs-item-height="chart.height" 
-                                gs-item-autopos="1">
+                                gs-item-autopos="0">
                                 <!-- Chart item -->
                                 <chart config="chart" on-trigger-toolbox="triggerToolbox('CHART', item)"></chart>
                             </div>

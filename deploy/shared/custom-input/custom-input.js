@@ -8,13 +8,14 @@ app
             scope: {
                 model: '=',
                 label: '@',
-                type: '@?'
+                type: '@?',
+                readonly: '=?'
             },
             templateUrl: 'shared/custom-input/custom-input.html',
 
             link: function (scope, element, attrs) {
-              scope.type = scope.type || 'text';
-                
+                scope.type = scope.type || 'text';
+                scope.readonly = scope.readonly || false;
             }
         }
     }

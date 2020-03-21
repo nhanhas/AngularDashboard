@@ -1,4 +1,40 @@
-<div>
-    <h3>Chart edit:</h3>
-    <div>Title: {{ editingElement.item.name }}</div>
+<div class="menu-toolbox">
+    <div>
+        <h4> <span><i class="fa fa-lg {{ getChartIcon() }}"></i></span>{{ editingElement.item.name }}:</h4>
+
+        <!-- Chart configurations -->
+        <div class="chart-config-container" >
+
+            <!-- Hint -->
+            <div class="toolbox-hint">
+                <span><i class="color-blue fa fa-exclamation-circle fa-lg"></i> </span> 
+                <span>Here you can change everything about your graphic. Style, fields...</span>
+            </div>
+
+            <!-- Identification -->
+            <div class="chart-header-container">
+                
+                <!-- Form -->                
+                <custom-input label="Graphic Name" model="editingElement.item.name"></custom-input>
+                <custom-input label="Fields" readonly="true" model="editingElement.item.fields.length"></custom-input>                
+
+            </div>
+
+            <!-- Details: BAR -->
+            <div ng-if="editingElement.item.chartType.toLowerCase() === 'bar'">
+
+
+            </div>
+
+            <!-- Save Button -->
+            <div class="save-btn-container">
+                <div ng-click="updateChart()">
+                    <span>Save Settings</span>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
 </div>

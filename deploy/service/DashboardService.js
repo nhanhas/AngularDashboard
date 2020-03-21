@@ -252,14 +252,25 @@ app.service('DashboardService', ['$http', 'FrameworkUtils', function($http, Fram
        
       return FrameworkUtils.Http_POST(baseUrl + 'api/DataEntries/GetChartDataEntriesByDates', param).then((data) => {
         if(data.data){
-          return data.data
-          let result = [];
-          // join fieldIds results into 1 array
-          data.data.forEach(setResult => result = result.concat(setResult));
-          return result;
+          return data.data;          
         }         
 
         return [];
+      })   
+    }
+
+    /**
+     * Update chart config
+     */
+    this.updateChart = function(chartConfig){
+      // setup param to send
+      const param = chartConfig;
+       
+      return FrameworkUtils.Http_POST(baseUrl + '/api/ChartConfig/Update', param).then((data) => {
+        if(data.data){
+          return data.data          
+        }        
+        return undefined;
       })   
     }
 

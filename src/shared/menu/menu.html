@@ -2,24 +2,24 @@
 
     <ul>
         <!-- Pic -->
-        <li class="user-picture" ng-click="userMenu.handler(userMenu.id)">
+        <li class="user-picture" ng-click="userMenu.handler(userMenu.type)">
            
             <!-- Photo -->
-            <div class="photo-container" ng-class="{ 'user-selected' : selectedMenu.id === userMenu.id && isToolboxOpened() }">  
+            <div class="photo-container" ng-class="{ 'user-selected' : selectedMenu.type === userMenu.type && isToolboxOpened() }">  
                 <img src="assets/img/user-photo.png">
-                <div class="menu-notch" ng-show="selectedMenu.id === userMenu.id && isToolboxOpened()"></div>
+                <div class="menu-notch" ng-show="selectedMenu.type === userMenu.type && isToolboxOpened()"></div>
             </div>
             
         </li>
 
         <hr class="menu-spacer" width="60%">
 
-        <li ng-click="menu.handler(menu.id)" ng-repeat="menu in menus" ng-if="menu.id !== userMenu.id">
-            <div class="menu-btn" ng-class="selectedMenu.id === menu.id && isToolboxOpened() ? 'background-white' : 'background-l-blue'">
-                <span><i class="fa {{ menu.icon }}" ng-class="{'color-blue' : selectedMenu.id === menu.id && isToolboxOpened() }"></i></span>
+        <li ng-click="menu.handler(menu.type)" ng-repeat="menu in menus" ng-if="menu.type !== userMenu.type">
+            <div class="menu-btn" ng-class="isMenuIconSelected(menu) && isToolboxOpened() ? 'background-white' : 'background-l-blue'">
+                <span><i class="fa {{ menu.icon }}" ng-class="{'color-blue' : isMenuIconSelected(menu) && isToolboxOpened() }"></i></span>
             </div>
 
-            <div class="menu-notch" ng-show="selectedMenu.id === menu.id && isToolboxOpened()"></div>
+            <div class="menu-notch" ng-show="isMenuIconSelected(menu) && isToolboxOpened()"></div>
         </li>      
     </ul>
 

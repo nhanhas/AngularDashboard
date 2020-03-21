@@ -88,6 +88,14 @@ app
             return $scope.toolboxOpened;
         }
         
+        //#AUX - Update chart config
+        $scope.updateChartConfig = function(chartConfig){
+            return DashboardService.updateChart(chartConfig).then(result => {                
+                console.log(result);
+                return result;
+            })
+        };
+
         //Initialize!
         $timeout( function(){
             $scope.initialize();

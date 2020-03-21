@@ -3,7 +3,8 @@
   /* DATASOURCES */
   /* GRAPHIC_PIE */
   /* Clear floats after the columns */
-  /* USER */ }
+  /* USER */
+  /* CHART (chart config)*/ }
   .toolbox #mobile-nav-menu {
     float: right;
     width: 310px;
@@ -18,7 +19,23 @@
     border-bottom-left-radius: 24px;
     /*border-bottom: 1px solid rgba(34, 34, 34, 0.3);*/
     top: 0;
-    bottom: 60px; }
+    bottom: 60px;
+    z-index: 99; }
+  .toolbox #mobile-nav-menu-loading {
+    float: right;
+    width: 310px;
+    background: rgba(255, 255, 255, 0.5);
+    position: absolute;
+    right: 45px;
+    border-bottom-left-radius: 24px;
+    top: 0;
+    bottom: 60px;
+    z-index: 99;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px; }
   .toolbox .ng-hide-remove {
     -webkit-animation: 0.5s slideIn ease;
     -moz-animation: 0.5s slideIn ease;
@@ -154,3 +171,13 @@
       margin-top: 20px; }
     .toolbox .user-container .form-container > custom-input > div {
       margin: 10px 0; }
+  .toolbox .chart-config-container .chart-header-container {
+    display: flex;
+    flex-direction: row;
+    margin-top: 15px; }
+    .toolbox .chart-config-container .chart-header-container custom-input:first-of-type {
+      flex: 2;
+      margin-right: 5px; }
+    .toolbox .chart-config-container .chart-header-container custom-input:last-of-type {
+      flex: 1;
+      margin-left: 5px; }

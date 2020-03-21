@@ -16,8 +16,25 @@
     /*border-bottom: 1px solid rgba(34, 34, 34, 0.3);*/
     top: 0;
     bottom: 60px;
+    z-index: 99;
   }
 
+  #mobile-nav-menu-loading{
+    float: right;
+    width: 310px;
+    background: rgba(255,255,255,0.5);
+    position: absolute;
+    right: 45px;
+    border-bottom-left-radius: 24px;
+    top: 0;
+    bottom: 60px;
+    z-index: 99;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+  }
   
   .ng-hide-remove {
     -webkit-animation: 0.5s slideIn ease;
@@ -167,17 +184,17 @@
     
   }
 
-/* Clear floats after the columns */
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
 
-[ng-drag].dragging {
-    position: fixed;
-    background-color: #90a9cd;
-}
+  [ng-drag].dragging {
+      position: fixed;
+      background-color: #90a9cd;
+  }
 
   /* USER */  
   .user-container{
@@ -224,6 +241,27 @@
         margin: 10px 0;
       }
     }
+  }
+
+  /* CHART (chart config)*/
+  .chart-config-container{
+    // header
+    .chart-header-container{
+      display: flex;
+      flex-direction: row;
+      margin-top: 15px;
+
+        custom-input:first-of-type{
+          flex:2;
+          margin-right: 5px;
+        }
+        custom-input:last-of-type{
+          flex:1;
+          margin-left: 5px;
+        }
+    }
+
+
   }
 
 }
