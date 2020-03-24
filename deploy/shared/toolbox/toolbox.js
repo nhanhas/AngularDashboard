@@ -45,11 +45,22 @@ app
                     scope.isLoading = true;
                     const chartConfig = scope.editingElement.item;
 
-                    // call homecontroller update chart function
-                    scope.updateChartConfig(chartConfig).then(result => {
-                        scope.isLoading = false;
-                        console.log("toolbox update chart", result);
-                    })                  
+                    // if no id => its a new chart
+                    if(chartConfig.chartConfigId === 0){
+                        // call homecontroller update chart function
+                        scope.createChartConfig(chartConfig).then(result => {
+                            scope.isLoading = false;
+                            console.log("toolbox create chart", result);
+                        })  
+
+                    }else{
+                        // call homecontroller update chart function
+                        scope.updateChartConfig(chartConfig).then(result => {
+                            scope.isLoading = false;
+                            console.log("toolbox update chart", result);
+                        })  
+                    }
+                                    
                 }
 
             }

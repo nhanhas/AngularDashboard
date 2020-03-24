@@ -28,10 +28,6 @@ app
                         scope.onTriggerToolbox({item : scope.config});
                     }  
                 }
-
-                scope.onDropComplete=function(data, event){
-                    console.log("drop success, data:", data);
-                }
                 
                 /**
                  * [Main] - Fetch chart result

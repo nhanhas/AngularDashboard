@@ -14,3 +14,6 @@
   background-color: white;
   border-radius: 25px;
   border: 1px solid #00000054; }
+
+.tabset .container-fluid.drag-enter {
+  background-color: #4e70a8; }

@@ -1,7 +1,7 @@
 .toolbox {
   /* Generic  */
   /* DATASOURCES */
-  /* GRAPHIC_PIE */
+  /* CHART_ITEM_CONFIG */
   /* Clear floats after the columns */
   /* USER */
   /* CHART (chart config)*/ }
@@ -121,7 +121,7 @@
       border-radius: 4px;
       padding: 10px;
       cursor: pointer; }
-  .toolbox .pie-element, .toolbox .pie-element > div {
+  .toolbox .chart-config-element, .toolbox .chart-config-element > div {
     background-color: #e2e0e0;
     width: 50px;
     height: 45px;
@@ -129,9 +129,9 @@
     text-align: center;
     border-radius: 5px;
     cursor: pointer; }
-  .toolbox .pie-element > div {
+  .toolbox .chart-config-element > div {
     padding-top: 4px; }
-  .toolbox .graphic-pie-container {
+  .toolbox .chart-item-config-container {
     max-width: 140px;
     margin: 0 auto; }
   .toolbox .column {

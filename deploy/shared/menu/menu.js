@@ -11,36 +11,36 @@ app
             link: function (scope, element, attrs) {
                 
                 // TYPE: USER menu handler
-                scope.userSettingsHandler = function(menuId){
+                scope.userSettingsHandler = function(menuType){
                     //#1 - Get datasources for toolbox
-                    scope.triggerToolbox(menuId, undefined);
+                    scope.triggerToolbox(menuType, undefined);
                     
                 }
                 
                 // TYPE: DATASOURCES menu handler
-                scope.dataSourceHandler = function(menuId){
+                scope.dataSourceHandler = function(menuType){
                     //#1 - Get datasources for toolbox
-                    scope.triggerToolbox(menuId, undefined);
+                    scope.triggerToolbox(menuType, undefined);
                     DashboardService.getDataSourcesSets().then((result) => {
 
                         //#2 - Show datasources in toolbox
                         //scope.$apply(function(){
-                            scope.triggerToolbox(menuId, result.data);
+                            scope.triggerToolbox(menuType, result.data);
                         //});
                         
 
                     });
                 }
 
-                // TYPE: GRAPHIC_PIE menu handler
-                scope.graphicPieHandler = function(menuType){
-                    //#1 - Get datasources for toolbox
-                    DashboardService.getGraphicPiesToBuild().then((result) => {
+                // TYPE: CHART_ITEM_CONFIG menu handler
+                scope.chartItemsConfigHandler = function(menuType){
+                    //#1 - Get all available charts to use in toolbox
+                    DashboardService.getChartItemsConfigToBuild().then((result) => {
 
-                        //#2 - Show datasources in toolbox
-                        scope.$apply(function(){
+                        //#2 - Show all available chart types to build in toolbox
+                        //scope.$apply(function(){
                             scope.triggerToolbox(menuType, result.data);
-                        });
+                        //});
                         
 
                     });
@@ -54,8 +54,8 @@ app
                 scope.menus = [
                     new MenuItem('USER', 'User settings', '', scope.userSettingsHandler.bind(this)),
                     new MenuItem('DATASOURCES', 'Data Sources and Data Sets', 'fa-database', scope.dataSourceHandler.bind(this)),
-                    new MenuItem('GRAPHIC_CHART', 'Graphic Charts', 'fa-bar-chart'),               
-                    new MenuItem('GRAPHIC_PIE', 'Graphic Pie', 'fa-pie-chart', scope.graphicPieHandler.bind(this))                    
+                    new MenuItem('TEXT_ITEM_CONFIG', 'Text Builder', 'fa-text-height'),               
+                    new MenuItem('CHART_ITEM_CONFIG', 'Charts Builder', 'fa-area-chart', scope.chartItemsConfigHandler.bind(this))                    
                 ]
                 // isolate menu user setting
                 scope.userMenu = scope.menus[0];
@@ -87,7 +87,7 @@ app
                     //otherwise is another external component component
                     switch (scope.editingElement.type) {
                         case 'CHART':
-                            scope.selectedMenu = scope.getMenuByType('GRAPHIC_PIE')
+                            scope.selectedMenu = scope.getMenuByType('CHART_ITEM_CONFIG')
                             break;
                         case 'TAB':                            
                             scope.selectedMenu = {} //TODO

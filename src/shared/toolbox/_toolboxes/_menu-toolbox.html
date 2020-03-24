@@ -74,21 +74,26 @@
             
         </div>
 
-        <!-- TYPE: GRAPHIC_CHART -->
+        <!-- TYPE: TEXT_ITEM_CONFIG -->
         <div ng-if="editingElement.item.type === 'GRAPHIC_CHART'">
 
-            Charts 
+            TEXT Editor 
         </div>
 
-        <!-- TYPE: GRAPHIC_PIE -->
-        <div class="graphic-pie-container" ng-if="editingElement.item.type === 'GRAPHIC_PIE'">
+        <!-- TYPE: CHART_ITEM_CONFIG (TODO change to Charts) -->
+        <div class="chart-item-config-container" ng-if="editingElement.item.type === 'CHART_ITEM_CONFIG'">
 
-            <div class="column" ng-repeat="pieItem in editingElement.data">
-                
-                <!-- Pie element -->
-                <div class="pie-element">
-                    <div ng-drag="true" ng-drag-data="{pieItem}" ng-center-anchor="true"> 
-                    <span id="{{ pieItem.id }}"><i class="fa {{ pieItem.icon }}"></i></span>
+            <div class="column" ng-repeat="chartConfig in editingElement.data" >                
+                <!-- chart element -->
+                <div class="chart-config-element">
+                    <div ng-drag="true" ng-drag-data="chartConfig" ng-center-anchor="true"> 
+                    <span id="{{ chartConfig.id }}" ng-switch="chartConfig.chartType">
+                        <!-- pick a icon -->
+                        <i ng-switch-when="line" class="fa fa-line-chart"></i>
+                        <i ng-switch-when="bar" class="fa fa-bar-chart"></i>
+                        <i ng-switch-when="pie" class="fa fa-pie-chart"></i>
+                        <i ng-switch-default class="fa fa-area-chart"></i>
+                    </span>
                 </div>
                 </div> 
 

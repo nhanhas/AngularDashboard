@@ -88,7 +88,18 @@ app
             return $scope.toolboxOpened;
         }
         
-        //#AUX - Update chart config
+        /**
+         * Chart configs server sync
+         */
+        // create chart config
+        $scope.createChartConfig = function(chartConfig){
+            return DashboardService.createChart(chartConfig).then(result => {                
+                console.log(result);
+                return result;
+            })
+        };
+
+        // update chart config
         $scope.updateChartConfig = function(chartConfig){
             return DashboardService.updateChart(chartConfig).then(result => {                
                 console.log(result);

@@ -20,6 +20,3 @@
     left: 50%;
     font-size: 52px;
     transform: translate(-50%, -50%); }
-
-.chart.drag-enter {
-  background-color: #4e70a8; }

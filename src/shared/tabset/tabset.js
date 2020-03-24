@@ -43,7 +43,9 @@ app
                 // Gridstack configuration
                 scope.gridStackOptions = {
                     cellHeight: 200,
-                    verticalMargin: 10
+                    verticalMargin: 10,
+                    acceptWidgets: '.chart-config-element',
+                    alwaysShowResizeHandle: true
                 };
 
 
@@ -79,39 +81,75 @@ app
                  */
                 // Flag this change by user mannualy
                 scope.onDragStart = function(event, ui) {
-                    scope.userChangedChart = true;
+                    scope.userChangedItem = true;
                 };
                 // Flag this change by user mannualy
                 scope.onResizeStart = function(event, ui) {
-                    scope.userChangedChart = true;
+                    scope.userChangedItem = true;
                 };
                 
                 // re-position and resize chart
                 scope.onChange = function(event, items) {
                     // if wasnt from user 
-                    if(!scope.userChangedChart) return;
+                    if(!scope.userChangedItem) return;
 
                     items.forEach(item => {
-                        const chartConfig = JSON.parse(item.el[0].attributes['gs-item'].value);
-                        scope.requestChartUpdate(chartConfig);
+                        const {itemType, itemConfig} = JSON.parse(item.el[0].attributes['gs-item'].value);
+                        
+                        // Different updates for different item configs:
+                        // ChartConfig
+                        if(itemType === ChartConfigItem.name && itemConfig.chartConfigId !== 0){ return scope.requestChartUpdate(itemConfig) }
+                                                
                     });
-                    scope.userChangedChart = false;
+                    scope.userChangedItem = false;
 
                 };
+
+
+                /**
+                 * Drop from item config 
+                 * from Toolbox
+                 */
+                scope.onDropComplete=function( data, event, tab){
+                    console.log("drop success, data:", data, tab);
+                    
+                    // handler for chart config item
+                    if(data instanceof ChartConfigItem){ return scope.addChartConfigItem(tab, data) }
+                    
+                }
+
+                /**
+                 * [New] Chart config item
+                 */
+                scope.addChartConfigItem = function(tab, chartConfig){
+                    // initiate visuals
+                    chartConfig.x = 0;
+                    chartConfig.y = 0;
+                    chartConfig.width = 0;
+                    chartConfig.heigth = 0;                    
+
+                    // push it to dashboard items
+                    tab.charts.push(chartConfig);     
+                    
+                    // open toolbox in edit mode
+                    scope.triggerToolbox('CHART', chartConfig);
+                }
 
                 //TEST
-                scope.widgets = [{ x:0, y:0, width:1, height:1 }, { x:0, y:0, width:3, height:1 }];
-                scope.addWidget = function() {
-                    var newWidget = { x:0, y:0, width:1, height:1 };
-                    scope.widgets.push(newWidget);
+
+                // Adds a new widget (itemConfig can be ChartItemConfig,...)
+                scope.addWidget = function(tab, itemConfig) {
+                    // TODO switch de itemConfig
+                    var newWidget = new ChartConfigItem();
+                    newWidget.x = 0;
+                    newWidget.y = 0;
+                    newWidget.width = 0;
+                    newWidget.heigth = 0;                    
+
+                    tab.charts.push(newWidget);
                 };
                 
-                scope.onDragStart = function(event, ui) {
-                    scope.userChangedChart = true;
-                };
-                scope.onResizeStart = function(event, ui) {
-                    scope.userChangedChart = true;
-                };
+               
                 scope.onResizeStop = function(event, ui) {};
 
                 scope.onDragStop = function(event, ui) {};
@@ -119,6 +157,8 @@ app
                 scope.onItemRemoved = function(item) {};
                 //TEST
 
+
+                
 
             }
         }

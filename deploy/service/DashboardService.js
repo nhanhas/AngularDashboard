@@ -260,6 +260,21 @@ app.service('DashboardService', ['$http', 'FrameworkUtils', function($http, Fram
     }
 
     /**
+     * Create chart config
+     */
+    this.createChart = function(chartConfig){
+      // setup param to send
+      const param = chartConfig;
+       
+      return FrameworkUtils.Http_POST(baseUrl + '/api/ChartConfig/Create', param).then((data) => {
+        if(data.data){
+          return data.data          
+        }        
+        return undefined;
+      })   
+    }
+
+    /**
      * Update chart config
      */
     this.updateChart = function(chartConfig){
@@ -275,9 +290,30 @@ app.service('DashboardService', ['$http', 'FrameworkUtils', function($http, Fram
     }
 
     /**
-     * Development
+     * Get available chartConfig types to
+     * build a new chart
      */
-    this.getGraphicPiesToBuild = function () {
+    this.getChartItemsConfigToBuild = function () {
+      return FrameworkUtils.Http_GET(baseUrl + '/api/ChartConfig/GetChartTypes').then((data) => {
+        let result = [];
+        let alreadyMapped = [];  
+        data.data.forEach(chartType => {                  
+          if(!alreadyMapped.includes(chartType.name)){
+            result.push(
+                Object.assign(new ChartConfigItem(), {   
+                  chartType: chartType.name
+              })
+            )
+            // mark as mapped
+            alreadyMapped.push(chartType.name)
+          }          
+      })
+
+      return { data: result};
+        
+    })
+
+      
         return Promise.resolve({ data: [
             { type: 'pie_01', icon: 'fa-pie-chart' },
             { type: 'pie_02', icon: 'fa-pie-chart' },
@@ -287,6 +323,9 @@ app.service('DashboardService', ['$http', 'FrameworkUtils', function($http, Fram
             { type: 'pie_06', icon: 'fa-pie-chart' }
 
         ] });
+
+      
+
        
     }
 

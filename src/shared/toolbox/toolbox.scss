@@ -159,8 +159,8 @@
   }
 
 
-  /* GRAPHIC_PIE */
-  .pie-element, .pie-element > div{
+  /* CHART_ITEM_CONFIG */
+  .chart-config-element, .chart-config-element > div{
     background-color: #e2e0e0;
     width: 50px;
     height: 45px;
@@ -169,10 +169,10 @@
     border-radius: 5px;
     cursor: pointer;
   }
-  .pie-element > div{    
+  .chart-config-element > div{    
     padding-top: 4px;
   }
-  .graphic-pie-container{
+  .chart-item-config-container{
     max-width: 140px;
     margin: 0 auto;
   }

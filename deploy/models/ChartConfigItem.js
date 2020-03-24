@@ -16,7 +16,7 @@ class ChartConfigItem{
     width = 0;
     heigth = 0;
     fields = [ ];
-    
+  
 
     constructor(){ }
 
