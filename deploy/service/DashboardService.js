@@ -48,7 +48,8 @@ app.service('DashboardService', ['$http', 'FrameworkUtils', function($http, Fram
                             name : fieldItem.name,
                             description : fieldItem.description,
                             selected : fieldItem.selected,    
-                            metaDataEntryId: fieldItem.MetadataEntryId
+                            metaDataEntryId: fieldItem.MetadataEntryId,
+                            serviceId: fieldItem.serviceId
                         })
                         newSet.itens.push(newField);
                     })

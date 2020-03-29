@@ -8,6 +8,7 @@ class DatafieldItem{
     description = '';
     selected = false;  
     metaDataEntryId;
+    serviceId = 0;
 
     constructor(){ }
 

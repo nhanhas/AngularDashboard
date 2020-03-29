@@ -44,8 +44,7 @@ app
                 scope.gridStackOptions = {
                     cellHeight: 200,
                     verticalMargin: 10,
-                    acceptWidgets: '.chart-config-element',
-                    alwaysShowResizeHandle: true
+                    acceptWidgets: '.chart-config-element'
                 };
 
 
@@ -126,7 +125,8 @@ app
                     chartConfig.x = 0;
                     chartConfig.y = 0;
                     chartConfig.width = 0;
-                    chartConfig.heigth = 0;                    
+                    chartConfig.heigth = 0;            
+                    chartConfig.chartSetId = tab.id;        
 
                     // push it to dashboard items
                     tab.charts.push(chartConfig);     

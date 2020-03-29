@@ -1,6 +1,6 @@
 <div class="menu-toolbox">
     <div>
-        <h4> <span><i class="fa fa-lg {{ getChartIcon() }}"></i></span>{{ editingElement.item.name }}:</h4>
+        <h4 class="tool-header"> <span><i class="fa fa-lg {{ getChartIcon() }}"></i></span>{{ editingElement.item.name }}:</h4>
 
         <!-- Chart configurations -->
         <div class="chart-config-container" >
@@ -18,6 +18,20 @@
                 <custom-input label="Graphic Name" model="editingElement.item.name"></custom-input>
                 <custom-input label="Fields" readonly="true" model="editingElement.item.fields.length"></custom-input>                
 
+            </div>
+
+            <!-- Fields -->
+            <div class="charts-fiels">
+                <label class="color-blue">Chart fields</label>
+
+                <uib-accordion close-others="true">
+                    <div uib-accordion-group class="panel-default" heading="{{ datasource.name }}" is-open="false" is-disabled="false" ng-repeat="datasource in chartXFields">
+                        <div ng-repeat="dataset in datasource.itens">
+                            <multi-dropdown datasource="dataset" on-add-item="onAddFieldHandler(itemSelected)" on-remove-item="onRemoveFieldHandler(itemSelected)"></multi-dropdown>
+                            <br>
+                        </div>  
+                    </div>                         
+                </uib-accordion>
             </div>
 
             <!-- Details: BAR -->

@@ -75,7 +75,7 @@
     .toolbox .toolbox-main-container > div {
       height: 100%;
       overflow: auto; }
-  .toolbox h4 {
+  .toolbox .tool-header {
     position: absolute;
     top: -20px;
     left: 0;
@@ -88,7 +88,7 @@
     align-items: center;
     width: 100%;
     height: 85px; }
-    .toolbox h4 > span {
+    .toolbox .tool-header > span {
       margin-right: 10px; }
   .toolbox .toolbox-hint {
     padding: 4px 10px;
@@ -138,6 +138,10 @@
     float: left;
     width: 50%;
     padding: 10px; }
+  .toolbox .charts-fiels {
+    margin-top: 10px; }
+    .toolbox .charts-fiels h4 {
+      font-size: 12px; }
   .toolbox .row:after {
     content: "";
     display: table;

@@ -7,7 +7,7 @@ app
          */
         
         $scope.dashboards = [];
-        $scope.dataSource = {};
+        $scope.dataSource = undefined;
         $scope.userInfo = {};
         $scope.toolboxOpened = false;
 

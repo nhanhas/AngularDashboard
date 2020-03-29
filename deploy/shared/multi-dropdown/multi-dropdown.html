@@ -22,7 +22,10 @@
             
             <div ng-repeat="dataset in datasource.itens">
                 <div>
-                    <custom-checkbox label="{{dataset.name}}" model="dataset.selected"></custom-checkbox>
+                    <custom-checkbox label="{{dataset.name}}" model="dataset.selected" item="dataset" 
+                        on-select="onSelectHandler(itemSelected)"
+                        on-unselect="onUnselectHandler(itemSelected)">
+                    </custom-checkbox>
                 </div>
             </div>
 
