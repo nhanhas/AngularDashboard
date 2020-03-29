@@ -251,7 +251,7 @@ app.service('DashboardService', ['$http', 'FrameworkUtils', function($http, Fram
         EndingDate: endDate        
       }
        
-      return FrameworkUtils.Http_POST(baseUrl + 'api/DataEntries/GetChartDataEntriesByDates', param).then((data) => {
+      return FrameworkUtils.Http_POST(baseUrl + 'api/DataEntries/GetChartDataEntriesByDates2', param).then((data) => {
         if(data.data){
           return data.data;          
         }         

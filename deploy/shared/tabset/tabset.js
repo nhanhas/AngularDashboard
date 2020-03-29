@@ -44,7 +44,8 @@ app
                 scope.gridStackOptions = {
                     cellHeight: 200,
                     verticalMargin: 10,
-                    acceptWidgets: '.chart-config-element'
+                    acceptWidgets: '.chart-config-element',
+                    float: true
                 };
 
 

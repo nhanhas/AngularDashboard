@@ -8,7 +8,7 @@
     font-size: 12px;
     /* margin-top: 60px; */
     padding: 0;
-    position: absolute;
+    position: fixed;
     right: 45px;
     overflow: hidden;
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.4);
@@ -23,7 +23,7 @@
     float: right;
     width: 310px;
     background: rgba(255,255,255,0.5);
-    position: absolute;
+    position: fixed;
     right: 45px;
     border-bottom-left-radius: 24px;
     top: 0;

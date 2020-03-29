@@ -67,7 +67,10 @@ app
 							break;
 						case 'pie':
 							scope.pieChartSetup(scope.config, chartResults)
-							break;	
+                            break;	
+                        case 'radar':
+                            scope.radarChartSetup(scope.config, chartResults)
+                            break;	
 
 						default:
 							scope.config.chartType = 'line'; //TODO - remove 
@@ -92,10 +95,13 @@ app
                         [28, 48, 40, 19, 86, 27, 90]
                     ];*/
 
-                    const results = scope.processResult(chartResults);
+                    /*const results = scope.processResult(chartResults);
 
                     scope.labels = results.labels;
-                    scope.data = results.data;
+                    scope.data = results.data;*/
+
+                    scope.labels = chartResults.Labels;
+                    scope.data = chartResults.DataEntries;
                 }
                 //#2 - Bar
                 scope.barChartSetup = function(chartConfig, chartResults){
@@ -107,17 +113,33 @@ app
                         ["168561","224580","244407","228866","236665","215694","34011","180208","58740","251856","82202","226187","158494","229436","36656","236833","20340","42692","60899","203328","226815","200695","235912","170599","153916","28653","219873","235912","170599","153916","28653","219873"]
                     ];*/
                     
-                    const results = scope.processResult(chartResults);
+                    /*const results = scope.processResult(chartResults);
 
                     scope.labels = results.labels;
-                    scope.data = results.data;
+                    scope.data = results.data;*/
+
+                    scope.labels = chartResults.Labels;
+                    scope.data = chartResults.DataEntries;
                                         
                     
                 }
 
                 //#3 - Pie / Doughnut
                 scope.pieChartSetup = function(chartConfig, chartResults){
-                    
+                    /*const results = scope.processResult(chartResults);
+
+                    scope.labels = results.labels;
+                    scope.data = results.data;*/
+
+                    scope.labels = chartResults.Labels;
+                    scope.data = chartResults.DataEntries;
+                }
+
+                //#3 - radar
+                scope.radarChartSetup = function(chartConfig, chartResults){               
+
+                    scope.labels = chartResults.Labels;
+                    scope.data = chartResults.DataEntries;
                 }
                 
 
