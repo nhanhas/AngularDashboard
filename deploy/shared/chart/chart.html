@@ -34,6 +34,14 @@
             chart-options="options">
         </canvas>
 
+        <!-- polar -->
+        <canvas ng-switch-when="polar"
+            class="chart chart-polar-area"
+            chart-data="data" 
+            chart-labels="labels" 
+            chart-options="options">
+        </canvas>
+
         <!-- radar -->
         <canvas ng-switch-when="radar"
             class="chart chart-radar"

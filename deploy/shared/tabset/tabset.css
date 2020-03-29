@@ -8,8 +8,16 @@
   background-color: white; }
 
 .tabset .grid-stack > .grid-stack-item > .ui-resizable-se {
-  right: -10px;
-  bottom: -10px;
+  right: 2px;
+  bottom: -2px;
+  color: white;
+  background-color: white;
+  border-radius: 25px;
+  border: 1px solid #00000054; }
+
+.tabset .grid-stack > .grid-stack-item > .ui-resizable-sw {
+  left: 2px;
+  bottom: -2px;
   color: white;
   background-color: white;
   border-radius: 25px;

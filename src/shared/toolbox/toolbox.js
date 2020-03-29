@@ -55,7 +55,9 @@ app
                         case 'pie':
                             return 'fa-pie-chart'  
                         case 'radar':
-                            return 'fa-connectdevelop'                            
+                            return 'fa-connectdevelop'  
+                        case 'polar':
+                            return 'fa-compass'                            
                     
                         default:
                             return 'fa-bar-chart';                            

@@ -45,7 +45,10 @@ app
                     cellHeight: 200,
                     verticalMargin: 10,
                     acceptWidgets: '.chart-config-element',
-                    float: true
+                    float: true,
+                    resizable: {
+                        handles: 'e, se, s, sw, w'
+                      },
                 };
 
 

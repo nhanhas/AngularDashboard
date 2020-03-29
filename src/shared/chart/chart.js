@@ -68,9 +68,13 @@ app
 						case 'pie':
 							scope.pieChartSetup(scope.config, chartResults)
                             break;	
+                        case 'polar':
+                            scope.polarChartSetup(scope.config, chartResults)
+                            break;	
                         case 'radar':
                             scope.radarChartSetup(scope.config, chartResults)
-                            break;	
+                            break;
+                            
 
 						default:
 							scope.config.chartType = 'line'; //TODO - remove 
@@ -134,8 +138,15 @@ app
                     scope.labels = chartResults.Labels;
                     scope.data = chartResults.DataEntries;
                 }
+                
+                //#4 - polar
+                scope.polarChartSetup = function(chartConfig, chartResults){               
 
-                //#3 - radar
+                    scope.labels = chartResults.Labels;
+                    scope.data = chartResults.DataEntries;
+                }
+
+                //#5 - radar
                 scope.radarChartSetup = function(chartConfig, chartResults){               
 
                     scope.labels = chartResults.Labels;
