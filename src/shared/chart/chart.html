@@ -2,7 +2,10 @@
     <!-- Title and config -->
     <div class="chart-header color-blue text-bold" style="height: 15%;">
         <div>{{ config.name }}</div>
-        <div><span ><i class="fa fa-cog" ng-click="triggerToolbox()"></i></span></div>
+        <div class="chart-bts-action">
+            <span ><i class="fa fa-times" ng-click="onDeleteChartHandler()"></i></span>
+            <span ><i class="fa fa-cog" ng-click="triggerToolbox()"></i></span>
+        </div>
     </div>
 
     <!-- Charts -->

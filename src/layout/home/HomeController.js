@@ -107,6 +107,22 @@ app
             })
         };
 
+        // delete chart config
+        $scope.deleteChartConfig = function(chartConfig, dashboard){
+            return DashboardService.deleteChart(chartConfig.chartConfigId).then(result => {                
+                if(result === true){
+                    //delete from collection
+                    $scope.dashboards.forEach(dashboardItem => {
+                        if(dashboard.id === dashboardItem.id){
+                            dashboardItem.charts = dashboardItem.charts.filter(chart => chart.chartConfigId !== chartConfig.chartConfigId )
+                        }
+                    });   
+                    $scope.closeToolbox();               
+                }
+            })
+            
+        }
+
         //Initialize!
         $timeout( function(){
             $scope.initialize();

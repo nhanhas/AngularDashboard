@@ -35,7 +35,7 @@
                                 gs-item-height="chart.heigth" 
                                 gs-item-autopos="0">
                                 <!-- Chart item -->
-                                <chart config="chart" on-trigger-toolbox="triggerToolbox('CHART', item)"></chart>
+                                <chart config="chart" on-trigger-toolbox="triggerToolbox('CHART', item)" on-delete-chart="onDeleteChartHandler(chartConfig, tab)"></chart>
                             </div>
                         </div>
                     </div>

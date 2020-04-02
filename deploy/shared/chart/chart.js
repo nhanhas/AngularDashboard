@@ -6,13 +6,18 @@ app
         return {
             restrict: 'EA',
             scope: {
-                config : '=' , //ChartConfigItem object
+                config : '=' , //ChartConfigItem object,
+                onDeleteChart: '&?',
                 onTriggerToolbox: '&?'       //Triggers the edition tab
             },
             templateUrl: 'shared/chart/chart.html',
 
             link: function (scope, element, attrs) {
                 scope.isLoading = false;
+
+                if (!attrs.onDeleteChart) {
+                    scope.onDeleteChart = undefined;
+                }
 
                 if (!attrs.onTriggerToolbox) {
                     scope.onTriggerToolbox = undefined;
@@ -27,6 +32,15 @@ app
                     if(scope.onTriggerToolbox){
                         scope.onTriggerToolbox({item : scope.config});
                     }  
+                }
+
+                //#B - Trigger Popup to delete chart
+                scope.onDeleteChartHandler = function(){
+                    if(window.confirm("Are you sure to delete chart?")){
+                        if(scope.onDeleteChart){
+                            scope.onDeleteChart({chartConfig : scope.config});
+                        }  
+                    }
                 }
                 
                 /**

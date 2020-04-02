@@ -291,6 +291,19 @@ app.service('DashboardService', ['$http', 'FrameworkUtils', function($http, Fram
     }
 
     /**
+     * Delete chart config
+     */
+    this.deleteChart = function(id){
+             
+      return FrameworkUtils.Http_POST(baseUrl + `/api/ChartConfig/Delete?chartConfigId=${id}`).then((data) => {
+        if(data.data){
+          return data.data          
+        }        
+        return undefined;
+      })   
+    }
+
+    /**
      * Get available chartConfig types to
      * build a new chart
      */

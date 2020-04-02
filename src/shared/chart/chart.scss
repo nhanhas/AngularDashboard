@@ -12,6 +12,13 @@
         align-items: center;
         padding: 0px 10px;
     }
+    .chart-bts-action{
+        display: flex;
+        flex-direction: row;
+        > span:first-child {
+            margin-right: 10px;
+        }
+    }
     .chart-close-btn{
         position: absolute;
         right: 10px;

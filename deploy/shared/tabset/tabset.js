@@ -11,7 +11,8 @@ app
                 tabCollection : '=',  //Tab collection
                 onAddNew: '&?',       //Handler for add new Tab
                 onTriggerToolbox: '&?',       //Triggers the edition tab
-                onChangeChartPosition: '&?'       //on change chart position
+                onChangeChartPosition: '&?',       //on change chart position
+                onDeleteChart: '&?'       //on change chart position
                 
             },
             templateUrl: 'shared/tabset/tabset.html',
@@ -31,6 +32,10 @@ app
 
                 if (!attrs.onChangeChartPosition) {
                     scope.onChangeChartPosition = undefined;
+                }
+
+                if (!attrs.onDeleteChart) {
+                    scope.onDeleteChart = undefined;
                 }
                 
 
@@ -137,6 +142,12 @@ app
                     
                     // open toolbox in edit mode
                     scope.triggerToolbox('CHART', chartConfig);
+                }
+
+                scope.onDeleteChartHandler = function(chartConfig, tab){
+                    if(scope.onDeleteChart){
+                        scope.onDeleteChart({chartConfig: chartConfig, dashboard: tab})
+                    }
                 }
 
                 //TEST

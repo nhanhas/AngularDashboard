@@ -4,7 +4,12 @@
   <br>
 
   <div class="home-tabset">
-    <tabset tab-collection="dashboards" on-add-new="addNewTab()" on-trigger-toolbox="triggerToolboxTabEdit(type, item)" on-change-chart-position="updateChartConfig(chartConfig)"></tabset>
+    <tabset 
+      tab-collection="dashboards" 
+      on-add-new="addNewTab()" 
+      on-trigger-toolbox="triggerToolboxTabEdit(type, item)" 
+      on-change-chart-position="updateChartConfig(chartConfig)"
+      on-delete-chart="deleteChartConfig(chartConfig, dashboard)"></tabset>
   </div>
 
 </div>
