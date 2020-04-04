@@ -100,7 +100,7 @@ app
         };
 
         // update chart config
-        $scope.updateChartConfig = function(chartConfig){
+        $scope.updateChartConfig = function(chartConfig){            
             return DashboardService.updateChart(chartConfig).then(result => {                
                 console.log(result);
                 return result;
@@ -109,16 +109,12 @@ app
 
         // delete chart config
         $scope.deleteChartConfig = function(chartConfig, dashboard){
+            //return new Promise((resolve, reject) => { resolve( true ); }); 
             return DashboardService.deleteChart(chartConfig.chartConfigId).then(result => {                
-                if(result === true){
-                    //delete from collection
-                    $scope.dashboards.forEach(dashboardItem => {
-                        if(dashboard.id === dashboardItem.id){
-                            dashboardItem.charts = dashboardItem.charts.filter(chart => chart.chartConfigId !== chartConfig.chartConfigId )
-                        }
-                    });   
-                    $scope.closeToolbox();               
+                if(result === true){                                       
+                    $scope.closeToolbox();                                   
                 }
+                return result;
             })
             
         }

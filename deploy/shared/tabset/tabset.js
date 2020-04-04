@@ -37,7 +37,17 @@ app
                 if (!attrs.onDeleteChart) {
                     scope.onDeleteChart = undefined;
                 }
-                
+
+                scope.reload = function(tab){
+                    let charts = angular.copy(tab.charts);
+                    charts.splice(1,1);
+                    tab.charts = [];
+
+                    $timeout(()=>{
+                        tab.charts = charts
+                    }, 2000)
+
+                }
 
                 /**
                  * #2 - Controller variables                 
@@ -146,11 +156,29 @@ app
 
                 scope.onDeleteChartHandler = function(chartConfig, tab){
                     if(scope.onDeleteChart){
-                        scope.onDeleteChart({chartConfig: chartConfig, dashboard: tab})
+                        scope.onDeleteChart({chartConfig: chartConfig, dashboard: tab}).then(result => {
+                            if(result){
+                                let charts = angular.copy(tab.charts);
+                                charts = charts.filter(chart => chart.chartConfigId !== chartConfig.chartConfigId );
+                                tab.charts = [];
+                                $timeout(()=>{
+                                    tab.charts = charts;                                
+                                });
+                                
+                            }
+                        })
                     }
                 }
 
+                
+
                 //TEST
+                scope.reloadTab = function(tab){
+                    let charts = angular.copy(tab.charts);                    
+                    tab.charts = [];
+                    scope.$apply()
+                    tab.charts = charts;
+                }
 
                 // Adds a new widget (itemConfig can be ChartItemConfig,...)
                 scope.addWidget = function(tab, itemConfig) {
