@@ -77,9 +77,9 @@ app
                     // generic chart options
                     scope.options = {
                         responsive: true, 
-                        maintainAspectRatio: false
+                        maintainAspectRatio: false,                        
                     }
-                    //scope.colors = [scope.config.backgroundColor] // TODO - fix
+                    scope.colors = [ '#FF0000', '#00FF00', '#0000FF'] 
                     
 
 					// run setup according chart type
