@@ -185,3 +185,5 @@
     .toolbox .chart-config-container .chart-header-container custom-input:last-of-type {
       flex: 1;
       margin-left: 5px; }
+  .toolbox .chart-config-container .chart-colors-container {
+    margin-top: 15px; }

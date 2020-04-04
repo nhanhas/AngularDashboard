@@ -146,6 +146,7 @@ app
                     chartConfig.width = 0;
                     chartConfig.heigth = 0;            
                     chartConfig.chartSetId = tab.id;        
+                    chartConfig.backgroundColor = '#FFFFFF';
 
                     // push it to dashboard items
                     tab.charts.push(chartConfig);     

@@ -1,4 +1,4 @@
-var app = angular.module("App", ['ngRoute', 'ui.bootstrap', 'pascalprecht.translate', 'ngAnimate', 'ngDraggable', 'chart.js', 'gridstack-angular']);
+var app = angular.module("App", ['ngRoute', 'ui.bootstrap', 'pascalprecht.translate', 'ngAnimate', 'ngDraggable', 'chart.js', 'gridstack-angular','color.picker']);
 
 //Routes Configuration 
 app.config(['$routeProvider', function($routeProvider) {
