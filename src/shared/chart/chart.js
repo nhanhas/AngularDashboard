@@ -199,6 +199,11 @@ app
                     return result;
                 }
 
+                //#Aux - get backgroundColor
+                scope.getBackgroundColor = function(){
+                    return { 'background-color': `#${scope.config.backgroundColor}` };
+                }
+
                 // setup chart! (change this for load chart data and then setup)
                 scope.initialize();                
 
