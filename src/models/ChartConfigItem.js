@@ -16,6 +16,8 @@ class ChartConfigItem{
     width = 0;
     heigth = 0;
     fields = [ ];
+
+    toUpdateView = false;
   
 
     constructor(){ }

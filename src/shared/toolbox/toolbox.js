@@ -84,6 +84,8 @@ app
                             }
 
                             console.log("toolbox create chart", result);
+                            // mark chartItem to update itself at chartDirective
+                            scope.editingElement.item.toUpdateView = true;
                         })  
 
                     }else{
@@ -91,9 +93,13 @@ app
                         scope.updateChartConfig(chartConfig).then(result => {
                             scope.isLoading = false;
                             console.log("toolbox update chart", result);
+
+                            // mark chartItem to update itself at chartDirective
+                            scope.editingElement.item.toUpdateView = true;
                         })  
                     }
-                                    
+                          
+                    
                 }
 
                 // get fields for chart

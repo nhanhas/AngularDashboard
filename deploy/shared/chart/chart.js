@@ -23,6 +23,17 @@ app
                     scope.onTriggerToolbox = undefined;
                 }
 
+                // to prevent load datasources at beggining
+                scope.$watch('config.toUpdateView', function (newValue, oldValue, scope) {
+                    if(newValue){
+                        console.log('Reloading chart...')
+                        scope.initialize().then(result => {
+                            scope.config.toUpdateView = false;
+                        });
+                        
+                    }
+                });
+
                 // Dates Range
                 scope.startDate = new Date('2020-01-16');
                 scope.endDate = new Date('2020-01-17');
@@ -51,7 +62,7 @@ app
 
                     const fieldsID = scope.config.fields.map(field => field.metaDataEntryId);
 
-                    DashboardService.fecthChartResultByDates(scope.startDate, scope.endDate, fieldsID).then(result => {
+                    return DashboardService.fecthChartResultByDates(scope.startDate, scope.endDate, fieldsID).then(result => {
                         scope.isLoading = false;
 
                         // run chart setup

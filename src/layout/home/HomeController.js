@@ -109,7 +109,15 @@ app
 
         // delete chart config
         $scope.deleteChartConfig = function(chartConfig, dashboard){
-            //return new Promise((resolve, reject) => { resolve( true ); }); 
+            // remove now if is an unsaved chart
+            if(chartConfig.chartConfigId === 0){ 
+                return new Promise((resolve, reject) => { 
+                    $scope.closeToolbox();   
+                    resolve( true ); 
+                }) 
+            }; 
+
+            // otherwise remove it on server
             return DashboardService.deleteChart(chartConfig.chartConfigId).then(result => {                
                 if(result === true){                                       
                     $scope.closeToolbox();                                   

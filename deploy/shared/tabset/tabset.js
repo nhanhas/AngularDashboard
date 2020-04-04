@@ -154,23 +154,26 @@ app
                     scope.triggerToolbox('CHART', chartConfig);
                 }
 
-                scope.onDeleteChartHandler = function(chartConfig, tab){
+                // Delete chart config
+                scope.onDeleteChartHandler = function(chartConfig, tab){                    
                     if(scope.onDeleteChart){
                         scope.onDeleteChart({chartConfig: chartConfig, dashboard: tab}).then(result => {
                             if(result){
-                                let charts = angular.copy(tab.charts);
-                                charts = charts.filter(chart => chart.chartConfigId !== chartConfig.chartConfigId );
-                                tab.charts = [];
-                                $timeout(()=>{
-                                    tab.charts = charts;                                
-                                });
-                                
+                                scope.deleteChartFromTab(chartConfig, tab);                                
                             }
                         })
                     }
                 }
 
-                
+                // delete from local chart array
+                scope.deleteChartFromTab = function(chartConfig, tab){
+                    let charts = angular.copy(tab.charts);
+                    charts = charts.filter(chart => chart.chartConfigId !== chartConfig.chartConfigId );
+                    tab.charts = [];
+                    $timeout(()=>{
+                        tab.charts = charts;                                
+                    });
+                }
 
                 //TEST
                 scope.reloadTab = function(tab){
