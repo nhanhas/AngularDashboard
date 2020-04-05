@@ -18,6 +18,9 @@
         > span:first-child {
             margin-right: 10px;
         }
+        > span {
+            cursor: pointer;
+        }
     }
     .chart-close-btn{
         position: absolute;

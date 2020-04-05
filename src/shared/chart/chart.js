@@ -23,7 +23,7 @@ app
                     scope.onTriggerToolbox = undefined;
                 }
 
-                // to prevent load datasources at beggining
+                // to prevent force to re-render chart
                 scope.$watch('config.toUpdateView', function (newValue, oldValue, scope) {
                     if(newValue){
                         console.log('Reloading chart...')
@@ -33,6 +33,13 @@ app
                         
                     }
                 });
+                // to update chart.js options to see color change right away
+                scope.$watch('config.color', function (newValue, oldValue, scope) {
+                    if(scope.options && scope.config)
+                        scope.setupChartOptions();
+                });
+
+
 
                 // Dates Range
                 scope.startDate = new Date('2020-01-16');
@@ -77,8 +84,13 @@ app
                     // generic chart options
                     scope.options = {
                         responsive: true, 
-                        maintainAspectRatio: false,                        
+                        maintainAspectRatio: false, 
                     }
+
+                    // setup options for visuals only
+                    scope.setupChartOptions();
+
+                    // color pallete
                     scope.colors = [ '#FF0000', '#00FF00', '#0000FF'] 
                     
 
@@ -199,9 +211,46 @@ app
                     return result;
                 }
 
+                /**
+                 * Visual section
+                 */
+                scope.setupChartOptions = function(){
+                    switch (scope.config.chartType) {
+                        case 'bar':
+                        case 'line':
+                            scope.options.scales = {
+                                xAxes: [{ 
+                                    gridLines: {
+                                        color: `#${scope.config.color}`
+                                    },
+                                    ticks: {
+                                      fontColor: `#${scope.config.color}` ,
+                                    }
+                                }],
+                                yAxes: [{ 
+                                    gridLines: {
+                                        color: `#${scope.config.color}`
+                                    },
+                                    ticks: {
+                                      fontColor: `#${scope.config.color}`, 
+                                    }
+                                }]
+                            }                
+                            break;
+                    
+                        default:
+                            break;
+                    }
+                }
+
                 //#Aux - get backgroundColor
                 scope.getBackgroundColor = function(){
                     return { 'background-color': `#${scope.config.backgroundColor}` };
+                }
+
+                //#Aux - get color
+                scope.getTextColor = function(){
+                    return { 'color': `#${scope.config.color}` };
                 }
 
                 // setup chart! (change this for load chart data and then setup)
