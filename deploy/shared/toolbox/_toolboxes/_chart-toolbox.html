@@ -26,14 +26,28 @@
                 <custom-color-picker label="Text and grid color" model="editingElement.item.color"></custom-color-picker>                
             </div>
 
-            <!-- Fields -->
+            <!-- X Fields -->
             <div class="charts-fiels">
-                <label class="color-blue">Chart fields</label>
+                <label class="color-blue">Chart Axis</label>
 
                 <uib-accordion close-others="true">
                     <div uib-accordion-group class="panel-default" heading="{{ datasource.name }}" is-open="false" is-disabled="false" ng-repeat="datasource in chartXFields">
                         <div ng-repeat="dataset in datasource.itens">
-                            <multi-dropdown datasource="dataset" on-add-item="onAddFieldHandler(itemSelected)" on-remove-item="onRemoveFieldHandler(itemSelected)"></multi-dropdown>
+                            <multi-dropdown single="true" datasource="dataset" on-add-item="onAddXFieldHandler(itemSelected)" on-remove-item="onRemoveXFieldHandler(itemSelected)"></multi-dropdown>
+                            <br>
+                        </div>  
+                    </div>                         
+                </uib-accordion>
+            </div>
+
+            <!-- Y Fields -->
+            <div class="charts-fiels">
+                <label class="color-blue">Chart Values</label>
+
+                <uib-accordion close-others="true">
+                    <div uib-accordion-group class="panel-default" heading="{{ datasource.name }}" is-open="false" is-disabled="false" ng-repeat="datasource in chartYFields">
+                        <div ng-repeat="dataset in datasource.itens">
+                            <multi-dropdown datasource="dataset" on-add-item="onAddYFieldHandler(itemSelected)" on-remove-item="onRemoveYFieldHandler(itemSelected)"></multi-dropdown>
                             <br>
                         </div>  
                     </div>                         

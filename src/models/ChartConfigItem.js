@@ -16,6 +16,7 @@ class ChartConfigItem{
     width = 0;
     heigth = 0;
     fields = [ ];
+    XAxisMetadataEntry = 0;
 
     toUpdateView = false;
   

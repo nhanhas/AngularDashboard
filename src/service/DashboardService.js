@@ -3,14 +3,30 @@
  * and some manipulations to return to Frontend the
  * Dashboard data
  * php -S 127.94.0.1:8000
+ * PW: Mpereira12345!
  */
 //var baseUrl = ''
 var baseUrl='https://10.1.0.25/'
 app.service('DashboardService', ['$http', 'FrameworkUtils', function($http, FrameworkUtils) {
 
+    this.access_token = '';
+
     this.sleep = function(time) {
         return new Promise((resolve) => setTimeout(resolve, time));
     };
+
+    /**
+     * Get Token 
+     */
+    this.getAuthToken = function () {                 
+      const [username, password] = ['mpereiraservice@gmail.com', 'Mpereira12345!']
+
+      return FrameworkUtils.Http_POST_TOKEN(baseUrl + `token`, `username=${username}&password=${password}&grant_type=password`).then((data) => {
+        if(data){
+          access_token = data.data.access_token;
+        }
+      })
+    }
 
     /**
      * Get DataSources 
@@ -183,11 +199,26 @@ app.service('DashboardService', ['$http', 'FrameworkUtils', function($http, Fram
     }
 
     /**
+     * Save data sets selection
+     */
+    this.updateDataSourcesSets = function(fieldsID){
+      // setup param to send
+      const param = fieldsID;
+            
+      return FrameworkUtils.Http_POST(baseUrl + '/api/DataSource/SaveDataSetsConfiguration', param).then((data) => {
+        if(data.data){
+          return data.data          
+        }        
+        return undefined;
+      })  
+    }
+
+    /**
      * Get all availble Dashboards
      * [{"Id":13,"Name":"chartSet1"},{"Id":14,"Name":"chartSet1"}]
      */
     this.getDashboards = function(){
-        return FrameworkUtils.Http_GET(baseUrl + "api/ChartSet/GetDashBoards").then((data) => {
+        return FrameworkUtils.Http_GET(baseUrl + "api/ChartSet/GetDashBoards", this.access_token).then((data) => {
             return data.data.map(dashboard => Object.assign(new DashboardItem(), { id: dashboard.Id, title: dashboard.Name }) )
         })            
 
@@ -210,6 +241,7 @@ app.service('DashboardService', ['$http', 'FrameworkUtils', function($http, Fram
                 width: chartConfig.Width,
                 heigth: chartConfig.Heigth,
                 fields: chartConfig.Fields,
+                XAxisMetadataEntry: chartConfig.XAxisMetadataEntry,
                 chartConfigId: chartConfig.ChartConfigId
             }))
             

@@ -15,9 +15,8 @@ app
          * Initialize main function
          */
         $scope.initialize = function(){
-
-            // #1 - get available dashboards
-            DashboardService.getDashboards().then(result => {
+           // #1 - get available dashboards
+           DashboardService.getDashboards().then(result => {
                 $scope.dashboards = result;    
 
                 // #2 - get charts by dashboard
@@ -28,6 +27,9 @@ app
                 })
 
             })
+           
+            //DashboardService.getAuthToken().then(result => {  });
+            
 
             // #2 - user info
             $scope.userInfo = {
@@ -86,6 +88,16 @@ app
         //#C - Is toolbox opened
         $scope.isToolboxOpened = function(){
             return $scope.toolboxOpened;
+        }
+
+        /**
+         * DataSets server sync
+         */
+        $scope.updateDataSources = function(fields){
+            return DashboardService.updateDataSourcesSets(fields).then(result => {                
+                console.log(result);
+                return result;
+            })
         }
         
         /**

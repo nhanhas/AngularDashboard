@@ -8,7 +8,8 @@
   color: white;
   background-color: white;
   border-radius: 25px;
-  border: 1px solid #00000054; }
+  border: 1px solid #00000054;
+  z-index: 0 !important; }
 
 .tabset .grid-stack > .grid-stack-item > .ui-resizable-sw {
   left: 2px;
@@ -16,7 +17,8 @@
   color: white;
   background-color: white;
   border-radius: 25px;
-  border: 1px solid #00000054; }
+  border: 1px solid #00000054;
+  z-index: 0 !important; }
 
 .tabset .container-fluid.drag-enter {
   background-color: #4e70a8; }

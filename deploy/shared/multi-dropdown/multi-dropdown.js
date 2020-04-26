@@ -9,7 +9,8 @@ app
             scope: {
                 datasource: '=',
                 onAddItem: '&?',
-                onRemoveItem: '&?' 
+                onRemoveItem: '&?',
+                single: '=?' 
             },
             templateUrl: 'shared/multi-dropdown/multi-dropdown.html',
 
@@ -17,6 +18,7 @@ app
                 
                 //Should be of class DatasourceItem 
                 scope.datasource = scope.datasource || undefined;
+                scope.single = scope.single || false;
 
                 if (!attrs.onAddItem) {
                     scope.onAddItem = undefined;
@@ -36,6 +38,14 @@ app
 
                 //on select item
                 scope.onSelectHandler = function(itemSelected){
+                    // if [single] usage, deselect other ones
+                    if(scope.single){
+                        scope.datasource.itens.forEach(item => {
+                            if(item !== itemSelected){
+                                item.selected = false
+                            }
+                        });
+                    }
                     if(scope.onAddItem)
                         scope.onAddItem({itemSelected: itemSelected})
                 }

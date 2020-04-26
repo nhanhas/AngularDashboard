@@ -7,10 +7,11 @@ app.service('FrameworkUtils', ['$http', function($http) {
     * Remote Services Utils
     */
     //GET Type
-    this.Http_GET  = function(serviceURL){
+    this.Http_GET  = function(serviceURL, access_token){        
         return $http({
                     method: 'GET',
-                    url: serviceURL
+                    url: serviceURL,
+                    headers: { 'Athorization': 'Bearer ' + access_token }
                 }).then(function successCallback(response) {
                     return response;
                 }, function errorCallback(response) {
@@ -19,11 +20,27 @@ app.service('FrameworkUtils', ['$http', function($http) {
     }
 
     //POST Type
-    this.Http_POST  = function(serviceURL, data){
+    this.Http_POST  = function(serviceURL, data){        
+
         return $http({
                     method: 'POST',
                     data: data,
                     url: serviceURL
+                }).then(function successCallback(response) {
+                    return response;
+                }, function errorCallback(response) {
+                    return 'error';
+                });
+    }
+
+    //POST Type (TOKEN)
+    this.Http_POST_TOKEN  = function(serviceURL, data){        
+
+        return $http({
+                    method: 'POST',
+                    data: data,
+                    url: serviceURL,
+                    headers: this.getHeaders()
                 }).then(function successCallback(response) {
                     return response;
                 }, function errorCallback(response) {
@@ -47,6 +64,18 @@ app.service('FrameworkUtils', ['$http', function($http) {
         if (!results) return null;
         if (!results[2]) return '';
         return decodeURIComponent(results[2].replace(/\+/g, " "));
+    }
+
+    this.getHeaders = function(access_token = ''){
+        /*return  {
+            'Athorization': 'Bearer ' + access_token,
+            'Access-Control-Allow-Origin': '*',
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }*/
+        return  {
+            'Access-Control-Allow-Origin': true,
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
     }
 
 }]);

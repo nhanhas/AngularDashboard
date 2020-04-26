@@ -21,6 +21,7 @@ app
                 // this will be our backup
                 scope.fieldsForCharts = [];
                 scope.chartXFields = [];
+                scope.chartYFields = []; //TODO
 
                 // save changes from toolbox                
                 $timeout(function(){
@@ -34,12 +35,51 @@ app
                 });
 
                 // whatch on toolbox for initializer
-                scope.$watch('editingElement.item', function (newValue, oldValue, scope) {                    
-                    if(!newValue) return;
+                scope.$watch('editingElement', function (newValue, oldValue, scope) {                  
 
-                    if(newValue.chartConfigId !== undefined) { return scope.initializeChartView() }
+                    if(!newValue) return;
+                    // Menu in edition
+                    if(newValue.item.type === 'DATASOURCES' && newValue.data && newValue.data.length > 0) { return scope.initializeDatasourcesView() }
+
+                    // Chart in edition
+                    if(newValue.item.chartConfigId !== undefined) { return scope.initializeChartView() }
 
                 });
+
+                /**
+                 * DATASOURCES toolbox section
+                 */
+                // update user datasets selections
+                scope.updateDataSourceSets = function(){
+                    scope.isLoading = true;
+                    // prepare all fields to use
+                    const dataSets = scope.editingElement.data;
+                    let dataSetsToUse = []
+                    dataSets.forEach(dataSet => {
+                        dataSetsToUse.push(...
+                            dataSet.itens
+                                .filter(value => value.selected)
+                                .map(value => value.itens.map(field => field.metaDataEntryId))
+                            )
+                    });
+                    // flaten field array
+                    dataSetsToUse = dataSetsToUse.flat();
+                    
+                    // update 
+                    scope.updateDataSources(dataSetsToUse).then(result => {
+                        scope.isLoading = false;
+                    });
+
+                }
+
+                // a datasources initializer
+                scope.initializeDatasourcesView = function(){
+                    scope.editingElement.data.forEach(dataSet => {
+                        dataSet.itens.forEach(table => {
+                            table.selected = table.itens.some(field => field.selected)
+                        })
+                    })
+                }
 
                 /**
                  * CHART toolbox section
@@ -107,8 +147,21 @@ app
                     if(scope.fieldsForCharts.length === 0){
 
                         return DashboardService.getDataSourcesSets().then((result) => {
-                            // reset all selected fields to false
                             let dataSource = result.data;
+
+                            // filter for available ones
+                            dataSource.forEach(dataSet => {
+                                dataSet.itens = dataSet.itens
+                                .filter(table => table.itens.some(field => field.selected))                                
+                            })
+                            
+                            dataSource = dataSource
+                                .filter(dataSet => dataSet.itens
+                                    .some(table => table.itens.length > 0)
+                                )
+                            
+                            // reset all selected fields to false
+                            //let dataSource = result.data;
                             dataSource.forEach(sourceItem => {
                                 // datasource reset
                                 sourceItem.selected = false;
@@ -130,8 +183,19 @@ app
                     return new Promise((resolve, reject) => { resolve( scope.fieldsForCharts ); });                    
                 }
 
-                // on add field for chart
-                scope.onAddFieldHandler = function(field){
+                // on add [xAxis] field for chart
+                scope.onAddXFieldHandler = function(field){
+                    scope.editingElement.item.XAxisMetadataEntry = field.metaDataEntryId;
+                }
+
+                // on remove [xAxis] field for chart
+                scope.onRemoveXFieldHandler = function(field){
+                    if(scope.editingElement.item.XAxisMetadataEntry === field.metaDataEntryId)
+                        scope.editingElement.item.XAxisMetadataEntry = null;
+                }
+
+                // on add [yAxis] field for chart
+                scope.onAddYFieldHandler = function(field){
                     console.log('add',scope.editingElement, field);
                     const newField = {
                         name: field.name,
@@ -143,8 +207,8 @@ app
                     scope.editingElement.item.fields.push(newField);
                 }
 
-                // on remove field for chart
-                scope.onRemoveFieldHandler = function(field){
+                // on remove [yAxis] field for chart
+                scope.onRemoveYFieldHandler = function(field){
                     console.log('remove', scope.editingElement, field);
                     const chartFields = scope.editingElement.item.fields;
                     scope.editingElement.item.fields = chartFields.filter( chartField => chartField.metaDataEntryId !== field.metaDataEntryId);
@@ -156,12 +220,24 @@ app
                     console.log(`Toolbox: initializeChartView: ${scope.editingElement.item.chartConfigId}`);
                     scope.getFieldsForCharts().then(result => {
 
-                        // set as selected fields if chart has it
-                        const fieldsForCharts = angular.copy(result);
-                        fieldsForCharts.forEach(sourceItem => {
+                        // [xAxis] - set as selected fields if chart has it
+                        const XfieldsForCharts = angular.copy(result);
+                        XfieldsForCharts.forEach(sourceItem => {
                             sourceItem.itens.forEach(setItem => {
                                 setItem.itens.forEach(fieldItem => {
-                                    
+                                    // mark selected from [yAxis]
+                                    const fieldInChart = scope.editingElement.item.XAxisMetadataEntry === fieldItem.metaDataEntryId;
+                                    fieldItem.selected = fieldInChart;                                
+                                })
+                            })
+                        });
+
+                        // [yAxis] - set as selected fields if chart has it
+                        const YfieldsForCharts = angular.copy(result);
+                        YfieldsForCharts.forEach(sourceItem => {
+                            sourceItem.itens.forEach(setItem => {
+                                setItem.itens.forEach(fieldItem => {
+                                    // mark selected from [yAxis]
                                     const fieldInChart = scope.editingElement.item.fields.find(field => field.metaDataEntryId === fieldItem.metaDataEntryId);
                                     fieldItem.selected = fieldInChart !== undefined;                                
                                 })
@@ -170,7 +246,8 @@ app
 
                         //set fields for x and y fields
                         $timeout( function(){
-                            scope.chartXFields = fieldsForCharts;
+                            scope.chartXFields = XfieldsForCharts;
+                            scope.chartYFields = YfieldsForCharts;
                         });
                         
                         

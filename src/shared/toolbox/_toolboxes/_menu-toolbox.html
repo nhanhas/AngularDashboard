@@ -66,7 +66,7 @@
             </div>
 
             <!-- Save Button -->
-            <div class="save-btn-container">
+            <div class="save-btn-container" ng-click="updateDataSourceSets()">
                 <div>
                     <span>Save Settings</span>
                 </div>
@@ -75,7 +75,7 @@
         </div>
 
         <!-- TYPE: TEXT_ITEM_CONFIG -->
-        <div ng-if="editingElement.item.type === 'GRAPHIC_CHART'">
+        <div ng-if="editingElement.item.type === 'TEXT_ITEM_CONFIG'">
 
             TEXT Editor 
         </div>
