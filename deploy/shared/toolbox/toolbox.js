@@ -47,6 +47,31 @@ app
                 });
 
                 /**
+                 * [TAB] - dashboard config
+                 */
+                scope.updateDashboardConfig = function(){
+                    if(scope.editingElement.item.name === '')
+                        return;
+                    scope.isLoading = true;
+                    const {title, id} = scope.editingElement.item;
+
+                    // update dashboard
+                    scope.updateDashboard(id, title).then(result => {
+                        scope.isLoading = false;
+                    });
+                }
+
+                scope.deleteDashboardConfig = function(){                    
+                    scope.isLoading = true;
+                    const {id} = scope.editingElement.item;
+
+                    // update dashboard
+                    scope.deleteDashboard(id).then(result => {
+                        scope.isLoading = false;
+                    });
+                }
+
+                /**
                  * DATASOURCES toolbox section
                  */
                 // update user datasets selections

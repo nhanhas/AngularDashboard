@@ -99,6 +99,32 @@ app
                 return result;
             })
         }
+
+        /**
+         * Dashboard config server sync
+         */
+        $scope.updateDashboard = function(id, name){
+            return DashboardService.updateDashboard(id, name).then(result => {                
+                console.log(result);
+                return result;
+            })
+        }
+
+        $scope.deleteDashboard = function(id){
+            return DashboardService.deleteDashboard(id).then(result => {                
+                console.log(result);
+                
+                if(result === true){
+                    // delete tab and select another one
+                    $scope.dashboards = $scope.dashboards.filter(dashboard => dashboard.id !== id)
+                    $scope.closeToolbox();   
+                }
+
+                
+                return result;
+            })
+        }
+
         
         /**
          * Chart configs server sync

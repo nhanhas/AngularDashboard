@@ -3,14 +3,27 @@
         <h4 class="tool-header">{{ editingElement.item.title }}:</h4>
 
         <div class="tab-container">
+            <!-- Hint -->
+            <div class="toolbox-hint">
+                <span><i class="color-blue fa fa-exclamation-circle fa-lg"></i> </span> 
+                <span>Here you can edit your Dashboard panel</span>
+            </div>
+            
+            <!-- Form -->
+            <div class="form-container">
+                <custom-input label="Name" model="editingElement.item.title"></custom-input>
+            </div>
 
-            <!-- TODO name, etc-->
-
-            <!-- Save Button -->
+            <!-- Save/delete Button -->
             <div class="save-btn-container">
-                <div>
+                <div class="delete-btn color-white" ng-click="deleteDashboardConfig()">
+                    <span>Delete Dashboard Panel</span>
+                </div>
+                
+                <div ng-class="{'disabled' : editingElement.item.title.length === 0}" ng-click="updateDashboardConfig()">
                     <span>Save Settings</span>
                 </div>
+                
             </div>
 
         </div>

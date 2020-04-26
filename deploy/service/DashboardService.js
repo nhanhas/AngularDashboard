@@ -260,11 +260,27 @@ app.service('DashboardService', ['$http', 'FrameworkUtils', function($http, Fram
     }
 
     /**
+     * Update dashboard
+     */
+    this.updateDashboard = function(id, name){
+            
+      return FrameworkUtils.Http_POST(baseUrl + `api/ChartSet/Update?chartSetId=${id}&name=${name}`).then((data) => {
+        if(data.data){
+          return data.data          
+        }        
+        return undefined;
+      })  
+    }
+
+    /**
      * Delete dashboard
      */
     this.deleteDashboard = function(id){
         return FrameworkUtils.Http_POST(baseUrl + `api/ChartSet/Delete?chartSetId=${id}`).then((data) => {
-            console.log(data)
+          if(data.data){
+            return data.data          
+          }        
+          return undefined;
         })     
     }
 
