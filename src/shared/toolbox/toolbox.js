@@ -4,7 +4,7 @@
  * It will accept transclude
  */
 app
-    .directive('toolbox', ['$timeout', 'DashboardService', function($timeout, DashboardService) {
+    .directive('toolbox', ['$timeout', 'DashboardService', 'FrameworkUtils', function($timeout, DashboardService, FrameworkUtils) {
         return {
             restrict: 'EA',
             scope: true,
@@ -14,6 +14,8 @@ app
             link: function (scope, element, attrs) {                
                 scope.isToolReady = false;
                 scope.isLoading = false;
+
+                scope.FrameworkUtils = FrameworkUtils;
                 
                 /**
                  * Variables for charts
@@ -281,6 +283,10 @@ app
                     
 
                 }
+
+                /**
+                 * Visual Items
+                 */
 
             }
         }

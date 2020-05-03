@@ -23,6 +23,7 @@
                             on-drag-stop="onDragStop(event,ui)" 
                             on-resize-start="onResizeStart(event,ui)" 
                             on-resize-stop="onResizeStop(event,ui)">
+
                             <!-- Grid Stack item (Charts) -->
                             <div 
                                 gridstack-item 
@@ -37,6 +38,23 @@
                                 <!-- Chart item -->
                                 <chart config="chart" on-trigger-toolbox="triggerToolbox('CHART', item)" on-delete-chart="onDeleteChartHandler(chartConfig, tab)"></chart>
                             </div>
+
+                            <!-- Grid Stack item (Visual items) -->
+                            <div 
+                                gridstack-item 
+                                ng-repeat="visual in tab.visuals track by $index" 
+                                class="grid-stack-item" 
+                                gs-item="{{ {itemType: FrameworkUtils.typeOf(visual), itemConfig: visual} }}"
+                                gs-item-x="visual.posX" 
+                                gs-item-y="visual.posY"
+                                gs-item-width="visual.width" 
+                                gs-item-height="visual.heigth" 
+                                gs-item-autopos="0">
+                                <!-- Visual item -->
+                                <visual-item config="visual" on-trigger-toolbox="triggerToolbox('VISUAL_ITEM', item)"></visual-item>
+                                
+                            </div>
+
                         </div>
                     </div>
                 </div>

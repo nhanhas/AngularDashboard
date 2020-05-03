@@ -36,25 +36,31 @@ app
                 scope.chartItemsConfigHandler = function(menuType){
                     //#1 - Get all available charts to use in toolbox
                     DashboardService.getChartItemsConfigToBuild().then((result) => {
-
-                        //#2 - Show all available chart types to build in toolbox
-                        //scope.$apply(function(){
-                            scope.triggerToolbox(menuType, result.data);
-                        //});
-                        
-
+                        //#2 - Show all available chart types to build in toolbox                        
+                        scope.triggerToolbox(menuType, result.data);
                     });
+                }
+
+                // TYPE: VISUAL_ITEMS
+                scope.visualItemsHandler = function(menuType){
+                    //#1 - Get available visual items
+                    const visualItems = [
+                        new TextConfigItem()
+                    ]
+
+                    //#1 - Show all available visual elements to build in toolbox                        
+                    scope.triggerToolbox(menuType, visualItems);
                 }
 
                 // Initialize variables after menu handlers
                 scope.selectedMenu = undefined;
 
-                //#1 - Init menu items
-                
+                //#1 - Init menu items                
                 scope.menus = [
                     new MenuItem('USER', 'User settings', '', scope.userSettingsHandler.bind(this)),
                     new MenuItem('DATASOURCES', 'Data Sources and Data Sets', 'fa-database', scope.dataSourceHandler.bind(this)),
-                    new MenuItem('TEXT_ITEM_CONFIG', 'Text Builder', 'fa-text-height'),               
+                    //new MenuItem('TEXT_ITEM_CONFIG', 'Text Builder', 'fa-text-height'),               
+                    new MenuItem('VISUAL_ITEMS', 'Visual Builder', 'fa-puzzle-piece', scope.visualItemsHandler.bind(this)),               
                     new MenuItem('CHART_ITEM_CONFIG', 'Charts Builder', 'fa-area-chart', scope.chartItemsConfigHandler.bind(this))                    
                 ]
                 // isolate menu user setting

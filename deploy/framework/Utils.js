@@ -78,6 +78,11 @@ app.service('FrameworkUtils', ['$http', function($http) {
         }
     }
 
+    // Get typeof object
+    this.typeOf = function(obj){
+        return obj.constructor.name;
+    }
+
 }]);
 
 

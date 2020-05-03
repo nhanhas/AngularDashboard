@@ -3,7 +3,7 @@
  * with his own tabs
  */
 app
-    .directive('tabset', ['$timeout', function($timeout) {
+    .directive('tabset', ['$timeout', 'FrameworkUtils', function($timeout, FrameworkUtils) {
         return {
             restrict: 'EA',
             transclude: true,                            
@@ -12,13 +12,13 @@ app
                 onAddNew: '&?',       //Handler for add new Tab
                 onTriggerToolbox: '&?',       //Triggers the edition tab
                 onChangeChartPosition: '&?',       //on change chart position
-                onDeleteChart: '&?'       //on change chart position
-                
+                onDeleteChart: '&?'       //on change chart position                
             },
             templateUrl: 'shared/tabset/tabset.html',
 
             link: function (scope, element, attrs) {
-                
+                scope.FrameworkUtils = FrameworkUtils;
+
                 //#1 - Initialize attrs
                 scope.tabCollection = scope.tabCollection || [];
                 
@@ -57,7 +57,7 @@ app
 
                 // Gridstack configuration
                 scope.gridStackOptions = {
-                    cellHeight: 200,
+                    cellHeight: 50,
                     verticalMargin: 10,
                     acceptWidgets: '.chart-config-element',
                     float: true,
@@ -101,6 +101,7 @@ app
                 scope.onDragStart = function(event, ui) {
                     scope.userChangedItem = true;
                 };
+
                 // Flag this change by user mannualy
                 scope.onResizeStart = function(event, ui) {
                     scope.userChangedItem = true;
@@ -123,7 +124,6 @@ app
 
                 };
 
-
                 /**
                  * Drop from item config 
                  * from Toolbox
@@ -134,10 +134,13 @@ app
                     // handler for chart config item
                     if(data instanceof ChartConfigItem){ return scope.addChartConfigItem(tab, data) }
                     
+                    // visual items 
+                    if(data instanceof TextConfigItem){ return scope.addVisualConfigItem(tab, data) }
+                    
                 }
 
                 /**
-                 * [New] Chart config item
+                 * Chart config item
                  */
                 scope.addChartConfigItem = function(tab, chartConfig){
                     // initiate visuals
@@ -176,6 +179,26 @@ app
                     });
                 }
 
+                /**
+                 * Visual config item
+                 */
+                scope.addVisualConfigItem = function(tab, visualConfig){
+                    // initiate visuals
+                    visualConfig.x = 0;
+                    visualConfig.y = 0;
+                    visualConfig.width = 0;
+                    visualConfig.heigth = 0;            
+                    visualConfig.chartSetId = tab.id;        
+                    visualConfig.backgroundColor = '#FFFFFF';
+
+                    // push it to dashboard items
+                    tab.visuals = []; //DEV_TEST
+                    tab.visuals.push(visualConfig);     
+
+                    // open toolbox in edit mode
+                    scope.triggerToolbox('VISUAL_ITEM', visualConfig);
+                }
+
                 //TEST
                 scope.reloadTab = function(tab){
                     let charts = angular.copy(tab.charts);                    
@@ -211,19 +234,3 @@ app
         }
     }
 ]);
-
-
-/**
- * Developer Doc:
- * 
- * 
- * A single Tab of tabCollection should have the following:
- * 
- * {
- *      id: <Integer>,
- *      disabled: <Boolean>,
- *      chart: <Object Array>
- * }
- * 
- * 
- */

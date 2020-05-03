@@ -1,11 +1,17 @@
 .toolbox {
   /* Generic  */
   /* DATASOURCES */
+  /* VISUAL_ITEMS */
   /* CHART_ITEM_CONFIG */
   /* Clear floats after the columns */
   /* USER */
   /* CHART (chart config)*/
-  /* DASHBOARD TAB */ }
+  /* DASHBOARD TAB */
+  /* VISUAL ITEM CONFIG TAB 
+  .visual-item-config-container{
+    
+  }
+*/ }
   .toolbox #mobile-nav-menu {
     float: right;
     width: 310px;
@@ -111,6 +117,12 @@
     opacity: 0.5; }
   .toolbox .form-container > custom-input > div {
     margin: 10px 0; }
+  .toolbox .colors-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px; }
+    .toolbox .colors-container custom-color-picker:not(:first-child) {
+      margin-top: 10px; }
   .toolbox .datasources-container > div:not(:last-child) {
     margin-bottom: 20px; }
   .toolbox .save-btn-container {
@@ -133,6 +145,19 @@
       padding: 10px;
       cursor: pointer;
       margin-bottom: 10px; }
+  .toolbox .visual-config-element, .toolbox .visual-config-element > div {
+    background-color: #e2e0e0;
+    width: 50px;
+    height: 45px;
+    font-size: 27px;
+    text-align: center;
+    border-radius: 5px;
+    cursor: pointer; }
+  .toolbox .visual-config-element > div {
+    padding-top: 4px; }
+  .toolbox .visual-config-container {
+    max-width: 140px;
+    margin: 0 auto; }
   .toolbox .chart-config-element, .toolbox .chart-config-element > div {
     background-color: #e2e0e0;
     width: 50px;
@@ -195,12 +220,6 @@
     .toolbox .chart-config-container .chart-header-container custom-input:last-of-type {
       flex: 1;
       margin-left: 5px; }
-  .toolbox .chart-config-container .chart-colors-container {
-    display: flex;
-    flex-direction: column;
-    margin-top: 10px; }
-    .toolbox .chart-config-container .chart-colors-container custom-color-picker:not(:first-child) {
-      margin-top: 10px; }
   .toolbox .tab-container .delete-btn-container {
     text-align: center; }
     .toolbox .tab-container .delete-btn-container > div {

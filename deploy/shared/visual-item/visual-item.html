@@ -1,0 +1,26 @@
+<div class="visual-item"  ng-style="getBackgroundColor()">
+  <!-- Title and config -->
+  <div class="visual-item-header text-bold grid-stack-item-content" style="height: 15%;" ng-style="getTextColor()">      
+      <div class="visual-item-bts-action">
+          <span ><i class="fa fa-times" ng-click="onDeleteItemHandler()"></i></span>
+          <span ><i class="fa fa-cog" ng-click="triggerToolbox()"></i></span>
+      </div>
+  </div>
+
+  <!-- Pick the right visual form -->
+  <div class="visual-item-content" ng-switch="FrameworkUtils.typeOf(config)">
+          
+    <!-- Text config item -->
+    <div ng-switch-when="TextConfigItem">
+      <div ng-include="'shared/visual-item/_visuals/_text-item.html'"></div>
+    </div>                                      
+   
+  </div>
+
+
+  <!-- loading -->
+  <div class="loading color-blue" ng-if="isLoading">
+    <span><i class="fa fa-spinner fa-spin"></i></span>
+  </div>
+
+</div>

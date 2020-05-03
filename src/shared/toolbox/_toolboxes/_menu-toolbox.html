@@ -74,10 +74,21 @@
             
         </div>
 
-        <!-- TYPE: TEXT_ITEM_CONFIG -->
-        <div ng-if="editingElement.item.type === 'TEXT_ITEM_CONFIG'">
+        <!-- TYPE: VISUAL_ITEMS -->
+        <div class="visual-config-container" ng-if="editingElement.item.type === 'VISUAL_ITEMS'">
+            <div class="column" ng-repeat="visualConfig in editingElement.data" >                
+                <!-- visual element -->
+                <div class="visual-config-element">
+                    <div ng-drag="true" ng-drag-data="visualConfig" ng-center-anchor="true"> 
+                        <span ng-switch="FrameworkUtils.typeOf(visualConfig)">
+                            <!-- pick a icon -->
+                            <i ng-switch-when="TextConfigItem" class="fa fa-text-height"></i>                                       
+                            <i ng-switch-default class="fa fa-cog"></i>
+                        </span>
+                    </div>
+                </div> 
 
-            TEXT Editor 
+            </div>
         </div>
 
         <!-- TYPE: CHART_ITEM_CONFIG (TODO change to Charts) -->
@@ -87,16 +98,16 @@
                 <!-- chart element -->
                 <div class="chart-config-element">
                     <div ng-drag="true" ng-drag-data="chartConfig" ng-center-anchor="true"> 
-                    <span id="{{ chartConfig.id }}" ng-switch="chartConfig.chartType">
-                        <!-- pick a icon -->
-                        <i ng-switch-when="line" class="fa fa-line-chart"></i>
-                        <i ng-switch-when="bar" class="fa fa-bar-chart"></i>
-                        <i ng-switch-when="pie" class="fa fa-pie-chart"></i>
-                        <i ng-switch-when="radar" class="fa fa-connectdevelop"></i>       
-                        <i ng-switch-when="polar" class="fa fa-compass"></i>                        
-                        <i ng-switch-default class="fa fa-area-chart"></i>
-                    </span>
-                </div>
+                        <span id="{{ chartConfig.id }}" ng-switch="chartConfig.chartType">
+                            <!-- pick a icon -->
+                            <i ng-switch-when="line" class="fa fa-line-chart"></i>
+                            <i ng-switch-when="bar" class="fa fa-bar-chart"></i>
+                            <i ng-switch-when="pie" class="fa fa-pie-chart"></i>
+                            <i ng-switch-when="radar" class="fa fa-connectdevelop"></i>       
+                            <i ng-switch-when="polar" class="fa fa-compass"></i>                        
+                            <i ng-switch-default class="fa fa-area-chart"></i>
+                        </span>
+                    </div>
                 </div> 
 
             </div>

@@ -21,13 +21,13 @@ app
 
                 scope.options = {             
                   allowEmpty: false,                  
-                  format: 'hex',
+                  format: 'rgb',
                   case: 'upper',
                   inputClass: 'form-control',
                   hue: true,
                   saturation: true,
                   lightness: true,
-                  alpha: true,
+                  alpha: true
                   
               };
             }

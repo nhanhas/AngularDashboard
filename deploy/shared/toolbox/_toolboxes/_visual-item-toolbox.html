@@ -1,0 +1,29 @@
+<div class="menu-toolbox">
+  <div>
+      <h4 class="tool-header">{{ editingElement.item.label }}</h4>
+
+      <div class="visual-item-config-container">
+
+        <!-- Pick the right visual form -->
+        <div ng-switch="FrameworkUtils.typeOf(editingElement.item)">
+          
+          <!-- Text config item -->
+          <div ng-switch-when="TextConfigItem">
+            <div ng-include="'shared/toolbox/_toolboxes/_visuals/_text-toolbox.html'"></div>
+          </div>                                      
+         
+        </div>
+
+        
+        <!-- Save/delete Button -->
+        <div class="save-btn-container">              
+          <div>
+              <span>Save Settings</span>
+          </div>              
+        </div>
+
+      </div>
+
+  </div>
+  
+</div>
