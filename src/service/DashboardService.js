@@ -310,6 +310,26 @@ app.service('DashboardService', ['$http', 'FrameworkUtils', function($http, Fram
     }
 
     /**
+     * Fetch Chart Result By Dates and chartId
+     */
+    this.fecthChartResultByIdDates = function(startDate, endDate, chartId) {
+      // setup param to send
+      const param = {        
+        ChartId: chartId,
+        StartingDate: startDate,
+        EndingDate: endDate        
+      }
+       
+      return FrameworkUtils.Http_POST(baseUrl + 'api/DataEntries/GetChartDataEntriesBycChartId', param).then((data) => {
+        if(data.data){
+          return data.data;          
+        }         
+
+        return [];
+      })   
+    }
+
+    /**
      * Create chart config
      */
     this.createChart = function(chartConfig){

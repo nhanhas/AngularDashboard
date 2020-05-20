@@ -67,14 +67,23 @@ app
                 scope.initialize = function(){
                     scope.isLoading = true;
 
-                    const fieldsID = scope.config.fields.map(field => field.metaDataEntryId);
-
-                    return DashboardService.fecthChartResultByDates(scope.startDate, scope.endDate, fieldsID).then(result => {
+                    return DashboardService.fecthChartResultByIdDates(scope.startDate, scope.endDate, scope.config.chartConfigId).then(result => {
                         scope.isLoading = false;
 
                         // run chart setup
                         scope.setupChart(result);
                     })
+                    
+                    /* old version
+                    const fieldsID = scope.config.fields.map(field => field.metaDataEntryId);
+
+                    
+                    return DashboardService.fecthChartResultByDates(scope.startDate, scope.endDate, fieldsID).then(result => {
+                        scope.isLoading = false;
+
+                        // run chart setup
+                        scope.setupChart(result);
+                    })*/
                         
                 }
 
@@ -166,7 +175,9 @@ app
                     scope.data = results.data;*/
 
                     //scope.labels = chartResults.Labels;
-                    scope.labels = [
+
+                    /* old version
+                        scope.labels = [
                         "01:00",
                         "02:00",
                         "03:00",
@@ -192,7 +203,13 @@ app
                         "23:00",
                         "00:00"
                       ]
-                    scope.data = chartResults.DataEntries;
+                    scope.data = chartResults.DataEntries; 
+                    */
+                    
+                    scope.labels = chartResults.labels;
+                    scope.data = chartResults.datasets.map(dataset => {
+                        return dataset.data;
+                    });
                 }
 
                 //#2 - Bar
@@ -211,6 +228,8 @@ app
                     scope.data = results.data;*/
 
                     //scope.labels = chartResults.Labels;
+
+                    /*
                     scope.labels = [
                         "01:00",
                         "02:00",
@@ -238,6 +257,12 @@ app
                         "00:00"
                       ]
                     scope.data = chartResults.DataEntries;
+                    */
+
+                    scope.labels = chartResults.labels;
+                    scope.data = chartResults.datasets.map(dataset => {
+                        return dataset.data;
+                    });
                                         
                     
                 }
@@ -249,8 +274,13 @@ app
                     scope.labels = results.labels;
                     scope.data = results.data;*/
 
+                    /*
                     scope.labels = chartResults.Labels;
-                    scope.data = chartResults.DataEntries;
+                    scope.data = chartResults.DataEntries; */
+                    scope.labels = chartResults.labels;
+                    scope.data = chartResults.datasets.map(dataset => {
+                        return dataset.data;
+                    });
                 }
                 
                 //#4 - polar
@@ -298,18 +328,18 @@ app
                             scope.options.scales = {
                                 xAxes: [{ 
                                     gridLines: {
-                                        color: `#${scope.config.color}`
+                                        color: `${scope.config.color}`
                                     },
                                     ticks: {
-                                      fontColor: `#${scope.config.color}` ,
+                                      fontColor: `${scope.config.color}` ,
                                     }
                                 }],
                                 yAxes: [{ 
                                     gridLines: {
-                                        color: `#${scope.config.color}`
+                                        color: `${scope.config.color}`
                                     },
                                     ticks: {
-                                      fontColor: `#${scope.config.color}`, 
+                                      fontColor: `${scope.config.color}`, 
                                     }
                                 }]
                             }                
@@ -322,12 +352,12 @@ app
 
                 //#Aux - get backgroundColor
                 scope.getBackgroundColor = function(){
-                    return { 'background-color': `#${scope.config.backgroundColor}` };
+                    return { 'background-color': `${scope.config.backgroundColor}` };
                 }
 
                 //#Aux - get color
                 scope.getTextColor = function(){
-                    return { 'color': `#${scope.config.color}` };
+                    return { 'color': `${scope.config.color}` };
                 }
 
                 // setup chart! (change this for load chart data and then setup)
