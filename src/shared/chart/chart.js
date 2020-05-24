@@ -92,6 +92,11 @@ app
                     
                     // generic chart options
                     scope.options = {
+                        legend: {
+                            display: true,
+                            position: 'bottom',
+                            align: 'center'
+                        },
                         responsive: true, 
                         maintainAspectRatio: false,
                         plugins: {
@@ -210,6 +215,10 @@ app
                     scope.data = chartResults.datasets.map(dataset => {
                         return dataset.data;
                     });
+
+                    scope.series = chartResults.datasets.map(dataset => {
+                        return dataset.label;
+                    });
                 }
 
                 //#2 - Bar
@@ -263,7 +272,10 @@ app
                     scope.data = chartResults.datasets.map(dataset => {
                         return dataset.data;
                     });
-                                        
+
+                    scope.series = chartResults.datasets.map(dataset => {
+                        return dataset.label;
+                    });       
                     
                 }
 
@@ -281,6 +293,8 @@ app
                     scope.data = chartResults.datasets.map(dataset => {
                         return dataset.data;
                     });
+                    scope.data = scope.data[0];
+
                 }
                 
                 //#4 - polar
