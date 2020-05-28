@@ -95,6 +95,9 @@ app
                     // update 
                     scope.updateDataSources(dataSetsToUse).then(result => {
                         scope.isLoading = false;
+
+                        // clear data sets for charts
+                        scope.fieldsForCharts = [];
                     });
 
                 }

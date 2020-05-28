@@ -10,8 +10,7 @@ app.service('FrameworkUtils', ['$http', function($http) {
     this.Http_GET  = function(serviceURL, access_token){        
         return $http({
                     method: 'GET',
-                    url: serviceURL,
-                    headers: { 'Athorization': 'Bearer ' + access_token }
+                    url: serviceURL
                 }).then(function successCallback(response) {
                     return response;
                 }, function errorCallback(response) {

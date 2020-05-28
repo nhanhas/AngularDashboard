@@ -42,7 +42,7 @@ app.service('DashboardService', ['$http', 'FrameworkUtils', function($http, Fram
 
             serviceDataSource.forEach(sourceItem => {
                 let newSource = Object.assign( new DatasourceItem, { 
-                    name : sourceItem.name,
+                    name : sourceItem.name  || 'untitled',
                     description : sourceItem.description,
                     selected : sourceItem.selected,    
                     metaDataEntryId: sourceItem.MetadataEntryId
@@ -51,7 +51,7 @@ app.service('DashboardService', ['$http', 'FrameworkUtils', function($http, Fram
                 // #2.1 - iterate data sources
                 sourceItem.itens.forEach(setItem => {
                     let newSet = Object.assign( new DatasetItem(), {
-                        name : setItem.name,
+                        name : setItem.name || 'untitled',
                         description : setItem.description,
                         selected : setItem.selected,    
                         metaDataEntryId: setItem.MetadataEntryId
@@ -62,7 +62,7 @@ app.service('DashboardService', ['$http', 'FrameworkUtils', function($http, Fram
                     // #2.2 - iterate data fields
                     setItem.itens.forEach(fieldItem => {
                         let newField = Object.assign( new DatafieldItem(), {
-                            name : fieldItem.name,
+                            name : fieldItem.name || 'untitled',
                             description : fieldItem.description,
                             selected : fieldItem.selected,    
                             metaDataEntryId: fieldItem.MetadataEntryId,
