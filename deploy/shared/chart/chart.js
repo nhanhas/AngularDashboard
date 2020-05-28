@@ -42,8 +42,11 @@ app
 
 
                 // Dates Range
-                scope.startDate = new Date('2020-01-16');
-                scope.endDate = new Date('2020-01-17');
+                scope.endDate = new Date();
+                scope.startDate = new Date();
+                scope.startDate.setMonth(scope.endDate.getMonth() - 1);
+
+
 
                 //#A - Trigger Toolbox Opening to edit chart
                 scope.triggerToolbox = function(){
@@ -95,7 +98,10 @@ app
                         legend: {
                             display: true,
                             position: 'bottom',
-                            align: 'center'
+                            align: 'center',
+                            labels: {
+                                fontColor: scope.config.color
+                            }
                         },
                         responsive: true, 
                         maintainAspectRatio: false,
@@ -210,7 +216,7 @@ app
                       ]
                     scope.data = chartResults.DataEntries; 
                     */
-                    
+                   $timeout(()=>{
                     scope.labels = chartResults.labels;
                     scope.data = chartResults.datasets.map(dataset => {
                         return dataset.data;
@@ -219,6 +225,8 @@ app
                     scope.series = chartResults.datasets.map(dataset => {
                         return dataset.label;
                     });
+                   })
+                    
                 }
 
                 //#2 - Bar
@@ -267,15 +275,17 @@ app
                       ]
                     scope.data = chartResults.DataEntries;
                     */
-
-                    scope.labels = chartResults.labels;
-                    scope.data = chartResults.datasets.map(dataset => {
-                        return dataset.data;
-                    });
-
-                    scope.series = chartResults.datasets.map(dataset => {
-                        return dataset.label;
-                    });       
+                    $timeout(()=>{
+                        scope.labels = chartResults.labels;
+                        scope.data = chartResults.datasets.map(dataset => {
+                            return dataset.data;
+                        });
+    
+                        scope.series = chartResults.datasets.map(dataset => {
+                            return dataset.label;
+                        });    
+                    })
+                       
                     
                 }
 
@@ -289,11 +299,13 @@ app
                     /*
                     scope.labels = chartResults.Labels;
                     scope.data = chartResults.DataEntries; */
-                    scope.labels = chartResults.labels;
-                    scope.data = chartResults.datasets.map(dataset => {
-                        return dataset.data;
-                    });
-                    scope.data = scope.data[0];
+                    $timeout(()=>{
+                        scope.labels = chartResults.labels;
+                        scope.data = chartResults.datasets.map(dataset => {
+                            return dataset.data;
+                        });
+                        scope.data = scope.data[0];
+                    })
 
                 }
                 
@@ -374,6 +386,7 @@ app
                     return { 'color': `${scope.config.color}` };
                 }
 
+                
                 // setup chart! (change this for load chart data and then setup)
                 scope.initialize();                
 
