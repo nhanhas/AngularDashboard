@@ -4,7 +4,7 @@
  * It will accept transclude
  */
 app
-    .directive('toolbox', ['$timeout', 'DashboardService', 'FrameworkUtils', function($timeout, DashboardService, FrameworkUtils) {
+    .directive('toolbox', ['$timeout', 'DashboardService', 'FrameworkUtils', '$q', function($timeout, DashboardService, FrameworkUtils, $q) {
         return {
             restrict: 'EA',
             scope: true,
@@ -23,7 +23,8 @@ app
                 // this will be our backup
                 scope.fieldsForCharts = [];
                 scope.chartXFields = [];
-                scope.chartYFields = []; //TODO
+                scope.chartYFields = []; 
+                scope.fieldsFunctions = [];
 
                 // save changes from toolbox                
                 $timeout(function(){
@@ -213,6 +214,21 @@ app
                     return new Promise((resolve, reject) => { resolve( scope.fieldsForCharts ); });                    
                 }
 
+                scope.getFieldsFunctions = function(){
+
+                    if(scope.fieldsFunctions.length === 0){
+
+                        return DashboardService.getAvailableFunctions().then((result) => {
+                            scope.fieldsFunctions = result;
+
+                            return scope.fieldsFunctions;
+                        })
+                    }else{
+                        return scope.fieldsFunctions;
+                    }
+                    
+                }
+
                 // on add [xAxis] field for chart
                 scope.onAddXFieldHandler = function(field){
                     scope.editingElement.item.XAxisMetadataEntry = field.metaDataEntryId;
@@ -248,41 +264,52 @@ app
                 // a chart config initializer
                 scope.initializeChartView = function(){
                     console.log(`Toolbox: initializeChartView: ${scope.editingElement.item.chartConfigId}`);
-                    scope.getFieldsForCharts().then(result => {
 
-                        // [xAxis] - set as selected fields if chart has it
-                        const XfieldsForCharts = angular.copy(result);
-                        XfieldsForCharts.forEach(sourceItem => {
-                            sourceItem.itens.forEach(setItem => {
-                                setItem.itens.forEach(fieldItem => {
-                                    // mark selected from [yAxis]
-                                    const fieldInChart = scope.editingElement.item.XAxisMetadataEntry === fieldItem.metaDataEntryId;
-                                    fieldItem.selected = fieldInChart;                                
+                    $q.all([
+                        // chart fields fetch
+                        scope.getFieldsForCharts().then(result => {
+
+                            // [xAxis] - set as selected fields if chart has it
+                            const XfieldsForCharts = angular.copy(result);
+                            XfieldsForCharts.forEach(sourceItem => {
+                                sourceItem.itens.forEach(setItem => {
+                                    setItem.itens.forEach(fieldItem => {
+                                        // mark selected from [yAxis]
+                                        const fieldInChart = scope.editingElement.item.XAxisMetadataEntry === fieldItem.metaDataEntryId;
+                                        fieldItem.selected = fieldInChart;                                
+                                    })
                                 })
-                            })
-                        });
-
-                        // [yAxis] - set as selected fields if chart has it
-                        const YfieldsForCharts = angular.copy(result);
-                        YfieldsForCharts.forEach(sourceItem => {
-                            sourceItem.itens.forEach(setItem => {
-                                setItem.itens.forEach(fieldItem => {
-                                    // mark selected from [yAxis]
-                                    const fieldInChart = scope.editingElement.item.fields.find(field => field.metaDataEntryId === fieldItem.metaDataEntryId);
-                                    fieldItem.selected = fieldInChart !== undefined;                                
+                            });
+    
+                            // [yAxis] - set as selected fields if chart has it
+                            const YfieldsForCharts = angular.copy(result);
+                            YfieldsForCharts.forEach(sourceItem => {
+                                sourceItem.itens.forEach(setItem => {
+                                    setItem.itens.forEach(fieldItem => {
+                                        // mark selected from [yAxis]
+                                        const fieldInChart = scope.editingElement.item.fields.find(field => field.metaDataEntryId === fieldItem.metaDataEntryId);
+                                        fieldItem.selected = fieldInChart !== undefined;                                
+                                    })
                                 })
-                            })
-                        });
+                            });
+    
+                            //set fields for x and y fields
+                            $timeout( function(){
+                                scope.chartXFields = XfieldsForCharts;
+                                scope.chartYFields = YfieldsForCharts;
+                            });
+                            
+                            
+                            
+                        }),
 
-                        //set fields for x and y fields
-                        $timeout( function(){
-                            scope.chartXFields = XfieldsForCharts;
-                            scope.chartYFields = YfieldsForCharts;
-                        });
-                        
-                        
-                        
-                    })
+                        // functions for fields
+                        scope.getFieldsFunctions()
+                    ]).then(([_, fieldFunctions]) => {
+                        console.log(fieldFunctions);
+                    });
+
+                    
                     
 
                 }

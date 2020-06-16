@@ -406,10 +406,18 @@ app.service('DashboardService', ['$http', 'FrameworkUtils', function($http, Fram
             { type: 'pie_06', icon: 'fa-pie-chart' }
 
         ] });
-
-      
-
        
+    }
+
+    /**
+     * Get available functions
+     */
+    this.getAvailableFunctions = function () {
+      return FrameworkUtils.Http_GET(baseUrl + '/api/ChartConfig/GetAvailableFunctions').then((data) => {
+        if(data.data){
+          return data.data;          
+        }       
+      })
     }
 
   

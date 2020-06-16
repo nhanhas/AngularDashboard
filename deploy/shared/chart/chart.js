@@ -155,6 +155,9 @@ app
                         case 'radar':
                             scope.radarChartSetup(scope.config, chartResults)
                             break;
+                        case 'bubble':
+                            scope.bubbleChartSetup(scope.config, chartResults)
+                            break;
                             
 
 						default:
@@ -312,15 +315,47 @@ app
                 //#4 - polar
                 scope.polarChartSetup = function(chartConfig, chartResults){               
 
-                    scope.labels = chartResults.Labels;
-                    scope.data = chartResults.DataEntries;
+                    $timeout(()=>{
+                        scope.labels = chartResults.labels;
+                        scope.data = chartResults.datasets.map(dataset => {
+                            return dataset.data;
+                        });
+    
+                        scope.series = chartResults.datasets.map(dataset => {
+                            return dataset.label;
+                        });    
+                    })
                 }
 
                 //#5 - radar
                 scope.radarChartSetup = function(chartConfig, chartResults){               
 
-                    scope.labels = chartResults.Labels;
-                    scope.data = chartResults.DataEntries;
+                    $timeout(()=>{
+                        scope.labels = chartResults.labels;
+                        scope.data = chartResults.datasets.map(dataset => {
+                            return dataset.data;
+                        });
+    
+                        scope.series = chartResults.datasets.map(dataset => {
+                            return dataset.label;
+                        });    
+                    })
+                }
+
+                //#5 - bubble
+                scope.bubbleChartSetup = function(chartConfig, chartResults){               
+
+                    $timeout(()=>{
+                        scope.labels = chartResults.labels;
+                        scope.data = chartResults.datasets.map(dataset => {
+                            return dataset.data;
+                        });
+    
+                        scope.series = chartResults.datasets.map(dataset => {
+                            return dataset.label;
+                        });    
+                    })
+                    
                 }
                 
 
