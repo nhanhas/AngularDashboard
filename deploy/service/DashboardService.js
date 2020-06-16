@@ -420,6 +420,71 @@ app.service('DashboardService', ['$http', 'FrameworkUtils', function($http, Fram
       })
     }
 
+    /**
+     * Get Itens of Dashboard
+     */
+    this.getSnapshotsByDashboard = function(id){
+      return FrameworkUtils.Http_GET(baseUrl + `api/SnapShotConfig/GetSnapShotConfigByDashBoardId?SnapShotConfigId=${id}`).then((data) => {
+          return data.data.map(snapshot => Object.assign(new SnapshotConfigItem(), {                
+              name: snapshot.Name,
+              description: snapshot.Description,
+              dashboardId: snapshot.DashBoardId,
+              snapshotType: snapshot.SnapShotType,
+              posX: snapshot.PosX,
+              posY: snapshot.PosY,
+              width: snapshot.Width,
+              heigth: snapshot.Heigth,
+              fields: snapshot.Fields,
+              settings: snapshot.Settings,
+              snapshotConfigId: snapshot.SnapShotConfigId
+          }))
+          
+      })
+    }
+    
+    /**
+     * Create snapshot config
+     */
+    this.createSnapshot = function(snapshotConfig){
+      // setup param to send
+      const param = snapshotConfig;
+       
+      return FrameworkUtils.Http_POST(baseUrl + '/api/SnapShotConfig/Create', param).then((data) => {
+        if(data.data){
+          return data.data          
+        }        
+        return undefined;
+      })   
+    }
+
+    /**
+     * Update snapshot config
+     */
+    this.updateSnapshot = function(snapshotConfig){
+      // setup param to send
+      const param = snapshotConfig;
+
+      return FrameworkUtils.Http_POST(baseUrl + '/api/SnapShotConfig/UpdateSnapShotConfig', param).then((data) => {
+        if(data.data){
+          return data.data          
+        }        
+        return undefined;
+      })   
+    }
+    
+    /**
+     * Delete snapshot config
+     */
+    this.deleteSnapshot = function(id){
+             
+      return FrameworkUtils.Http_POST(baseUrl + `/api/SnapShotConfig/DeleteSnapShot?SnapShotConfigId=${id}`).then((data) => {
+        if(data.data){
+          return data.data          
+        }        
+        return undefined;
+      })   
+    }
+
   
     /**
      * Mockups

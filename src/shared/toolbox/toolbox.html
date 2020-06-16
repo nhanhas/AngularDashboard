@@ -25,12 +25,17 @@
                 <div ng-include="'shared/toolbox/_toolboxes/_chart-toolbox.html'"></div>
             </div>
 
+            <!-- snapshot item toolbox -->
+            <div  ng-switch-when="SNAPSHOT">
+                <div ng-include="'shared/toolbox/_toolboxes/_snapshot-toolbox.html'"></div>
+            </div>
+
             <!-- visual item toolbox -->
             <div  ng-switch-when="VISUAL_ITEM">
                 <div ng-include="'shared/toolbox/_toolboxes/_visual-item-toolbox.html'"></div>
             </div>
 
-            <!--<pre>{{ editingElement |json }}</pre>-->
+             <!--<pre>{{ editingElement |json }}</pre>-->
         </div>
     </div>
 

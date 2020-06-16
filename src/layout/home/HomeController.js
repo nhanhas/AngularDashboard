@@ -21,9 +21,25 @@ app
 
                 // #2 - get charts by dashboard
                 $scope.dashboards.forEach(dashboard => {
-                    DashboardService.getDashboardItems(dashboard.id).then(chartsResult => {
-                        dashboard.charts = chartsResult;
+
+                    $q.all([
+                        // Charts
+                        DashboardService.getDashboardItems(dashboard.id).then(chartsResult => {
+                            dashboard.charts = chartsResult;
+                        }),
+
+                        // snapshots
+                        DashboardService.getSnapshotsByDashboard(dashboard.id).then(snapshotResults => {
+                            dashboard.snapshots = snapshotResults;
+                        }),
+
+                    ]).then(_ => {
+                        // ready to show
+                        
+                        // visuals - TODO service
+                        dashboard.visuals = [];
                     })
+                    
                 })
 
             })
@@ -157,6 +173,45 @@ app
 
             // otherwise remove it on server
             return DashboardService.deleteChart(chartConfig.chartConfigId).then(result => {                
+                if(result === true){                                       
+                    $scope.closeToolbox();                                   
+                }
+                return result;
+            })
+            
+        }
+
+        /**
+         * Snapshot config server sync
+         */
+        // create snapshot config
+        $scope.createSnapshotConfig = function(snapshotConfig){
+            return DashboardService.createSnapshot(snapshotConfig).then(result => {                
+                console.log(result);
+                return result;
+            })
+        };
+
+        // update snapshot config
+        $scope.updateSnapshotConfig = function(snapshotConfig){            
+            return DashboardService.updateSnapshot(snapshotConfig).then(result => {                
+                console.log(result);
+                return result;
+            })
+        };
+
+        // delete snapshot config
+        $scope.deleteSnapshotConfig = function(snapshotConfig, dashboard){
+            // remove now if is an unsaved snapshot
+            if(snapshotConfig.snapshotConfigId === 0){ 
+                return new Promise((resolve, reject) => { 
+                    $scope.closeToolbox();   
+                    resolve( true ); 
+                }) 
+            }; 
+
+            // otherwise remove it on server
+            return DashboardService.deleteSnapshot(snapshotConfig.snapshotConfigId).then(result => {                
                 if(result === true){                                       
                     $scope.closeToolbox();                                   
                 }

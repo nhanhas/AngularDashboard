@@ -1,0 +1,42 @@
+.snapshot{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 4px;
+
+  overflow: hidden;
+  .snapshot-header{
+      height: 10%;
+      min-height: 15px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0px 10px;
+  }
+  .snapshot-bts-action{
+      display: flex;
+      flex-direction: row;
+      > span:first-child {
+          margin-right: 10px;
+      }
+      > span {
+          cursor: pointer;
+      }
+  }
+  .snapshot-close-btn{
+      position: absolute;
+      right: 10px;
+      top: 5px;
+  }    
+
+  .loading{
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      font-size: 52px;
+      transform: translate(-50%, -50%);   
+  }
+
+}
+

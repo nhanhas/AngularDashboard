@@ -306,6 +306,7 @@ app
                         // functions for fields
                         scope.getFieldsFunctions()
                     ]).then(([_, fieldFunctions]) => {
+                        // setup fields 
                         console.log(fieldFunctions);
                     });
 
@@ -317,6 +318,63 @@ app
                 /**
                  * Visual Items
                  */
+
+
+                /**
+                 * Snapshot Items
+                 */
+                // get icon depending on chart type
+                scope.getSnapshotIcon = function(){
+                    const snapshotConfig = scope.editingElement.item;
+                    switch (snapshotConfig.snapshotType) {
+                        case 0:
+                            return 'fa-sticky-note'                            
+                        case 1:
+                            return 'fa-table'                      
+                        case 2:
+                            return 'fa-list'             
+                        default:
+                            return 'fa-square';                            
+                    }
+                }
+
+                // Update Snapshot config in server
+                scope.updateSnapshot = function(){
+                    scope.isLoading = true;
+                    const snapshotConfig = scope.editingElement.item;
+
+                    // if no id => its a new snapshot
+                    if(snapshotConfig.snapshotConfigId === 0){
+                        delete snapshotConfig.snapshotConfigId;
+                        // call homecontroller update snapshot function
+                        scope.createSnapshotConfig(snapshotConfig).then(result => {
+                            scope.isLoading = false;
+                            // update snapshotonfigId to result (id)
+                            if(!isNaN(result))
+                                scope.editingElement.item.snapshotConfigId = result;
+                            else{
+                                // reset snapshotConfigId to zero
+                                scope.editingElement.item.snapshotConfigId = 0;
+                            }
+
+                            console.log("toolbox create snapshot", result);
+                            // mark chartItem to update itself at snapshotDirective
+                            scope.editingElement.item.toUpdateView = true;
+                        })  
+
+                    }else{
+                        // call homecontroller update snapshot function
+                        scope.updateSnapshotConfig(snapshotConfig).then(result => {
+                            scope.isLoading = false;
+                            console.log("toolbox update snapshot", result);
+
+                            // mark snapshotItem to update itself at snapshotDirective
+                            scope.editingElement.item.toUpdateView = true;
+                        })  
+                    }
+                          
+                    
+                }
 
             }
         }

@@ -179,6 +179,19 @@
     margin-top: 10px; }
     .toolbox .charts-fiels h4 {
       font-size: 12px; }
+  .toolbox .snapshot-config-element, .toolbox .snapshot-config-element > div {
+    background-color: #e2e0e0;
+    width: 50px;
+    height: 45px;
+    font-size: 27px;
+    text-align: center;
+    border-radius: 5px;
+    cursor: pointer; }
+  .toolbox .snapshot-config-element > div {
+    padding-top: 4px; }
+  .toolbox .snapshot-config-container {
+    max-width: 140px;
+    margin: 0 auto; }
   .toolbox .row:after {
     content: "";
     display: table;

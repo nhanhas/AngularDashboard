@@ -55,6 +55,22 @@
                                 
                             </div>
 
+                            <!-- Grid Stack item (Snapshot items) -->
+                            <div 
+                                gridstack-item 
+                                ng-repeat="snapshot in tab.snapshots track by $index" 
+                                class="grid-stack-item" 
+                                gs-item="{{ {itemType: 'SnapshotConfigItem', itemConfig: snapshot} }}"
+                                gs-item-x="snapshot.posX" 
+                                gs-item-y="snapshot.posY"
+                                gs-item-width="snapshot.width" 
+                                gs-item-height="snapshot.heigth" 
+                                gs-item-autopos="0">
+                                <!-- snapshot item -->
+                                <snapshot config="snapshot" on-trigger-toolbox="triggerToolbox('SNAPSHOT', item)" on-delete-snapshot="onDeleteSnapshotHandler(snapshotConfig, tab)"></chart>
+                                
+                            </div>
+
                         </div>
                     </div>
                 </div>

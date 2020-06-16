@@ -12,7 +12,9 @@ app
                 onAddNew: '&?',       //Handler for add new Tab
                 onTriggerToolbox: '&?',       //Triggers the edition tab
                 onChangeChartPosition: '&?',       //on change chart position
-                onDeleteChart: '&?'       //on change chart position                
+                onChangeSnapshotPosition: '&?',       //on change chart position
+                onDeleteChart: '&?',       //on change chart position    
+                onDeleteSnapshot: '&?'       //on change Snapshot position                
             },
             templateUrl: 'shared/tabset/tabset.html',
 
@@ -34,8 +36,16 @@ app
                     scope.onChangeChartPosition = undefined;
                 }
 
+                if (!attrs.onChangeSnapshotPosition) {
+                    scope.onChangeSnapshotPosition = undefined;
+                }                
+
                 if (!attrs.onDeleteChart) {
                     scope.onDeleteChart = undefined;
+                }
+
+                if (!attrs.onDeleteSnapshot) {
+                    scope.onDeleteSnapshot = undefined;
                 }
 
                 scope.reload = function(tab){
@@ -84,14 +94,6 @@ app
                     }  
                 }
 
-                // Request homecontroller update chart on server
-                scope.requestChartUpdate = function(chartConfig){
-                    if(scope.onChangeChartPosition){
-                        scope.onChangeChartPosition({ chartConfig: chartConfig }).then(result => {
-                            console.log("tabset update chart", result);
-                        });
-                    }    
-                }
 
                 /**
                  * Drag and Drop Handlers
@@ -118,6 +120,9 @@ app
                         // Different updates for different item configs:
                         // ChartConfig
                         if(itemType === ChartConfigItem.name && itemConfig.chartConfigId !== 0){ return scope.requestChartUpdate(itemConfig) }
+
+                        // SnapshotConfig
+                        if(itemType === SnapshotConfigItem.name && itemConfig.snapshotConfigId !== 0){ return scope.requestSnapshotUpdate(itemConfig) }
                                                 
                     });
                     scope.userChangedItem = false;
@@ -136,6 +141,9 @@ app
                     
                     // visual items 
                     if(data instanceof TextConfigItem){ return scope.addVisualConfigItem(tab, data) }
+
+                    // snapshot items 
+                    if(data instanceof SnapshotConfigItem){ return scope.addSnapshotConfigItem(tab, data) }
                     
                 }
 
@@ -144,8 +152,8 @@ app
                  */
                 scope.addChartConfigItem = function(tab, chartConfig){
                     // initiate visuals
-                    chartConfig.x = 0;
-                    chartConfig.y = 0;
+                    chartConfig.posX = 0;
+                    chartConfig.posY = 0;
                     chartConfig.width = 0;
                     chartConfig.heigth = 0;            
                     chartConfig.chartSetId = tab.id;        
@@ -179,25 +187,82 @@ app
                     });
                 }
 
+                // Request homecontroller update chart on server
+                scope.requestChartUpdate = function(chartConfig){
+                    if(scope.onChangeChartPosition){
+                        scope.onChangeChartPosition({ chartConfig: chartConfig }).then(result => {
+                            console.log("tabset update chart", result);
+                        });
+                    }    
+                }
+
                 /**
                  * Visual config item
                  */
                 scope.addVisualConfigItem = function(tab, visualConfig){
                     // initiate visuals
-                    visualConfig.x = 0;
-                    visualConfig.y = 0;
+                    visualConfig.posX = 0;
+                    visualConfig.posy = 0;
                     visualConfig.width = 0;
                     visualConfig.heigth = 0;            
                     visualConfig.chartSetId = tab.id;        
                     visualConfig.backgroundColor = '#FFFFFF';
 
                     // push it to dashboard items
-                    tab.visuals = []; //DEV_TEST
                     tab.visuals.push(visualConfig);     
 
                     // open toolbox in edit mode
                     scope.triggerToolbox('VISUAL_ITEM', visualConfig);
                 }
+
+                /**
+                 * Snapshot config item
+                 */
+                scope.addSnapshotConfigItem = function(tab, snapshotConfig){
+                    // initiate visuals
+                    snapshotConfig.posX = 0;
+                    snapshotConfig.posy = 0;
+                    snapshotConfig.width = 0;
+                    snapshotConfig.heigth = 0;            
+                    snapshotConfig.dashboardId = tab.id;        
+
+                    // push it to dashboard items
+                    tab.snapshots.push(snapshotConfig);     
+
+                    // open toolbox in edit mode
+                    scope.triggerToolbox('SNAPSHOT', snapshotConfig);
+                }
+
+                // Request homecontroller update snapshot on server
+                scope.requestSnapshotUpdate = function(snapshotConfig){
+                    if(scope.onChangeSnapshotPosition){
+                        scope.onChangeSnapshotPosition({ snapshotConfig: snapshotConfig }).then(result => {
+                            console.log("tabset update snapshot", result);
+                        });
+                    }    
+                }
+                
+                // Delete snapshot config
+                scope.onDeleteSnapshotHandler = function(snapshotConfig, tab){                    
+                    if(scope.onDeleteSnapshot){
+                        scope.onDeleteSnapshot({snapshotConfig: snapshotConfig, dashboard: tab}).then(result => {
+                            if(result){
+                                scope.deleteSnapshotFromTab(snapshotConfig, tab);                                
+                            }
+                        })
+                    }
+                }
+
+                // delete from local snapshot array
+                scope.deleteSnapshotFromTab = function(snapshotConfig, tab){
+                    let snapshots = angular.copy(tab.snapshots);
+                    snapshots = snapshots.filter(snapshot => snapshot.snapshotConfigId !== snapshotConfig.snapshotConfigId );
+                    tab.snapshots = [];
+                    $timeout(()=>{
+                        tab.snapshots = snapshots;                                
+                    });
+                }
+                
 
                 //TEST
                 scope.reloadTab = function(tab){

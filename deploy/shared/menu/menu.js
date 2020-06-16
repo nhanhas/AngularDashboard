@@ -41,6 +41,19 @@ app
                     });
                 }
 
+                // TYPE: SNAPSHOT_ITEM_CONFIG menu handler
+                scope.snapshotItemsConfigHandler = function(menuType){
+                    //0 - card, 1 - table, 2 - list
+                    const snapshotTypes = [
+                        Object.assign(new SnapshotConfigItem(), {snapshotType: 0}),
+                        Object.assign(new SnapshotConfigItem(), {snapshotType: 1}),
+                        Object.assign(new SnapshotConfigItem(), {snapshotType: 2})
+                    ]
+                    //#2 - Show all available chart types to build in toolbox                        
+                    scope.triggerToolbox(menuType, snapshotTypes);
+                    
+                }
+
                 // TYPE: VISUAL_ITEMS
                 scope.visualItemsHandler = function(menuType){
                     //#1 - Get available visual items
@@ -61,7 +74,8 @@ app
                     new MenuItem('DATASOURCES', 'Data Sources and Data Sets', 'fa-database', scope.dataSourceHandler.bind(this)),
                     //new MenuItem('TEXT_ITEM_CONFIG', 'Text Builder', 'fa-text-height'),               
                     new MenuItem('VISUAL_ITEMS', 'Visual Builder', 'fa-puzzle-piece', scope.visualItemsHandler.bind(this)),               
-                    new MenuItem('CHART_ITEM_CONFIG', 'Charts Builder', 'fa-area-chart', scope.chartItemsConfigHandler.bind(this))                    
+                    new MenuItem('CHART_ITEM_CONFIG', 'Charts Builder', 'fa-area-chart', scope.chartItemsConfigHandler.bind(this)),
+                    new MenuItem('SNAPSHOT_ITEM_CONFIG', 'Snapshot Builder', 'fa-dashboard', scope.snapshotItemsConfigHandler.bind(this))                        
                 ]
                 // isolate menu user setting
                 scope.userMenu = scope.menus[0];

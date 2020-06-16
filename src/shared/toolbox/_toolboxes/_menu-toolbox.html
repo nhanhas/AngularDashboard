@@ -114,6 +114,25 @@
             </div>
 
         </div>
+
+        <!-- TYPE: SNAPSHOT_CONFIC_ITEMS -->
+        <div class="snapshot-config-container" ng-if="editingElement.item.type === 'SNAPSHOT_ITEM_CONFIG'">
+            <div class="column" ng-repeat="snapshotConfig in editingElement.data" >                
+                <!-- snapshot element -->
+                <div class="snapshot-config-element">
+                    <div ng-drag="true" ng-drag-data="snapshotConfig" ng-center-anchor="true"> 
+                        <span ng-switch="snapshotConfig.snapshotType">
+                            <!-- pick a icon -->
+                            <i ng-switch-when="0" class="fa fa-sticky-note"></i>         
+                            <i ng-switch-when="1" class="fa fa-table"></i>         
+                            <i ng-switch-when="2" class="fa fa-list"></i>                                       
+                            <i ng-switch-default class="fa fa-cog"></i>
+                        </span>
+                    </div>
+                </div> 
+
+            </div>
+        </div>
     </div>
 
     
