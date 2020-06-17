@@ -73,10 +73,11 @@
                             <td class="table-field-name">{{field.name}}</td>
                             <td><select class="form-control" ng-model="field.function" ng-options="opt.Value as opt.Key for opt in fieldsFunctions"></select></td>
                         </tr>
-                        
+                        <tr ng-if="editingElement.item.fields.length === 0">
+                            <td class="text-center" colspan="2">No fields selected</td>
+                        </tr>  
                     </tbody>
                 </table>
-                <!--<select class="form-control" ng-model="mstep" ng-options="opt for opt in [1,2,3]"></select> -->
             </div>
 
             <!-- Details: BAR -->

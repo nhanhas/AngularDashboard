@@ -44,7 +44,7 @@ app
                 // Dates Range
                 scope.endDate = new Date();
                 scope.startDate = new Date();
-                scope.startDate.setMonth(scope.endDate.getMonth() - 1);
+                scope.startDate.setMonth(scope.endDate.getMonth() - 6);
 
 
 

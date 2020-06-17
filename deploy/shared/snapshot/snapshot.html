@@ -11,7 +11,20 @@
   <!-- Snapshots -->
   <div ng-if="!isLoading" ng-switch="config.snapshotType" style="height: 85%;">
 
-    teste
+    <!-- Card -->
+    <div ng-switch-when="0" class="snapshot-card">
+      Card
+    </div>
+
+    <!-- Table -->
+    <div ng-switch-when="1" class="snapshot-table">
+      Table
+    </div>
+
+    <!-- List -->
+    <div ng-switch-when="2" class="snapshot-list">
+      List
+    </div>
 
   </div>
 

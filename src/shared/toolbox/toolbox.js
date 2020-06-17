@@ -21,10 +21,12 @@ app
                  * Variables for charts
                  */
                 // this will be our backup
-                scope.fieldsForCharts = [];
+                scope.fieldsForCharts = []; // for charts and snapshots
                 scope.chartXFields = [];
                 scope.chartYFields = []; 
                 scope.fieldsFunctions = [];
+
+                scope.snapshotFields = []; 
 
                 // save changes from toolbox                
                 $timeout(function(){
@@ -46,6 +48,9 @@ app
 
                     // Chart in edition
                     if(newValue.item.chartConfigId !== undefined) { return scope.initializeChartView() }
+
+                    // Snapshot in edition
+                    if(newValue.item.snapshotConfigId !== undefined) { return scope.initializeSnapshotView() }
 
                 });
 
@@ -247,7 +252,8 @@ app
                         name: field.name,
                         description: field.description,
                         metaDataEntryId: field.metaDataEntryId,
-                        serviceId: field.serviceId
+                        serviceId: field.serviceId,
+                        function: 0
                     }
                     //add it into chart
                     scope.editingElement.item.fields.push(newField);
@@ -309,10 +315,6 @@ app
                         // setup fields 
                         scope.fieldsFunctions = fieldFunctions;
                     });
-
-                    
-                    
-
                 }
 
                 /**
@@ -374,6 +376,65 @@ app
                     }
                           
                     
+                }
+
+                // on add [yAxis] field for chart
+                scope.onAddSnapshotFieldHandler = function(field){
+                    console.log('add',scope.editingElement, field);
+                    const newField = {
+                        name: field.name,
+                        description: field.description,
+                        metaDataEntryId: field.metaDataEntryId,
+                        serviceId: field.serviceId,
+                        function: 0
+                    }
+                    //add it into chart
+                    scope.editingElement.item.fields.push(newField);
+                }
+
+                // on remove [yAxis] field for chart
+                scope.onRemoveSnapshotFieldHandler = function(field){
+                    console.log('remove', scope.editingElement, field);
+                    const chartFields = scope.editingElement.item.fields;
+                    scope.editingElement.item.fields = chartFields.filter( chartField => chartField.metaDataEntryId !== field.metaDataEntryId);                    
+                }
+
+                // a chart config initializer
+                scope.initializeSnapshotView = function(){
+                    console.log(`Toolbox: initializeSnapshotView: ${scope.editingElement.item.snapshotConfigId}`);
+
+                    $q.all([
+                        // chart fields fetch
+                        scope.getFieldsForCharts().then(result => {
+    
+                            // set as selected fields if snapshot has it
+                            const fieldsForSnapshots = angular.copy(result);
+                            fieldsForSnapshots.forEach(sourceItem => {
+                                sourceItem.itens.forEach(setItem => {
+                                    setItem.itens.forEach(fieldItem => {
+                                        // mark selected
+                                        const fieldInSnapshot = scope.editingElement.item.fields.find(field => field.metaDataEntryId === fieldItem.metaDataEntryId);
+                                        fieldItem.selected = fieldInSnapshot !== undefined;                                
+                                    })
+                                })
+                            });
+    
+                            //set fields for snapshots
+                            $timeout( function(){
+                                scope.snapshotFields = fieldsForSnapshots;
+                            });
+                            
+                            
+                            
+                        }),
+
+                        // functions for fields
+                        scope.getFieldsFunctions()
+
+                    ]).then(([_, fieldFunctions]) => {
+                        // setup fields 
+                        scope.fieldsFunctions = fieldFunctions;
+                    });
                 }
 
             }

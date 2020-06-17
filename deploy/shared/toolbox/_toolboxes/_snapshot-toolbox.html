@@ -19,6 +19,46 @@
               
           </div>
 
+          <!-- Y Fields -->
+          <div class="charts-fiels">
+            <label class="color-blue">Fields</label>
+
+            <uib-accordion close-others="true">
+                <div uib-accordion-group class="panel-default" heading="{{ datasource.name }}" is-open="false" is-disabled="false" ng-repeat="datasource in snapshotFields">
+                    <div ng-repeat="dataset in datasource.itens">
+                        <!-- others multiple Fields -->
+                        <multi-dropdown ng-if="editingElement.item.snapshotType !== 0" datasource="dataset" on-add-item="onAddSnapshotFieldHandler(itemSelected)" on-remove-item="onRemoveSnapshotFieldHandler(itemSelected)"></multi-dropdown>
+                        <!-- cards use single field -->
+                        <multi-dropdown ng-if="editingElement.item.snapshotType === 0" single="true" datasource="dataset" on-add-item="onAddSnapshotFieldHandler(itemSelected)" on-remove-item="onRemoveSnapshotFieldHandler(itemSelected)"></multi-dropdown>
+                        <br>
+                    </div>  
+                </div>                         
+            </uib-accordion>
+          </div>
+
+          <!-- Functions -->
+          <div class="charts-fiels">
+            <label class="color-blue">Fields Functions</label>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Field</th>
+                        <th scope="col">Function</th>                            
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="field in editingElement.item.fields">
+                        <td class="table-field-name">{{field.name}}</td>
+                        <td><select class="form-control" ng-model="field.function" ng-options="opt.Value as opt.Key for opt in fieldsFunctions"></select></td>
+                    </tr>
+                    <tr ng-if="editingElement.item.fields.length === 0">
+                      <td class="text-center" colspan="2">No fields selected</td>
+                    </tr>                    
+                </tbody>
+            </table>
+          </div>
+
           <!-- Save Button -->
           <div class="save-btn-container">
             <div ng-click="updateSnapshot()">
