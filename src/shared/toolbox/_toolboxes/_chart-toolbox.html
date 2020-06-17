@@ -57,6 +57,28 @@
                 </uib-accordion>
             </div>
 
+            <!-- Functions -->
+            <div class="charts-fiels">
+                <label class="color-blue">Fields Functions</label>
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Y Field</th>
+                            <th scope="col">Function</th>                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="field in editingElement.item.fields">
+                            <td class="table-field-name">{{field.name}}</td>
+                            <td><select class="form-control" ng-model="field.function" ng-options="opt.Value as opt.Key for opt in fieldsFunctions"></select></td>
+                        </tr>
+                        
+                    </tbody>
+                </table>
+                <!--<select class="form-control" ng-model="mstep" ng-options="opt for opt in [1,2,3]"></select> -->
+            </div>
+
             <!-- Details: BAR -->
             <div ng-if="editingElement.item.chartType.toLowerCase() === 'bar'">
 

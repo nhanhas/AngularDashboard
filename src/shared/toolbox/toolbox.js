@@ -307,7 +307,7 @@ app
                         scope.getFieldsFunctions()
                     ]).then(([_, fieldFunctions]) => {
                         // setup fields 
-                        console.log(fieldFunctions);
+                        scope.fieldsFunctions = fieldFunctions;
                     });
 
                     

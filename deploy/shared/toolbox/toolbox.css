@@ -3,6 +3,7 @@
   /* DATASOURCES */
   /* VISUAL_ITEMS */
   /* CHART_ITEM_CONFIG */
+  /* SNAPSHOT_ITEM_CONFIG */
   /* Clear floats after the columns */
   /* USER */
   /* CHART (chart config)*/
@@ -179,6 +180,8 @@
     margin-top: 10px; }
     .toolbox .charts-fiels h4 {
       font-size: 12px; }
+  .toolbox .table-field-name {
+    vertical-align: middle; }
   .toolbox .snapshot-config-element, .toolbox .snapshot-config-element > div {
     background-color: #e2e0e0;
     width: 50px;
