@@ -10,6 +10,7 @@ class SnapshotConfigItem{
   dashboardId = 0;
   snapshotType = 0;
   backgroundColor = "";
+  color = "";
   posX = 0;
   posY = 0;
   width = 0;

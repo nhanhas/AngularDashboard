@@ -85,7 +85,15 @@ app
                                 
                
 
-              
+                //#Aux - get backgroundColor
+                scope.getBackgroundColor = function(){
+                    return { 'background-color': `${scope.config.backgroundColor}` };
+                }
+
+                //#Aux - get color
+                scope.getTextColor = function(){
+                    return { 'color': `${scope.config.color}` };
+                }
 
                 
                 // setup snapshot! (change this for load snapshot data and then setup)

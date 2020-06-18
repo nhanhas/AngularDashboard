@@ -263,6 +263,15 @@
     margin: 0 auto;
   }
 
+  .snapshot-align-fields{
+    margin-top: 10px;
+    .snap-alignment{
+      width: 100%;
+      label {width: 33%;}
+    }
+  }
+
+
   /* Clear floats after the columns */
   .row:after {
     content: "";

@@ -195,6 +195,12 @@
   .toolbox .snapshot-config-container {
     max-width: 140px;
     margin: 0 auto; }
+  .toolbox .snapshot-align-fields {
+    margin-top: 10px; }
+    .toolbox .snapshot-align-fields .snap-alignment {
+      width: 100%; }
+      .toolbox .snapshot-align-fields .snap-alignment label {
+        width: 33%; }
   .toolbox .row:after {
     content: "";
     display: table;

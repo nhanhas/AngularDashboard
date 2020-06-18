@@ -202,7 +202,7 @@ app
                 scope.addVisualConfigItem = function(tab, visualConfig){
                     // initiate visuals
                     visualConfig.posX = 0;
-                    visualConfig.posy = 0;
+                    visualConfig.posY = 0;
                     visualConfig.width = 0;
                     visualConfig.heigth = 0;            
                     visualConfig.chartSetId = tab.id;        
@@ -221,10 +221,15 @@ app
                 scope.addSnapshotConfigItem = function(tab, snapshotConfig){
                     // initiate visuals
                     snapshotConfig.posX = 0;
-                    snapshotConfig.posy = 0;
+                    snapshotConfig.posY = 0;
                     snapshotConfig.width = 0;
                     snapshotConfig.heigth = 0;            
-                    snapshotConfig.dashboardId = tab.id;        
+                    snapshotConfig.dashboardId = tab.id;     
+                    snapshotConfig.backgroundColor = '#FFFFFF';   
+                    snapshotConfig.settings.push({
+                        key: 'align',
+                        value: 'center'
+                    })
 
                     // push it to dashboard items
                     tab.snapshots.push(snapshotConfig);     

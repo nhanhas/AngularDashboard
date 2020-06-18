@@ -23,6 +23,8 @@
     position: absolute;
     right: 10px;
     top: 5px; }
+  .snapshot .snapshot-card {
+    height: 100%; }
   .snapshot .loading {
     position: absolute;
     top: 50%;

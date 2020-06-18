@@ -1,6 +1,6 @@
-<div class="snapshot">
+<div class="snapshot" ng-style="getBackgroundColor()">
   <!-- Title and config -->
-  <div class="snapshot-header text-bold grid-stack-item-content" style="height: 15%;">
+  <div class="snapshot-header text-bold grid-stack-item-content" style="height: 15%;" ng-style="getTextColor()">
       <div>{{ config.name }}</div>
       <div class="snapshot-bts-action">
           <span ><i class="fa fa-times" ng-click="onDeleteSnapshotHandler()"></i></span>
@@ -12,18 +12,18 @@
   <div ng-if="!isLoading" ng-switch="config.snapshotType" style="height: 85%;">
 
     <!-- Card -->
-    <div ng-switch-when="0" class="snapshot-card">
-      Card
+    <div ng-switch-when="0" class="snapshot-card" ng-style="getTextColor()">
+      <span>Card</span>
     </div>
 
     <!-- Table -->
-    <div ng-switch-when="1" class="snapshot-table">
-      Table
+    <div ng-switch-when="1" class="snapshot-table" ng-style="getTextColor()">
+      <span>Table</span>
     </div>
 
     <!-- List -->
-    <div ng-switch-when="2" class="snapshot-list">
-      List
+    <div ng-switch-when="2" class="snapshot-list" ng-style="getTextColor()">
+      <span>List</span>
     </div>
 
   </div>

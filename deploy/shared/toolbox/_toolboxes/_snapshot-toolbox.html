@@ -19,48 +19,63 @@
               
           </div>
 
-          <!-- Y Fields -->
-          <div class="charts-fiels">
-            <label class="color-blue">Fields</label>
+        <!-- Colors -->
+        <div class="colors-container">
+            <custom-color-picker label="Background color" model="editingElement.item.backgroundColor"></custom-color-picker>                
+            <custom-color-picker label="Text color" model="editingElement.item.color"></custom-color-picker>                
+        </div>
 
-            <uib-accordion close-others="true">
-                <div uib-accordion-group class="panel-default" heading="{{ datasource.name }}" is-open="false" is-disabled="false" ng-repeat="datasource in snapshotFields">
-                    <div ng-repeat="dataset in datasource.itens">
-                        <!-- others multiple Fields -->
-                        <multi-dropdown ng-if="editingElement.item.snapshotType !== 0" datasource="dataset" on-add-item="onAddSnapshotFieldHandler(itemSelected)" on-remove-item="onRemoveSnapshotFieldHandler(itemSelected)"></multi-dropdown>
-                        <!-- cards use single field -->
-                        <multi-dropdown ng-if="editingElement.item.snapshotType === 0" single="true" datasource="dataset" on-add-item="onAddSnapshotFieldHandler(itemSelected)" on-remove-item="onRemoveSnapshotFieldHandler(itemSelected)"></multi-dropdown>
-                        <br>
-                    </div>  
-                </div>                         
-            </uib-accordion>
-          </div>
+        <div class="snapshot-align-fields">
+            <label class="color-blue">Text alignment</label>
+            <div class="snap-alignment btn-group">
+                <label class="btn btn-primary" ng-model="editingElement.item.settings[0].value" uib-btn-radio="'left'" uncheckable><span class="fa fa-align-left"></span></label>
+                <label class="btn btn-primary" ng-model="editingElement.item.settings[0].value" uib-btn-radio="'center'" uncheckable><span class="fa fa-align-center"></span></label>
+                <label class="btn btn-primary" ng-model="editingElement.item.settings[0].value" uib-btn-radio="'right'" uib-uncheckable="uncheckable"><span class="fa fa-align-right"></span></label>
+            </div>
+        </div>
 
-          <!-- Functions -->
-          <div class="charts-fiels">
-            <label class="color-blue">Fields Functions</label>
+        <!-- Y Fields -->
+        <div class="charts-fiels">
+        <label class="color-blue">Fields</label>
 
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">Field</th>
-                        <th scope="col">Function</th>                            
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="field in editingElement.item.fields">
-                        <td class="table-field-name">{{field.name}}</td>
-                        <td><select class="form-control" ng-model="field.function" ng-options="opt.Value as opt.Key for opt in fieldsFunctions"></select></td>
-                    </tr>
-                    <tr ng-if="editingElement.item.fields.length === 0">
-                      <td class="text-center" colspan="2">No fields selected</td>
-                    </tr>                    
-                </tbody>
-            </table>
-          </div>
+        <uib-accordion close-others="true">
+            <div uib-accordion-group class="panel-default" heading="{{ datasource.name }}" is-open="false" is-disabled="false" ng-repeat="datasource in snapshotFields">
+                <div ng-repeat="dataset in datasource.itens">
+                    <!-- others multiple Fields -->
+                    <multi-dropdown ng-if="editingElement.item.snapshotType !== 0" datasource="dataset" on-add-item="onAddSnapshotFieldHandler(itemSelected)" on-remove-item="onRemoveSnapshotFieldHandler(itemSelected)"></multi-dropdown>
+                    <!-- cards use single field -->
+                    <multi-dropdown ng-if="editingElement.item.snapshotType === 0" single="true" datasource="dataset" on-add-item="onAddSnapshotFieldHandler(itemSelected)" on-remove-item="onRemoveSnapshotFieldHandler(itemSelected)"></multi-dropdown>
+                    <br>
+                </div>  
+            </div>                         
+        </uib-accordion>
+        </div>
 
-          <!-- Save Button -->
-          <div class="save-btn-container">
+        <!-- Functions -->
+        <div class="charts-fiels">
+        <label class="color-blue">Fields Functions</label>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Field</th>
+                    <th scope="col">Function</th>                            
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="field in editingElement.item.fields">
+                    <td class="table-field-name">{{field.name}}</td>
+                    <td><select class="form-control" ng-model="field.function" ng-options="opt.Value as opt.Key for opt in fieldsFunctions"></select></td>
+                </tr>
+                <tr ng-if="editingElement.item.fields.length === 0">
+                    <td class="text-center" colspan="2">No fields selected</td>
+                </tr>                    
+            </tbody>
+        </table>
+        </div>
+
+        <!-- Save Button -->
+        <div class="save-btn-container">
             <div ng-click="updateSnapshot()">
                 <span>Save Settings</span>
             </div>
