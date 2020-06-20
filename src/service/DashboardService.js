@@ -436,6 +436,8 @@ app.service('DashboardService', ['$http', 'FrameworkUtils', function($http, Fram
               heigth: snapshot.Heigth,
               fields: snapshot.Fields,
               settings: snapshot.Settings,
+              color: snapshot.Color,
+              backgroundColor: snapshot.BackGroundColor,
               snapshotConfigId: snapshot.SnapShotConfigId
           }))
           

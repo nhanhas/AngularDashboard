@@ -227,8 +227,8 @@ app
                     snapshotConfig.dashboardId = tab.id;     
                     snapshotConfig.backgroundColor = '#FFFFFF';   
                     snapshotConfig.settings.push({
-                        key: 'align',
-                        value: 'center'
+                        Key: 'align',
+                        Value: 'center'
                     })
 
                     // push it to dashboard items

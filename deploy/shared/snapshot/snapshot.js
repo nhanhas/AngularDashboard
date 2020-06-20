@@ -73,8 +73,25 @@ app
                 }
 
                 // setup chart config
-                scope.setupSnapshot = function(chartResults){                    
+                scope.setupSnapshot = function(snapshotResults){                    
                                       
+                    // run setup according snapshot type
+                    switch (scope.config.snapshotType) {
+                        // card
+                        case 0:
+                            scope.cardSnapshotSetup(scope.config, snapshotResults);
+                            break;
+
+                        // table
+                        case 1:
+                            scope.tableSnapshotSetup(scope.config, snapshotResults);
+                            break;
+
+                        // list 
+                        case 2:
+                            break;
+                    }
+
                     // finished setup
                     scope.isLoading = false;
                 }
@@ -82,8 +99,77 @@ app
                 /**
                  * Setups for snapshot type
                  */
+                //#1 - Card
+                scope.cardSnapshotSetup = function(snapshotConfig, snapshotResults){
+                    //Development test
+                    scope.labels = "Service"
+                    scope.data = "HPOASDA_12"                                 
+               }
                                 
+               scope.tableSnapshotSetup = function(snapshotConfig, snapshotResults){
+                    //Development test
+                    snapshotResults = {
+                        "labels": [],
+                        "datasets": [
+                        {
+                            "label": "UserScheduler",
+                            "data": [
+                            320,
+                            "16"
+                            ]
+                        },
+                        {
+                            "label": "FilestreamConfiguredLevel",
+                            "data": [
+                            "Disabled",
+                            "Disabled"
+                            ]
+                        },
+                        {
+                            "label": "InstanceDefaultDataPath",
+                            "data": [
+                            "F:\\MP_SQL_DATA_01\\SQL_DATA\\",
+                            "F:\\MP_SQL_DATA_01\\SQL_DATA\\"
+                            ]
+                        },
+                        {
+                            "label": "InstanceDefaultLogPath",
+                            "data": [
+                            "F:\\MP_SQL_TLOG_01\\SQL_TLOG\\",
+                            "F:\\MP_SQL_TLOG_01\\SQL_TLOG\\"
+                            ]
+                        }
+                        ]
+                    }
+
+                    // headers
+                    scope.columns = snapshotResults.datasets.reduce((list, dataset) => {
+                        list.push(dataset.label)
+                        return list;
+                    }, []);
+                    
+                    scope.data = snapshotResults.datasets.map(dataset => {
+                        return dataset.data;
+                    });
+
+                    let results = [];
+                    scope.columns.forEach((column, colindex) => {
+                        scope.data[colindex].forEach((data, index) => {
+                            
+                            if(colindex === 0){
+                                results.push({
+                                    [column]: data
+                                })
+                            }else{
+                                results[index][column] = data;
+                            }
+                         
+                        })
+                    })
+
+                    scope.data = results;
                
+               }
 
                 //#Aux - get backgroundColor
                 scope.getBackgroundColor = function(){
@@ -95,6 +181,18 @@ app
                     return { 'color': `${scope.config.color}` };
                 }
 
+                //#Aux - get text size based on setting
+                scope.getFontSize = function(){
+                    return { 'font-size': `${scope.getSnapshotSetting('fontSize')}px` };
+                }
+
+                //#Aux - get snapshot setting by key
+                scope.getSnapshotSetting = function(setting){
+                    // get setting
+                    let snapshotSetting = scope.config.settings.find(value => value.Key === setting);
+                    if(snapshotSetting) { return snapshotSetting.Value; }
+
+                }
                 
                 // setup snapshot! (change this for load snapshot data and then setup)
                 scope.initialize();                

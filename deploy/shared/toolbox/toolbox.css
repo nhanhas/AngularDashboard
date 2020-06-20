@@ -201,6 +201,8 @@
       width: 100%; }
       .toolbox .snapshot-align-fields .snap-alignment label {
         width: 33%; }
+  .toolbox .snapshot-text-size-fields {
+    margin-top: 10px; }
   .toolbox .row:after {
     content: "";
     display: table;

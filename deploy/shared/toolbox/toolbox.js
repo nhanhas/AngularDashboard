@@ -399,6 +399,27 @@ app
                     scope.editingElement.item.fields = chartFields.filter( chartField => chartField.metaDataEntryId !== field.metaDataEntryId);                    
                 }
 
+                // UTIL: get snapshot setting by key - TODO remove "isNumber"
+                scope.getSnapshotSetting = function(setting, isNumber = false){
+                    // get setting
+                    let snapshotSetting = scope.editingElement.item.settings.find(value => value.Key === setting);
+                    // if(snapshotSetting) { return snapshotSetting; } -  TODO - remove when fixed
+                    // remove this if below
+                    if(snapshotSetting) { 
+                        snapshotSetting.Value = isNumber 
+                            ? +snapshotSetting.Value
+                            : snapshotSetting.Value;
+
+                        return snapshotSetting; 
+                    }
+
+                    // if not exist, create it
+                    scope.editingElement.item.settings.push({ Key: setting, Value: '' })
+
+                    // return ref
+                    return scope.editingElement.item.settings.find(value => value.Key === setting);
+                }
+
                 // a chart config initializer
                 scope.initializeSnapshotView = function(){
                     console.log(`Toolbox: initializeSnapshotView: ${scope.editingElement.item.snapshotConfigId}`);

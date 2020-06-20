@@ -9,20 +9,32 @@
   </div>
 
   <!-- Snapshots -->
-  <div ng-if="!isLoading" ng-switch="config.snapshotType" style="height: 85%;">
+  <div class="snapshot-container" ng-if="!isLoading" ng-switch="config.snapshotType" style="height: 85%;">
 
     <!-- Card -->
-    <div ng-switch-when="0" class="snapshot-card" ng-style="getTextColor()">
-      <span>Card</span>
+    <div ng-switch-when="0" class="snapshot-card {{ getSnapshotSetting('align') }}" ng-style="getTextColor()">
+      <span>{{labels}}</span>
+      <span ng-style="getFontSize()">{{data}}</span>
     </div>
 
     <!-- Table -->
-    <div ng-switch-when="1" class="snapshot-table" ng-style="getTextColor()">
-      <span>Table</span>
+    <div ng-switch-when="1" class="snapshot-table {{ getSnapshotSetting('align') }}" ng-style="getTextColor()">
+      <table class="table">
+        <thead>
+            <tr>
+                <th scope="col" ng-repeat="column in columns">{{ column }}</th>                   
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="row in data">
+                <td ng-repeat="column in columns" class="table-field-name">{{row[column]}}</td>
+            </tr>                           
+        </tbody>
+      </table>
     </div>
 
     <!-- List -->
-    <div ng-switch-when="2" class="snapshot-list" ng-style="getTextColor()">
+    <div ng-switch-when="2" class="snapshot-list {{ getSnapshotSetting('align') }}" ng-style="getTextColor()">
       <span>List</span>
     </div>
 

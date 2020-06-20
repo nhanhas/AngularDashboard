@@ -30,8 +30,10 @@
       top: 5px;
   }   
   
-  .snapshot-card{
-      height: 100%;
+
+
+  .snapshot-container{
+      padding: 10px;
   }
 
   .loading{
@@ -40,6 +42,18 @@
       left: 50%;
       font-size: 52px;
       transform: translate(-50%, -50%);   
+  }
+
+  /* CARD */
+  .snapshot-card{
+
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .snapshot-table{
+    overflow-x: scroll;
   }
 
 }
