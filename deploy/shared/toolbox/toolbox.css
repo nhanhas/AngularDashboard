@@ -8,11 +8,7 @@
   /* USER */
   /* CHART (chart config)*/
   /* DASHBOARD TAB */
-  /* VISUAL ITEM CONFIG TAB 
-  .visual-item-config-container{
-    
-  }
-*/ }
+  /* VISUAL ITEM CONFIG TAB */ }
   .toolbox #mobile-nav-menu {
     float: right;
     width: 310px;
@@ -251,3 +247,5 @@
       border-radius: 4px;
       padding: 10px;
       cursor: pointer; }
+  .toolbox .visual-setting-container {
+    margin-top: 10px; }

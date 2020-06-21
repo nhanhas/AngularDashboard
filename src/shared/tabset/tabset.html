@@ -44,7 +44,7 @@
                                 gridstack-item 
                                 ng-repeat="visual in tab.visuals track by $index" 
                                 class="grid-stack-item" 
-                                gs-item="{{ {itemType: FrameworkUtils.typeOf(visual), itemConfig: visual} }}"
+                                gs-item="{{ {itemType: 'VisualConfigItem', itemConfig: visual} }}"
                                 gs-item-x="visual.posX" 
                                 gs-item-y="visual.posY"
                                 gs-item-width="visual.width" 

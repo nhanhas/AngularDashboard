@@ -1,19 +1,31 @@
 <div class="visual-item"  ng-style="getBackgroundColor()">
   <!-- Title and config -->
-  <div class="visual-item-header text-bold grid-stack-item-content" style="height: 15%;" ng-style="getTextColor()">      
+  <div class="visual-item-header text-bold grid-stack-item-content" style="height: 15%;" ng-style="getTextColor()" ng-if="config.visualType !== 1">      
       <div class="visual-item-bts-action">
           <span ><i class="fa fa-times" ng-click="onDeleteItemHandler()"></i></span>
           <span ><i class="fa fa-cog" ng-click="triggerToolbox()"></i></span>
       </div>
   </div>
 
+  <div class="visual-item-header-separator text-bold grid-stack-item-content" ng-style="getTextColor()" ng-if="config.visualType === 1">      
+    <div class="visual-item-bts-action">
+        <span ><i class="fa fa-times" ng-click="onDeleteItemHandler()"></i></span>
+        <span ><i class="fa fa-cog" ng-click="triggerToolbox()"></i></span>
+    </div>
+</div>
+
   <!-- Pick the right visual form -->
-  <div class="visual-item-content" ng-switch="FrameworkUtils.typeOf(config)">
+  <div class="visual-item-content" ng-switch="config.visualType" ng-class="{ 'separator-full-height' : config.visualType === 1}"> 
           
     <!-- Text config item -->
-    <div ng-switch-when="TextConfigItem">
+    <div ng-switch-when="0">
       <div ng-include="'shared/visual-item/_visuals/_text-item.html'"></div>
-    </div>                                      
+    </div>   
+    
+    <!-- Separator config item -->
+    <div ng-switch-when="1" style="width:100%;" ng-class="{'separator-full-height': getVisualSetting('orientation') === 'vertical'}">
+      <div ng-include="'shared/visual-item/_visuals/_separator-item.html'" style="height: 100%;"></div>
+    </div>   
    
   </div>
 

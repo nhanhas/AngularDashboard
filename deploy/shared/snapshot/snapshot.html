@@ -19,10 +19,10 @@
 
     <!-- Table -->
     <div ng-switch-when="1" class="snapshot-table {{ getSnapshotSetting('align') }}" ng-style="getTextColor()">
-      <table class="table">
+      <table class="table" ng-style="getFontSize()">
         <thead>
             <tr>
-                <th scope="col" ng-repeat="column in columns">{{ column }}</th>                   
+                <th scope="col" class="{{ getSnapshotSetting('align') }}" ng-repeat="column in columns">{{ column }}</th>                   
             </tr>
         </thead>
         <tbody>

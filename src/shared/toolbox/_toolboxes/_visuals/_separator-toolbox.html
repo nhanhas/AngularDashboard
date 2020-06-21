@@ -1,0 +1,35 @@
+<!-- Hint -->
+<div class="toolbox-hint">
+  <span><i class="color-blue fa fa-exclamation-circle fa-lg"></i> </span> 
+  <span>Here you can edit Separator element of your Dashboard</span>
+</div>
+
+<!-- Form -->
+<div class="form-container">
+  <custom-input label="Name" model="editingElement.item.name"></custom-input>
+</div>
+
+<!-- Colors -->
+<div class="colors-container">
+  <custom-color-picker label="Background color" model="editingElement.item.backgroundColor"></custom-color-picker>                
+  <custom-color-picker label="Text and grid color" model="editingElement.item.color"></custom-color-picker>                
+</div>
+
+<!-- Orientation -->
+<div class="visual-setting-container">
+  <label class="color-blue">Separtor orientation</label>
+  <select 
+    class="form-control" 
+    ng-model="getVisualSetting('orientation').Value" 
+    ng-options="opt.Value as opt.Key for opt in [{Key: 'Horizontal', Value: 'horizontal'}, {Key: 'Vertical', Value: 'vertical'}]">
+  </select>
+</div>
+
+<!-- line size -->
+<div class="visual-line-size-fields">
+  <label class="color-blue">Line size</label>
+  <div>
+      <span>{{getVisualSetting('lineSize').Value || 0}}px</span>
+      <input type="range" min="1" max="10" ng-model="getVisualSetting('lineSize').Value">
+  </div>
+</div>

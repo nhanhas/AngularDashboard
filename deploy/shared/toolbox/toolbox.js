@@ -320,7 +320,18 @@ app
                 /**
                  * Visual Items
                  */
+                // UTIL: get visual setting by key - TODO remove "isNumber"
+                scope.getVisualSetting = function(setting){       
+                    let visualSetting = scope.editingElement.item.settings.find(value => value.Key === setting);            
+                    if(visualSetting) { return visualSetting; }
+                  
 
+                    // if not exist, create it
+                    scope.editingElement.item.settings.push({ Key: setting, Value: '' })
+
+                    // return ref
+                    return scope.editingElement.item.settings.find(value => value.Key === setting);
+                }
 
                 /**
                  * Snapshot Items

@@ -80,11 +80,12 @@
                 <!-- visual element -->
                 <div class="visual-config-element">
                     <div ng-drag="true" ng-drag-data="visualConfig" ng-center-anchor="true"> 
-                        <span ng-switch="FrameworkUtils.typeOf(visualConfig)">
+                        <span ng-switch="visualConfig.visualType">
                             <!-- pick a icon -->
-                            <i ng-switch-when="TextConfigItem" class="fa fa-text-height"></i>                                       
+                            <i ng-switch-when="0" class="fa fa-text-height"></i>         
+                            <i ng-switch-when="1" class="fa fa-window-minimize"></i>                                       
                             <i ng-switch-default class="fa fa-cog"></i>
-                        </span>
+                        </span>                        
                     </div>
                 </div> 
 

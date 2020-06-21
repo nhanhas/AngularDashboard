@@ -140,7 +140,7 @@ app
                     if(data instanceof ChartConfigItem){ return scope.addChartConfigItem(tab, data) }
                     
                     // visual items 
-                    if(data instanceof TextConfigItem){ return scope.addVisualConfigItem(tab, data) }
+                    if(data instanceof VisualConfigItem){ return scope.addVisualConfigItem(tab, data) }
 
                     // snapshot items 
                     if(data instanceof SnapshotConfigItem){ return scope.addSnapshotConfigItem(tab, data) }
@@ -151,9 +151,11 @@ app
                  * Chart config item
                  */
                 scope.addChartConfigItem = function(tab, chartConfig){
+                    const availableY = scope.getAvailableSlot(tab);
+
                     // initiate visuals
                     chartConfig.posX = 0;
-                    chartConfig.posY = 0;
+                    chartConfig.posY = availableY;
                     chartConfig.width = 0;
                     chartConfig.heigth = 0;            
                     chartConfig.chartSetId = tab.id;        
@@ -200,12 +202,14 @@ app
                  * Visual config item
                  */
                 scope.addVisualConfigItem = function(tab, visualConfig){
+                    const availableY = scope.getAvailableSlot(tab);
+
                     // initiate visuals
                     visualConfig.posX = 0;
-                    visualConfig.posY = 0;
+                    visualConfig.posY = availableY;
                     visualConfig.width = 0;
                     visualConfig.heigth = 0;            
-                    visualConfig.chartSetId = tab.id;        
+                    visualConfig.dashboardId = tab.id;        
                     visualConfig.backgroundColor = '#FFFFFF';
 
                     // push it to dashboard items
@@ -219,9 +223,11 @@ app
                  * Snapshot config item
                  */
                 scope.addSnapshotConfigItem = function(tab, snapshotConfig){
+                    const availableY = scope.getAvailableSlot(tab);
+
                     // initiate visuals
                     snapshotConfig.posX = 0;
-                    snapshotConfig.posY = 0;
+                    snapshotConfig.posY = availableY;
                     snapshotConfig.width = 0;
                     snapshotConfig.heigth = 0;            
                     snapshotConfig.dashboardId = tab.id;     
@@ -268,6 +274,33 @@ app
                     });
                 }
                 
+
+
+
+
+                // UTIL: get 1st available slot
+                scope.getAvailableSlot = function(tab){
+                    let availableSlot = 0, max = 0;
+                    // max at charts
+                    max = Math.max.apply(Math, tab.charts.map(function(element) { return element.posY + element.heigth; }));
+                    availableSlot = max > availableSlot 
+                        ? max
+                        : availableSlot;
+
+                    // max at snapshots
+                    max = Math.max.apply(Math, tab.snapshots.map(function(element) { return element.posY + element.heigth; }));
+                    availableSlot = max > availableSlot 
+                        ? max
+                        : availableSlot;
+                    
+                    // max at visuals
+                    max = Math.max.apply(Math, tab.visuals.map(function(element) { return element.posY + element.heigth; }));
+                    availableSlot = max > availableSlot 
+                        ? max
+                        : availableSlot;
+
+                    return availableSlot
+                }
 
                 //TEST
                 scope.reloadTab = function(tab){

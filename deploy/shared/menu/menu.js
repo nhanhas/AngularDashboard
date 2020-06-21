@@ -58,7 +58,8 @@ app
                 scope.visualItemsHandler = function(menuType){
                     //#1 - Get available visual items
                     const visualItems = [
-                        new TextConfigItem()
+                        Object.assign(new VisualConfigItem(), {visualType: 0}),
+                        Object.assign(new VisualConfigItem(), {visualType: 1}),                        
                     ]
 
                     //#1 - Show all available visual elements to build in toolbox                        

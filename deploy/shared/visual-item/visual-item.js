@@ -51,6 +51,20 @@ app
             return { 'color': `#${scope.config.color}` };
         }
 
+        //#Aux - get Line
+        scope.getLineSize = function(isVertical){
+          return isVertical 
+            ? { 'width': `${scope.getVisualSetting('lineSize')}px` }
+            : { 'height': `${scope.getVisualSetting('lineSize')}px` };
+      }
+
+        //#Aux - get visual setting by key
+        scope.getVisualSetting = function(setting){
+          // get setting
+          let visualSetting = scope.config.settings.find(value => value.Key === setting);
+          if(visualSetting) { return visualSetting.Value; }
+
+      }
           
       }
 

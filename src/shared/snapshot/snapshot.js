@@ -37,7 +37,7 @@ app
                 // Dates Range
                 scope.endDate = new Date();
                 scope.startDate = new Date();
-                scope.startDate.setMonth(scope.endDate.getMonth() - 1);
+                scope.startDate.setMonth(scope.endDate.getMonth() - 6);
 
 
 
@@ -64,8 +64,6 @@ app
                     scope.isLoading = true;
 
                     return DashboardService.fecthChartResultByIdDates(scope.startDate, scope.endDate, scope.config.snapshotConfigId).then(result => {
-                        
-
                         // run chart setup
                         scope.setupSnapshot(result);
                     })
@@ -102,8 +100,21 @@ app
                 //#1 - Card
                 scope.cardSnapshotSetup = function(snapshotConfig, snapshotResults){
                     //Development test
-                    scope.labels = "Service"
-                    scope.data = "HPOASDA_12"                                 
+                    /*scope.labels = "Service"
+                    scope.data = "HPOASDA_12"*/
+
+                    if(snapshotResults.datasets.length === 0) { return; }
+
+                    const label = snapshotResults.datasets[0].label;
+                    const data = snapshotResults.datasets.map(dataset => {
+                        return dataset.data;
+                    });
+                    
+                    scope.labels = label;
+                    scope.data = !!data.length
+                        ? data[0][0].y
+                        : '';
+
                }
                                 
                scope.tableSnapshotSetup = function(snapshotConfig, snapshotResults){
