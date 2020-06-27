@@ -1,0 +1,31 @@
+<!-- Grid Stack item (Visual items) -->
+<div 
+  gridstack-item 
+  ng-repeat="visual in getItemsByCollection(tab, 'visuals') track by $index" 
+  class="grid-stack-item" 
+  gs-item="{{ {itemType: 'VisualConfigItem', itemConfig: visual} }}"
+  gs-item-x="visual.posX" 
+  gs-item-y="visual.posY"
+  gs-item-width="visual.width" 
+  gs-item-height="visual.heigth" 
+  gs-item-autopos="0">
+  <!-- Visual item -->
+  <visual-item config="visual" on-trigger-toolbox="childTriggerToolbox('VISUAL_ITEM', item)"></visual-item>
+
+</div>
+
+<!-- Grid Stack item (Snapshot items) -->
+<div 
+  gridstack-item 
+  ng-repeat="snapshot in getItemsByCollection(tab, 'snapshots') track by $index" 
+  class="grid-stack-item" 
+  gs-item="{{ {itemType: 'SnapshotConfigItem', itemConfig: snapshot} }}"
+  gs-item-x="snapshot.posX" 
+  gs-item-y="snapshot.posY"
+  gs-item-width="snapshot.width" 
+  gs-item-height="snapshot.heigth" 
+  gs-item-autopos="0">
+  <!-- snapshot item -->
+  <snapshot config="snapshot" on-trigger-toolbox="childTriggerToolbox('SNAPSHOT', item)" on-delete-snapshot="childDeleteSnapshot(snapshotConfig, tab)"></chart>
+
+</div>

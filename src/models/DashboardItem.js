@@ -7,6 +7,8 @@ class DashboardItem{
     id = -1;
     title = '';
     charts = [];
+    snapshots = [];
+    visuals = [];
 
     constructor(){ }
 

@@ -188,7 +188,7 @@ app
         $scope.createSnapshotConfig = function(snapshotConfig){
             // force all Setting to string value
             snapshotConfig.settings.forEach(value => value.Value = String(value.Value));
-            
+         
             return DashboardService.createSnapshot(snapshotConfig).then(result => {                
                 console.log(result);
                 return result;
@@ -198,7 +198,7 @@ app
         // update snapshot config
         $scope.updateSnapshotConfig = function(snapshotConfig){        
             // force all Setting to string value
-            snapshotConfig.settings.forEach(value => value.Value = String(value.Value));
+            snapshotConfig.settings.forEach(value => value.Value = String(value.Value));            
 
             return DashboardService.updateSnapshot(snapshotConfig).then(result => {                
                 console.log(result);

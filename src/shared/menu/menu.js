@@ -59,7 +59,8 @@ app
                     //#1 - Get available visual items
                     const visualItems = [
                         Object.assign(new VisualConfigItem(), {visualType: 0}),
-                        Object.assign(new VisualConfigItem(), {visualType: 1}),                        
+                        Object.assign(new VisualConfigItem(), {visualType: 1}),
+                        Object.assign(new VisualConfigItem(), {visualType: 2})                        
                     ]
 
                     //#1 - Show all available visual elements to build in toolbox                        

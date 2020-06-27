@@ -219,6 +219,23 @@ app
                     scope.triggerToolbox('VISUAL_ITEM', visualConfig);
                 }
 
+                // Delete visual config
+                scope.onDeleteVisualHandler = function(visualConfig, tab){                    
+                    // TODO - request
+                    scope.deleteVisualFromTab(visualConfig, tab);                                                                                   
+                    
+                }
+
+                // delete from local snapshot array
+                scope.deleteVisualFromTab = function(visualConfig, tab){
+                    let visuals = angular.copy(tab.visuals);
+                    visuals = visuals.filter(snapshot => snapshot.visualConfigId !== visualConfig.visualConfigId );
+                    tab.visuals = [];
+                    $timeout(()=>{
+                        tab.visuals = visuals;                                
+                    });
+                }
+
                 /**
                  * Snapshot config item
                  */
@@ -331,7 +348,16 @@ app
                 //TEST
 
 
-                
+                // UTILS - only show on main grid if there is no visualContainerSetting
+                scope.getItemsByCollection = function(tab, collection){      
+                    if(!tab[collection].length) { return false; }  
+                    
+                    return tab[collection].filter(value => {
+                        const container = value.settings.find(setting => setting.Key === 'visualContainer');
+                        return !container 
+                      })
+
+                  }
 
             }
         }

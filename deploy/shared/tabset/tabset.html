@@ -51,14 +51,20 @@
                                 gs-item-height="visual.heigth" 
                                 gs-item-autopos="0">
                                 <!-- Visual item -->
-                                <visual-item config="visual" on-trigger-toolbox="triggerToolbox('VISUAL_ITEM', item)"></visual-item>
+                                <visual-item config="visual" tab="tab" 
+                                    on-trigger-toolbox="triggerToolbox('VISUAL_ITEM', item)" 
+                                    on-delete-visual="onDeleteVisualHandler(visualConfig, tab)"
+                                    on-child-trigger-toolbox="triggerToolbox(type, item)" 
+                                    on-child-delete-chart="onDeleteChartHandler(chartConfig, tab)"
+                                    on-child-delete-snapshot="onDeleteSnapshotHandler(snapshotConfig, tab)"
+                                    on-child-delete-visual="onDeleteVisualHandler(visualConfig, tab)"></visual-item>
                                 
                             </div>
 
                             <!-- Grid Stack item (Snapshot items) -->
                             <div 
                                 gridstack-item 
-                                ng-repeat="snapshot in tab.snapshots track by $index" 
+                                ng-repeat="snapshot in getItemsByCollection(tab, 'snapshots') track by $index" 
                                 class="grid-stack-item" 
                                 gs-item="{{ {itemType: 'SnapshotConfigItem', itemConfig: snapshot} }}"
                                 gs-item-x="snapshot.posX" 
