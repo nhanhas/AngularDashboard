@@ -1,6 +1,6 @@
 <div class="snapshot" ng-style="getBackgroundColor()">
   <!-- Title and config -->
-  <div class="snapshot-header text-bold grid-stack-item-content" style="height: 15%;" ng-style="getTextColor()">
+  <div class="snapshot-header text-bold grid-stack-item-content" ng-style="getTextColor()">
       <div>{{ config.name }}</div>
       <div class="snapshot-bts-action">
           <span ><i class="fa fa-times" ng-click="onDeleteSnapshotHandler()"></i></span>
@@ -36,6 +36,21 @@
     <!-- List -->
     <div ng-switch-when="2" class="snapshot-list {{ getSnapshotSetting('align') }}" ng-style="getTextColor()">
       <span>List</span>
+    </div>
+
+    <!-- gauge -->
+    <div ng-switch-when="3" class="snapshot-gauge" ng-style="getTextColor()">
+      <ng-gauge 
+        size="{{ getSnapshotSetting('gaugeSize') }}" 
+        type="{{ getSnapshotSetting('gaugeType') }}" 
+        thick="{{ getSnapshotSetting('gaugeThick') }}" 
+        min="+getSnapshotSetting('gaugeMin', true)" 
+        max="+getSnapshotSetting('gaugeMax', true)" 
+        cap="round"
+        value="data" 
+        label="{{ getSnapshotSetting('gaugeLabel') }}" append="{{ getSnapshotSetting('gaugeAppend') }}"
+        foreground-color="{{ getSnapshotSetting('gaugeBarColor') }}" background-color="#EEE">
+      </ng-gauge>
     </div>
 
   </div>

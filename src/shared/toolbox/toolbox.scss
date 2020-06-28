@@ -370,6 +370,25 @@
   /* VISUAL ITEM CONFIG TAB */
   .visual-setting-container{
     margin-top: 10px;
+
+    .custom-input {
+      margin-top: 10px;
+    }
   }
+
+  // header
+  .gauge-maxmin-values-container{
+    display: flex;
+    flex-direction: row;
+    margin-top: 15px;
+
+    custom-input:first-of-type{      
+      margin-right: 5px;
+    }
+    custom-input:last-of-type{      
+      margin-left: 5px;
+    }
+  }
+
 }
 

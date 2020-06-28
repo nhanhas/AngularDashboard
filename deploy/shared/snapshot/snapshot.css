@@ -4,7 +4,8 @@
   height: 100%;
   border-radius: 4px;
   overflow: hidden;
-  /* CARD */ }
+  /* CARD */
+  /* gauge */ }
   .snapshot .snapshot-header {
     height: 10%;
     min-height: 15px;
@@ -25,8 +26,7 @@
     right: 10px;
     top: 5px; }
   .snapshot .snapshot-container {
-    padding: 10px;
-    overflow: auto; }
+    padding: 10px; }
   .snapshot .loading {
     position: absolute;
     top: 50%;
@@ -38,5 +38,10 @@
     display: flex;
     flex-direction: column;
     justify-content: center; }
+  .snapshot .snapshot-table {
+    overflow: auto;
+    height: 100%; }
   .snapshot .snapshot-table tbody {
     overflow: auto; }
+  .snapshot .snapshot-gauge {
+    text-align: center; }

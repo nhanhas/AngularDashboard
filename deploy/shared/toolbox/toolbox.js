@@ -345,7 +345,9 @@ app
                         case 1:
                             return 'fa-table'                      
                         case 2:
-                            return 'fa-list'             
+                            return 'fa-list' 
+                        case 3:
+                            return 'fa-tachometer'             
                         default:
                             return 'fa-square';                            
                     }

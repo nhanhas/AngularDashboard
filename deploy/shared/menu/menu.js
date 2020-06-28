@@ -43,11 +43,12 @@ app
 
                 // TYPE: SNAPSHOT_ITEM_CONFIG menu handler
                 scope.snapshotItemsConfigHandler = function(menuType){
-                    //0 - card, 1 - table, 2 - list
+                    //0 - card, 1 - table, 2 - list, 3 - gauge
                     const snapshotTypes = [
                         Object.assign(new SnapshotConfigItem(), {snapshotType: 0}),
                         Object.assign(new SnapshotConfigItem(), {snapshotType: 1}),
-                        Object.assign(new SnapshotConfigItem(), {snapshotType: 2})
+                        Object.assign(new SnapshotConfigItem(), {snapshotType: 2}),
+                        Object.assign(new SnapshotConfigItem(), {snapshotType: 3})
                     ]
                     //#2 - Show all available chart types to build in toolbox                        
                     scope.triggerToolbox(menuType, snapshotTypes);

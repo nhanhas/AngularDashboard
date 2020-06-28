@@ -249,3 +249,13 @@
       cursor: pointer; }
   .toolbox .visual-setting-container {
     margin-top: 10px; }
+    .toolbox .visual-setting-container .custom-input {
+      margin-top: 10px; }
+  .toolbox .gauge-maxmin-values-container {
+    display: flex;
+    flex-direction: row;
+    margin-top: 15px; }
+    .toolbox .gauge-maxmin-values-container custom-input:first-of-type {
+      margin-right: 5px; }
+    .toolbox .gauge-maxmin-values-container custom-input:last-of-type {
+      margin-left: 5px; }

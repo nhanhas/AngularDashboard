@@ -34,8 +34,9 @@
 
   .snapshot-container{
       padding: 10px;
-      overflow: auto;
+      //overflow: auto;
   }
+
 
   .loading{
       position: absolute;
@@ -53,8 +54,17 @@
     flex-direction: column;
     justify-content: center;
   }
+  .snapshot-table {
+    overflow: auto;
+    height: 100%;
+  }
   .snapshot-table tbody{
     overflow: auto;
+  }
+
+  /* gauge */
+  .snapshot-gauge{
+      text-align: center;
   }
 
 }

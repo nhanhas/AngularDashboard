@@ -35,6 +35,7 @@ app
                 });
              
                 // Dates Range
+                scope.data = 0;
                 scope.endDate = new Date();
                 scope.startDate = new Date();
                 scope.startDate.setMonth(scope.endDate.getMonth() - 6);
@@ -79,15 +80,17 @@ app
                         case 0:
                             scope.cardSnapshotSetup(scope.config, snapshotResults);
                             break;
-
                         // table
                         case 1:
                             scope.tableSnapshotSetup(scope.config, snapshotResults);
                             break;
-
                         // list 
                         case 2:
-                            break;
+                            break;                    
+                        // gauge 
+                        case 3:
+                            scope.gaugeSnapshotSetup(scope.config, snapshotResults);
+                            break;                            
                     }
 
                     // finished setup
@@ -115,72 +118,90 @@ app
                         ? data[0][0].y
                         : '';
 
-               }
-                                
-               scope.tableSnapshotSetup = function(snapshotConfig, snapshotResults){
-                    //Development test
-                    snapshotResults = {
-                        "labels": [],
-                        "datasets": [
-                        {
-                            "label": "UserScheduler",
-                            "data": [
-                            320,
-                            "16"
-                            ]
-                        },
-                        {
-                            "label": "FilestreamConfiguredLevel",
-                            "data": [
-                            "Disabled",
-                            "Disabled"
-                            ]
-                        },
-                        {
-                            "label": "InstanceDefaultDataPath",
-                            "data": [
-                            "F:\\MP_SQL_DATA_01\\SQL_DATA\\",
-                            "F:\\MP_SQL_DATA_01\\SQL_DATA\\"
-                            ]
-                        },
-                        {
-                            "label": "InstanceDefaultLogPath",
-                            "data": [
-                            "F:\\MP_SQL_TLOG_01\\SQL_TLOG\\",
-                            "F:\\MP_SQL_TLOG_01\\SQL_TLOG\\"
+                }
+                
+                //#2 - table           
+                scope.tableSnapshotSetup = function(snapshotConfig, snapshotResults){
+                        //Development test
+                        snapshotResults = {
+                            "labels": [],
+                            "datasets": [
+                            {
+                                "label": "UserScheduler",
+                                "data": [
+                                320,
+                                "16"
+                                ]
+                            },
+                            {
+                                "label": "FilestreamConfiguredLevel",
+                                "data": [
+                                "Disabled",
+                                "Disabled"
+                                ]
+                            },
+                            {
+                                "label": "InstanceDefaultDataPath",
+                                "data": [
+                                "F:\\MP_SQL_DATA_01\\SQL_DATA\\",
+                                "F:\\MP_SQL_DATA_01\\SQL_DATA\\"
+                                ]
+                            },
+                            {
+                                "label": "InstanceDefaultLogPath",
+                                "data": [
+                                "F:\\MP_SQL_TLOG_01\\SQL_TLOG\\",
+                                "F:\\MP_SQL_TLOG_01\\SQL_TLOG\\"
+                                ]
+                            }
                             ]
                         }
-                        ]
-                    }
 
-                    // headers
-                    scope.columns = snapshotResults.datasets.reduce((list, dataset) => {
-                        list.push(dataset.label)
-                        return list;
-                    }, []);
-                    
-                    scope.data = snapshotResults.datasets.map(dataset => {
+                        // headers
+                        scope.columns = snapshotResults.datasets.reduce((list, dataset) => {
+                            list.push(dataset.label)
+                            return list;
+                        }, []);
+                        
+                        scope.data = snapshotResults.datasets.map(dataset => {
+                            return dataset.data;
+                        });
+
+                        let results = [];
+                        scope.columns.forEach((column, colindex) => {
+                            scope.data[colindex].forEach((data, index) => {
+                                
+                                if(colindex === 0){
+                                    results.push({
+                                        [column]: data
+                                    })
+                                }else{
+                                    results[index][column] = data;
+                                }
+                            
+                            })
+                        })
+
+                        scope.data = results;
+                
+                }
+
+                //#3 - list
+
+                //#4 - Gauge
+                scope.gaugeSnapshotSetup = function(snapshotConfig, snapshotResults){
+                    if(snapshotResults.datasets.length === 0) { return; }
+
+                    const label = snapshotResults.datasets[0].label;
+                    const data = snapshotResults.datasets.map(dataset => {
                         return dataset.data;
                     });
-
-                    let results = [];
-                    scope.columns.forEach((column, colindex) => {
-                        scope.data[colindex].forEach((data, index) => {
-                            
-                            if(colindex === 0){
-                                results.push({
-                                    [column]: data
-                                })
-                            }else{
-                                results[index][column] = data;
-                            }
-                         
-                        })
-                    })
-
-                    scope.data = results;
-               
-               }
+                    
+                    scope.labels = label;
+                    scope.data = !!data.length
+                        ? data[0][0].y
+                        : 0;
+                }
 
                 //#Aux - get backgroundColor
                 scope.getBackgroundColor = function(){
@@ -198,10 +219,15 @@ app
                 }
 
                 //#Aux - get snapshot setting by key
-                scope.getSnapshotSetting = function(setting){
+                scope.getSnapshotSetting = function(setting, isNumeric = false){
                     // get setting
                     let snapshotSetting = scope.config.settings.find(value => value.Key === setting);
                     if(snapshotSetting) { return snapshotSetting.Value; }
+
+                    // if not found
+                    return isNumeric 
+                        ? 0
+                        : '';
 
                 }
                 

@@ -90,6 +90,15 @@
                     </div>
                 </div> 
 
+                <!-- titlte -->
+                <div class="text-center" ng-switch="visualConfig.visualType">
+                    <!-- pick a name -->
+                    <span ng-switch-when="0" >Text</span>         
+                    <span ng-switch-when="1" >Separator</span>         
+                    <span ng-switch-when="2" >Container</span>                    
+                    <span ng-switch-default ></span>
+                </div>
+
             </div>
         </div>
 
@@ -112,6 +121,17 @@
                         </span>
                     </div>
                 </div> 
+                <!-- titlte -->
+                <div class="text-center" ng-switch="chartConfig.chartType">
+                    <!-- pick a name -->
+                    <span ng-switch-when="line">Line</span>         
+                    <span ng-switch-when="bar">Bar</span>         
+                    <span ng-switch-when="pie">Pie</span>
+                    <span ng-switch-when="radar">Radar</span>  
+                    <span ng-switch-when="polar">Polar</span>  
+                    <span ng-switch-when="bubble">Bubble</span>  
+                    <span ng-switch-default></span>
+                </div>
 
             </div>
 
@@ -127,11 +147,22 @@
                             <!-- pick a icon -->
                             <i ng-switch-when="0" class="fa fa-sticky-note"></i>         
                             <i ng-switch-when="1" class="fa fa-table"></i>         
-                            <i ng-switch-when="2" class="fa fa-list"></i>                                       
+                            <i ng-switch-when="2" class="fa fa-list"></i>
+                            <i ng-switch-when="3" class="fa fa-tachometer"></i>  
                             <i ng-switch-default class="fa fa-cog"></i>
                         </span>
-                    </div>
+                    </div>                    
                 </div> 
+
+                <!-- titlte -->
+                <div class="text-center" ng-switch="snapshotConfig.snapshotType">
+                    <!-- pick a name -->
+                    <span ng-switch-when="0" >Card</span>         
+                    <span ng-switch-when="1" >Table</span>         
+                    <span ng-switch-when="2" >List</span>
+                    <span ng-switch-when="3" >Gauge</span>  
+                    <span ng-switch-default ></span>
+                </div>
 
             </div>
         </div>

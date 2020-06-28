@@ -1,8 +1,8 @@
 <div class="menu-toolbox">
     <div>
         <h4 class="tool-header"> <span><i class="fa fa-lg {{ getSnapshotIcon() }}"></i></span>{{ editingElement.item.name }}:</h4>
-        <!-- Chart configurations -->
-        <div class="chart-config-container" >
+        <!-- Snapshot configurations (not gauges) -->
+        <div class="chart-config-container" ng-if="editingElement.item.snapshotType !== 3">
 
             <!-- Hint -->
             <div class="toolbox-hint">
@@ -92,5 +92,116 @@
             </div>
 
         </div>
+
+        <!-- Snapshot configurations (for gauges) -->
+        <div class="chart-config-container" ng-if="editingElement.item.snapshotType === 3">
+            <!-- Hint -->
+            <div class="toolbox-hint">
+                <span><i class="color-blue fa fa-exclamation-circle fa-lg"></i> </span> 
+                <span>Here you can change everything about your snapshot. Style, fields...</span>
+            </div>
+
+            <!-- Identification -->
+            <div class="chart-header-container">                
+                <!-- Form -->                
+                <custom-input label="Snapshot Name" model="editingElement.item.name"></custom-input>
+                <custom-input label="Fields" readonly="true" model="editingElement.item.fields.length"></custom-input>                                
+            </div>
+
+            <!-- Colors -->
+            <div class="colors-container">
+                <custom-color-picker label="Background color" model="editingElement.item.backgroundColor"></custom-color-picker>                
+                <custom-color-picker label="Text color" model="editingElement.item.color"></custom-color-picker>             
+                <custom-color-picker label="Bar color" model="getSnapshotSetting('gaugeBarColor').Value"></custom-color-picker>                
+            </div>
+
+            <!-- gauge size -->
+            <div class="snapshot-text-size-fields">
+                <label class="color-blue">Gauge size</label>
+                <div>
+                    <span>{{getSnapshotSetting('gaugeSize').Value || 0}}px</span>
+                    <input type="range" min="100" max="600" ng-model="getSnapshotSetting('gaugeSize', true).Value">
+                </div>
+            </div>
+
+            <!-- gauge thick -->
+            <div class="snapshot-text-size-fields">
+                <label class="color-blue">Gauge thickness</label>
+                <div>
+                    <span>{{getSnapshotSetting('gaugeThick').Value || 0}}px</span>
+                    <input type="range" min="1" max="50" ng-model="getSnapshotSetting('gaugeThick', true).Value">
+                </div>
+            </div>
+
+            <!-- Max min value -->
+            <div class="gauge-maxmin-values-container">                
+                <!-- Form -->                
+                <custom-input label="Min value" model="getVisualSetting('gaugeMin').Value"></custom-input>
+                <custom-input label="Max value" model="getVisualSetting('gaugeMax').Value"></custom-input>                                
+            </div>
+
+            <!-- Labels and append -->
+            <div class="visual-setting-container">                
+                <!-- Form -->                
+                <custom-input label="Label" model="getVisualSetting('gaugeLabel').Value"></custom-input>
+                <custom-input label="Append" model="getVisualSetting('gaugeAppend').Value"></custom-input>                
+            </div>
+
+            <!-- Gauge Type -->
+            <div class="visual-setting-container">
+                <label class="color-blue">Gauge type</label>
+                <select 
+                    class="form-control" 
+                    ng-model="getVisualSetting('gaugeType').Value" 
+                    ng-options="opt.Value as opt.Key for opt in [{Key: 'Full', Value: 'full'}, {Key: 'Semi', Value: 'semi'}, {Key: 'Arch', Value: 'arch'}]">
+                </select>
+            </div>
+
+            <!-- Y Fields -->
+            <div class="charts-fiels">
+                <label class="color-blue">Fields</label>
+    
+                <uib-accordion close-others="true">
+                    <div uib-accordion-group class="panel-default" heading="{{ datasource.name }}" is-open="false" is-disabled="false" ng-repeat="datasource in snapshotFields">
+                        <div ng-repeat="dataset in datasource.itens">                            
+                            <multi-dropdown single="true" datasource="dataset" on-add-item="onAddSnapshotFieldHandler(itemSelected)" on-remove-item="onRemoveSnapshotFieldHandler(itemSelected)"></multi-dropdown>
+                            <br>
+                        </div>  
+                    </div>                         
+                </uib-accordion>
+            </div>
+
+            <!-- Functions -->
+            <div class="charts-fiels">
+                <label class="color-blue">Fields Functions</label>
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Field</th>
+                            <th scope="col">Function</th>                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="field in editingElement.item.fields">
+                            <td class="table-field-name">{{field.name}}</td>
+                            <td><select class="form-control" ng-model="field.function" ng-options="opt.Value as opt.Key for opt in fieldsFunctions"></select></td>
+                        </tr>
+                        <tr ng-if="editingElement.item.fields.length === 0">
+                            <td class="text-center" colspan="2">No fields selected</td>
+                        </tr>                    
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Save Button -->
+            <div class="save-btn-container">
+                <div ng-click="updateSnapshot()">
+                    <span>Save Settings</span>
+                </div>
+            </div>
+
+        </div>
+
     </div>
 </div>
