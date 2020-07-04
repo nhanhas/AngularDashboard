@@ -63,11 +63,20 @@ app
                  */
                 scope.initialize = function(){
                     scope.isLoading = true;
-
-                    return DashboardService.fecthChartResultByIdDates(scope.startDate, scope.endDate, scope.config.snapshotConfigId).then(result => {
-                        // run chart setup
-                        scope.setupSnapshot(result);
-                    })
+                    // list and tables
+                    if(scope.config.snapshotType === 1 || scope.config.snapshotType === 2){
+                        return DashboardService.fecthTableResultByIdDates(scope.startDate, scope.endDate, scope.config.snapshotConfigId).then(result => {
+                            // run  setup
+                            scope.setupSnapshot(result);
+                        })
+                    }else{
+                        // otherwise gauges or cards
+                        return DashboardService.fecthChartResultByIdDates(scope.startDate, scope.endDate, scope.config.snapshotConfigId).then(result => {
+                            // run  setup
+                            scope.setupSnapshot(result);
+                        })
+                    }
+                    
                                           
                 }
 
@@ -86,6 +95,7 @@ app
                             break;
                         // list 
                         case 2:
+                            scope.listSnapshotSetup(scope.config, snapshotResults);
                             break;                    
                         // gauge 
                         case 3:
@@ -123,70 +133,92 @@ app
                 //#2 - table           
                 scope.tableSnapshotSetup = function(snapshotConfig, snapshotResults){
                         //Development test
-                        snapshotResults = {
-                            "labels": [],
-                            "datasets": [
-                            {
-                                "label": "UserScheduler",
-                                "data": [
-                                320,
-                                "16"
-                                ]
-                            },
-                            {
-                                "label": "FilestreamConfiguredLevel",
-                                "data": [
-                                "Disabled",
-                                "Disabled"
-                                ]
-                            },
-                            {
-                                "label": "InstanceDefaultDataPath",
-                                "data": [
-                                "F:\\MP_SQL_DATA_01\\SQL_DATA\\",
-                                "F:\\MP_SQL_DATA_01\\SQL_DATA\\"
-                                ]
-                            },
-                            {
-                                "label": "InstanceDefaultLogPath",
-                                "data": [
-                                "F:\\MP_SQL_TLOG_01\\SQL_TLOG\\",
-                                "F:\\MP_SQL_TLOG_01\\SQL_TLOG\\"
-                                ]
-                            }
-                            ]
-                        }
+                        /*snapshotResults = [
+                            [
+                              "NumaNodeCount",
+                              "CPUSockets",
+                              "IsPolyBaseInstalled",
+                              "InMemorySupported",
+                              "IsLocalDB",
+                              "IsIntegratedSecurityOnly",
+                              "IsAlwaysOnEnabled",
+                              "HadrManagerStatus"
+                            ],
+                            [
+                              0,
+                              0,
+                              0,
+                              0,
+                              0,
+                              0,
+                              0,
+                              0
+                            ],
+                            [
+                                1,
+                                02,
+                                04,
+                                50,
+                                60,
+                                07,
+                                032,
+                                60
+                              ]
+                          ]*/
 
                         // headers
-                        scope.columns = snapshotResults.datasets.reduce((list, dataset) => {
-                            list.push(dataset.label)
-                            return list;
-                        }, []);
+                        scope.columns = snapshotResults[0];
+                        snapshotResults.shift();
                         
-                        scope.data = snapshotResults.datasets.map(dataset => {
-                            return dataset.data;
-                        });
+                        scope.data = snapshotResults;
 
-                        let results = [];
-                        scope.columns.forEach((column, colindex) => {
-                            scope.data[colindex].forEach((data, index) => {
-                                
-                                if(colindex === 0){
-                                    results.push({
-                                        [column]: data
-                                    })
-                                }else{
-                                    results[index][column] = data;
-                                }
-                            
-                            })
-                        })
-
-                        scope.data = results;
                 
                 }
 
                 //#3 - list
+                scope.listSnapshotSetup = function(snapshotConfig, snapshotResults){
+                    //Development test
+                    /*snapshotResults = [
+                        [
+                          "NumaNodeCount",
+                          "CPUSockets",
+                          "IsPolyBaseInstalled",
+                          "InMemorySupported",
+                          "IsLocalDB",
+                          "IsIntegratedSecurityOnly",
+                          "IsAlwaysOnEnabled",
+                          "HadrManagerStatus"
+                        ],
+                        [
+                          0,
+                          0,
+                          0,
+                          0,
+                          0,
+                          0,
+                          0,
+                          0
+                        ],
+                        [
+                            1,
+                            02,
+                            04,
+                            50,
+                            60,
+                            07,
+                            032,
+                            60
+                          ]
+                      ]*/
+
+                    // headers
+                    scope.columns = snapshotResults[0];
+                    snapshotResults.shift();
+                    
+                    scope.data = snapshotResults;
+
+            
+            }
 
                 //#4 - Gauge
                 scope.gaugeSnapshotSetup = function(snapshotConfig, snapshotResults){

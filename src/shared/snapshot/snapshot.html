@@ -27,7 +27,7 @@
         </thead>
         <tbody>
             <tr ng-repeat="row in data">
-                <td ng-repeat="column in columns" class="table-field-name">{{row[column]}}</td>
+                <td ng-repeat="column in columns track by $index" class="table-field-name">{{row[$index]}}</td>
             </tr>                           
         </tbody>
       </table>
@@ -35,7 +35,11 @@
 
     <!-- List -->
     <div ng-switch-when="2" class="snapshot-list {{ getSnapshotSetting('align') }}" ng-style="getTextColor()">
-      <span>List</span>
+      <h1 ng-style="getFontSize()">{{columns[0]}}:</h1>
+      <ul ng-style="getFontSize()">
+        <li ng-repeat="row in data">{{ row[0] }}</li>
+      </ul>  
+  
     </div>
 
     <!-- gauge -->

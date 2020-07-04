@@ -33,6 +33,8 @@
     left: 50%;
     font-size: 52px;
     transform: translate(-50%, -50%); }
+  .snapshot ul {
+    list-style-type: none; }
   .snapshot .snapshot-card {
     height: 100%;
     display: flex;

@@ -321,9 +321,9 @@ app
                             return dataset.data;
                         });
     
-                        scope.series = chartResults.datasets.map(dataset => {
+                        /*scope.series = chartResults.datasets.map(dataset => {
                             return dataset.label;
-                        });    
+                        });    */
                     })
                 }
 
