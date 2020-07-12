@@ -175,50 +175,6 @@ app
                  */
                 //#1 - Line
                 scope.lineChartSetup = function(chartConfig, chartResults){
-                     //Development test
-                    /*scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
-                    
-                    scope.data = [
-                        [{x: 'January', y: 65}, {x: 'February', y: 59}, {x: 'March', y: 80}, {x: 'April', y: 81}, {x: 'May', y: 56}, {x: 'June', y: 55}, {x: 'July', y: 40} ],
-                        [{x: 'January', y: 28}, {x: 'February', y: 48}, {x: 'March', y: 40}, {x: 'April', y: 19}, {x: 'May', y: 86}, {x: 'June', y: 27}, {x: 'July', y:90} ]
-                    ];*/
-
-                    /*const results = scope.processResult(chartResults);
-
-                    scope.labels = results.labels;
-                    scope.data = results.data;*/
-
-                    //scope.labels = chartResults.Labels;
-
-                    /* old version
-                        scope.labels = [
-                        "01:00",
-                        "02:00",
-                        "03:00",
-                        "04:00",
-                        "05:00",
-                        "06:00",
-                        "07:00",
-                        "08:00",
-                        "09:00",
-                        "10:00",
-                        "11:00",
-                        "12:00",
-                        "13:00",
-                        "14:00",
-                        "15:00",
-                        "16:00",
-                        "17:00",
-                        "18:00",
-                        "19:00",
-                        "20:00",
-                        "21:00",
-                        "22:00",
-                        "23:00",
-                        "00:00"
-                      ]
-                    scope.data = chartResults.DataEntries; 
-                    */
                    $timeout(()=>{
                     scope.labels = chartResults.labels;
                     scope.data = chartResults.datasets.map(dataset => {
@@ -228,6 +184,29 @@ app
                     scope.series = chartResults.datasets.map(dataset => {
                         return dataset.label;
                     });
+                
+
+                    /*scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
+                    scope.series = ['Series A', 'Series B'];
+                    scope.data = [
+                        [65, 59, 80, 81, 56, 55, 40],
+                        [28, 48, 40, 19, 86, 27, 90]
+                    ];*/
+                    const isScatter = scope.getChartSetting('isScatter');
+                    if(isScatter){
+                        scope.datasetOverride = [];
+                        scope.series.forEach(serie => {
+                            scope.datasetOverride.push(
+                                {
+                                    label: serie,
+                                    borderWidth: 1,
+                                    type: 'scatter'
+                                }
+                            )
+                        })
+                    }
+                    
+                    
                    })
                     
                 }
@@ -421,6 +400,18 @@ app
                     return { 'color': `${scope.config.color}` };
                 }
 
+                //#Aux - get snapshot setting by key
+                scope.getChartSetting = function(setting, isNumeric = false){
+                    // get setting
+                    let chartSetting = scope.config.settings.find(value => value.Key === setting);
+                    if(chartSetting) { return chartSetting.Value; }
+
+                    // if not found
+                    return isNumeric 
+                        ? 0
+                        : '';
+
+                }
                 
                 // setup chart! (change this for load chart data and then setup)
                 scope.initialize();                

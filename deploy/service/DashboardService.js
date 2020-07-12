@@ -241,6 +241,7 @@ app.service('DashboardService', ['$http', 'FrameworkUtils', function($http, Fram
                 width: chartConfig.Width,
                 heigth: chartConfig.Heigth,
                 fields: chartConfig.Fields,
+                settings: chartConfig.Settings,
                 XAxisMetadataEntry: chartConfig.XAxisMetadataEntry,
                 chartConfigId: chartConfig.ChartConfigId
             }))

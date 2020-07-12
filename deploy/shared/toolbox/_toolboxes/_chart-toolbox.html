@@ -80,6 +80,14 @@
                 </table>
             </div>
 
+            <!-- is scatter? -->
+            <div class="charts-fiels" ng-if="editingElement.item.chartType.toLowerCase() === 'line'">
+                <label class="color-blue">Is scatter chart?</label>   
+                <br>             
+                <!-- Form -->                
+                <input type="checkbox" ng-model="getVisualSetting('isScatter').Value">                                
+            </div>
+
             <!-- Details: BAR -->
             <div ng-if="editingElement.item.chartType.toLowerCase() === 'bar'">
 
