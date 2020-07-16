@@ -88,6 +88,12 @@
                 <input type="checkbox" ng-model="getVisualSetting('isScatter').Value">                                
             </div>
 
+            <!-- Treshold -->
+            <div class="charts-fiels">                
+                <!-- Form -->                
+                <custom-input label="Chart Treshold (ms)" type="'number'" model="getVisualSetting('treshold').Value"></custom-input>                
+            </div>
+
             <!-- Details: BAR -->
             <div ng-if="editingElement.item.chartType.toLowerCase() === 'bar'">
 

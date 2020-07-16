@@ -75,6 +75,15 @@ app
 
                         // run chart setup
                         scope.setupChart(result);
+
+                        // setup timer
+                        const treshold = scope.getChartSetting('treshold', true);
+                        if(treshold > 0 && treshold >= 1000){
+                            setTimeout(()=> {
+                                scope.initialize()
+                            }, +treshold);
+                        }
+
                     })
                     
                     /* old version
