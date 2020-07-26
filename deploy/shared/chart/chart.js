@@ -305,13 +305,13 @@ app
 
                     $timeout(()=>{
                         scope.labels = chartResults.labels;
-                        scope.data = chartResults.datasets.map(dataset => {
-                            return dataset.data;
-                        });
-    
-                        /*scope.series = chartResults.datasets.map(dataset => {
+                        scope.labels = chartResults.datasets.map(dataset => {
                             return dataset.label;
-                        });    */
+                        });
+                        scope.data = chartResults.datasets.map(dataset => {
+                            return dataset.data[0];
+                        });
+
                     })
                 }
 
