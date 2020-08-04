@@ -24,6 +24,7 @@ app
                 scope.fieldsForCharts = []; // for charts and snapshots
                 scope.chartXFields = [];
                 scope.chartYFields = []; 
+                scope.chartRFields = []; 
                 scope.fieldsFunctions = [];
 
                 scope.snapshotFields = []; 
@@ -267,6 +268,17 @@ app
                     
                 }
 
+                // on add [rAxis] field for chart
+                scope.onAddRFieldHandler = function(field){
+                    scope.editingElement.item.RMetadataEntry = field.metaDataEntryId;
+                }
+
+                // on remove [rAxis] field for chart
+                scope.onRemoveRFieldHandler = function(field){
+                    if(scope.editingElement.item.RMetadataEntry === field.metaDataEntryId)
+                        scope.editingElement.item.RMetadataEntry = null;
+                }
+
                 // a chart config initializer
                 scope.initializeChartView = function(){
                     console.log(`Toolbox: initializeChartView: ${scope.editingElement.item.chartConfigId}`);
@@ -298,11 +310,24 @@ app
                                     })
                                 })
                             });
+
+                            // [rAxis] - set as selected fields if chart has it
+                            const RfieldsForCharts = angular.copy(result);
+                            RfieldsForCharts.forEach(sourceItem => {
+                                sourceItem.itens.forEach(setItem => {
+                                    setItem.itens.forEach(fieldItem => {
+                                        // mark selected from [yAxis]
+                                        const fieldInChart = scope.editingElement.item.RMetadataEntry === fieldItem.metaDataEntryId;
+                                        fieldItem.selected = fieldInChart;                                
+                                    })
+                                })
+                            });
     
                             //set fields for x and y fields
                             $timeout( function(){
                                 scope.chartXFields = XfieldsForCharts;
                                 scope.chartYFields = YfieldsForCharts;
+                                scope.chartRFields = RfieldsForCharts;
                             });
                             
                             

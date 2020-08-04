@@ -18,6 +18,7 @@ class ChartConfigItem{
     fields = [ ];
     settings = [ ];
     XAxisMetadataEntry = 0;
+    RMetadataEntry = 0;
 
     toUpdateView = false;
   
